@@ -48,7 +48,7 @@ dikejar di akhir.
 - [ ] **Akun X + post pertama.** Syaratnya 5 post dalam 30 hari sebelum submit.
       Ini satu-satunya item yang tidak bisa dikompres. 1 post/hari sampai submit.
 - [ ] **Kirim alamat wallet ke organizer** untuk alokasi BOT mainnet. Tidak ada
-      faucet mainnet.
+      faucet mainnet. Draft pesannya ada di bagian 7a.
 - [ ] **Klaim tBOT** di <https://faucet.botchain.ai/basic>. Batas **10 tBOT per
       alamat per 24 jam**, jadi kalau kurang kamu perlu klaim dua hari berturut.
 - [ ] **Beli domain** ($1–1.5). Simpan struk, direimburse setelah submit.
@@ -161,6 +161,71 @@ rg -l "0x<alamat-sy>" web/app/.next/static/chunks/
 ```
 
 Kosong berarti build tidak melihat env-nya.
+
+---
+
+## 7a. Mendapatkan BOT mainnet
+
+### Berapa
+
+Script deploy memakai **24.779.528 gas** (diukur dari run anvil yang sukses),
+dan `eth_gasPrice` mengembalikan **20 gwei** di testnet maupun mainnet.
+
+```
+24.779.528 x 20 gwei = 0,4956 BOT
+```
+
+| | |
+|---|---|
+| Biaya dasar | 0,50 BOT |
+| +30% buffer | 0,64 BOT |
+| Dengan `--gas-estimate-multiplier 200` | 0,99 BOT |
+
+**Minta 1,5 BOT.** Menutup deploy dengan multiplier penuh, plus sisa untuk
+transaksi admin setelahnya (`fundCoupon` susulan, `setVerified` untuk dompet
+juri) dan percobaan ulang. Kehabisan gas di tengah deploy sebelas kontrak jauh
+lebih mahal daripada meminta berlebih.
+
+Angka gas-nya dari anvil. BOT Chain memakai Proof of Staked Authority, jadi
+jadwal gas-nya bisa sedikit berbeda dari EVM standar — selisihnya biasanya di
+bawah 10%, dan buffer 3x sudah menutupinya. Yang tidak bisa diprediksi: apakah
+20 gwei itu tetap atau mengambang saat jaringan ramai.
+
+Testnet: deploy hanya memakai **5% dari jatah faucet harian** (0,5 dari 10
+tBOT), jadi satu klaim cukup untuk deploy plus banyak percobaan.
+
+### Cara
+
+**Jalur utama — minta ke organizer.** Guidebook: *"Contact the organizer for a
+BOT allocation to cover gas fees. Share your wallet address with the organizer
+ahead of time."* Gratis. Ambil alamat dari MetaMask dengan mengklik nama akun.
+
+Draft:
+
+> Halo, saya peserta Build Week Vol.2 dengan proyek **toMaker** — protokol yang
+> memisahkan principal dan yield dari sebuah tokenized bond.
+>
+> Saya mau minta alokasi BOT mainnet untuk gas deployment.
+>
+> Wallet: `0x...`
+> Perkiraan kebutuhan: **~0,5 BOT** untuk deploy, minta **1,5 BOT** sebagai buffer.
+>
+> Perhitungan: script deploy saya memakai 24.779.528 gas (11 kontrak dalam satu
+> transaksi), dan `eth_gasPrice` di `rpc.botchain.ai` mengembalikan 20 gwei
+> sehingga 0,4956 BOT. Sisanya untuk transaksi admin setelah deploy dan
+> percobaan ulang.
+>
+> Terima kasih.
+
+Menyertakan angkanya membuat permintaan gampang disetujui — organizer tidak
+perlu menebak.
+
+**Jalur cadangan — B DEX.** Checklist guidebook menyebut *"via organizer
+allocation or B DEX"*: <https://dex.botchain.ai/#/swap>. Ini pembelian dengan
+uang sungguhan; jalankan sendiri.
+
+> **Pakai wallet khusus deploy**, bukan wallet utama. Private key-nya masuk ke
+> environment variable saat `forge script` jalan.
 
 ---
 
