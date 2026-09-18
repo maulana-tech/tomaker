@@ -1,0 +1,199 @@
+// SPDX-License-Identifier: Apache-2.0
+
+import { describe, expect, it, vi } from "vitest";
+import { decodeFunctionData } from "viem";
+import { ToMakerClient } from "../src/client.js";
+import { ammAbi, bondAbi, orderbookAbi, syVaultAbi } from "../src/abis.js";
+import { marketMethodFor, quoteMethodFor, relativePriceImpactBps } from "../src/routes.js";
+import {
+  bondDiscountBps,
+  claimablePayout,
+  impliedBondApyBps,
+  bondPositionValue,
+} from "../src/bond.js";
+import { ContractError } from "../src/errors.js";
+import { WAD, ORDER_SIDE } from "../src/types.js";
+
+const CONTRACTS = {
+  sy: "0x0000000000000000000000000000000000000001",
+  pt: "0x0000000000000000000000000000000000000002",
+  yt: "0x0000000000000000000000000000000000000003",
+  tokenizer: "0x0000000000000000000000000000000000000004",
+  market: "0x0000000000000000000000000000000000000005",
+  orderbook: "0x0000000000000000000000000000000000000006",
+  bond: "0x0000000000000000000000000000000000000007",
+  strategy: "0x0000000000000000000000000000000000000008",
+  underlying: "0x0000000000000000000000000000000000000009",
+};
+
+function client(): ToMakerClient {
+  return new ToMakerClient({ rpcUrl: "http://localhost:8545", chainId: 296, contracts: CONTRACTS });
+}
+
+describe("reads after confirmed transactions", () => {
+  it("reads at least the receipt block even when the RPC head lags, then follows newer blocks", async () => {
+    const sdk = client();
+    const receipt = vi.spyOn(sdk.publicClient, "waitForTransactionReceipt");
+    receipt.mockResolvedValue({ status: "success", blockNumber: 100n } as never);
+    const head = vi.spyOn(sdk.publicClient, "getBlockNumber").mockResolvedValue(99n);
+    const read = vi.spyOn(sdk.publicClient, "readContract").mockResolvedValue(42n);
+    const hash = `0x${"1".repeat(64)}`;
+    await sdk.waitForReceipt(hash);
+    expect(await sdk.getTokenBalance(CONTRACTS.sy, CONTRACTS.pt)).toBe(42n);
+    expect(read.mock.calls.at(-1)?.[0].blockNumber).toBe(100n);
+    receipt.mockResolvedValue({ status: "success", blockNumber: 98n } as never);
+    await sdk.getReceipt(hash);
+    await sdk.getTokenBalance(CONTRACTS.sy, CONTRACTS.pt);
+    expect(read.mock.calls.at(-1)?.[0].blockNumber).toBe(100n);
+    head.mockResolvedValue(101n);
+    await sdk.getTokenBalance(CONTRACTS.sy, CONTRACTS.pt);
+    expect(read.mock.calls.at(-1)?.[0].blockNumber).toBe(101n);
+  });
+
+  it("does not advance the read floor for a reverted transaction", async () => {
+    const sdk = client();
+    vi.spyOn(sdk.publicClient, "waitForTransactionReceipt").mockResolvedValue({ status: "reverted", blockNumber: 100n } as never);
+    const head = vi.spyOn(sdk.publicClient, "getBlockNumber");
+    const read = vi.spyOn(sdk.publicClient, "readContract").mockResolvedValue(42n);
+    await expect(sdk.waitForReceipt(`0x${"2".repeat(64)}`)).rejects.toThrow("transaction reverted");
+    await sdk.getTokenBalance(CONTRACTS.sy, CONTRACTS.pt);
+    expect(head).not.toHaveBeenCalled();
+    expect(read.mock.calls.at(-1)?.[0].blockNumber).toBeUndefined();
+  });
+});
+
+describe("route mapping", () => {
+  it("maps every supported route", () => {
+    expect(quoteMethodFor("PT", "SY")).toBe("quotePtForSy");
+    expect(quoteMethodFor("SY", "PT")).toBe("quoteSyForPt");
+    expect(quoteMethodFor("SY", "YT")).toBe("quoteSyForYt");
+    expect(quoteMethodFor("YT", "SY")).toBe("quoteYtForSy");
+    expect(marketMethodFor("PT", "SY")).toBe("swapPtForSy");
+    expect(marketMethodFor("SY", "YT")).toBe("swapSyForYt");
+  });
+
+  it("rejects unsupported routes", () => {
+    expect(() => quoteMethodFor("PT", "YT")).toThrow(/unsupported swap route/);
+    expect(() => marketMethodFor("SY", "SY")).toThrow(/unsupported swap route/);
+  });
+});
+
+describe("price impact", () => {
+  it("is zero when execution matches the reference rate", () => {
+    expect(relativePriceImpactBps(1_000n, 100n, 1_000n, 100n, 10_000n)).toBe(0n);
+  });
+
+  it("is positive when execution is worse", () => {
+    // Reference: 100/1000 = 10%; execution 95/1000 = 9.5% => 5%.
+    expect(relativePriceImpactBps(1_000n, 95n, 1_000n, 100n, 10_000n)).toBe(500n);
+  });
+});
+
+describe("bond helpers", () => {
+  it("computes discount to par", () => {
+    expect(bondDiscountBps(WAD)).toBe(0n);
+    expect(bondDiscountBps((WAD * 95n) / 100n)).toBe(500n);
+  });
+
+  it("annualizes the issue-to-face gain", () => {
+    // 5% over one year.
+    const year = 365n * 24n * 60n * 60n;
+    expect(impliedBondApyBps((WAD * 95n) / 100n, WAD, year)).toBe(526n);
+  });
+
+  it("values a position from the contract's unit value", () => {
+    expect(bondPositionValue(100n * WAD, (WAD * 97n) / 100n)).toBe(97n * WAD);
+  });
+
+  it("computes the discount against a 6-decimal cash par", () => {
+    const par = 1_000_000n; // 1.0 USDC
+    expect(bondDiscountBps(par, par)).toBe(0n);
+    expect(bondDiscountBps(950_000n, par)).toBe(500n);
+  });
+
+  it("caps the claim at the junior surplus before applying the fee", () => {
+    // Preview 100 exceeds surplus 40 => payable 40, 10% fee => 36.
+    expect(claimablePayout(100n, 40n, 1_000n)).toBe(36n);
+    // Surplus is ample: fee applies to the preview.
+    expect(claimablePayout(100n, 1_000n, 1_000n)).toBe(90n);
+    // Nothing banked: a claim pays zero, never a fabricated amount.
+    expect(claimablePayout(100n, 0n, 1_000n)).toBe(0n);
+  });
+});
+
+describe("transaction builders", () => {
+  it("encodes a swap for the right route", () => {
+    const request = client().buildSwap({
+      from: CONTRACTS.sy,
+      assetIn: "SY",
+      assetOut: "PT",
+      amountIn: 1_000n,
+      minAmountOut: 900n,
+    });
+    expect(request.to).toBe(CONTRACTS.market);
+    const decoded = decodeFunctionData({ abi: ammAbi, data: request.data as `0x${string}` });
+    expect(decoded.functionName).toBe("swapSyForPt");
+    expect(decoded.args).toEqual([1_000n, 900n]);
+  });
+
+  it("encodes a place order with the numeric side", () => {
+    const request = client().buildPlaceOrder({
+      maker: CONTRACTS.pt,
+      side: "Bid",
+      baseAmount: 50n,
+      priceWad: (WAD * 98n) / 100n,
+      expiry: 1_900_000_000n,
+      predecessor: null,
+    });
+    const decoded = decodeFunctionData({ abi: orderbookAbi, data: request.data as `0x${string}` });
+    expect(decoded.functionName).toBe("placeOrder");
+    expect(decoded.args?.[0]).toBe(ORDER_SIDE.Bid);
+    expect(decoded.args?.[4]).toBe(0n);
+  });
+
+  it("encodes a deposit with the slippage floor", () => {
+    const request = client().buildDeposit({
+      marketId: "hedera",
+      from: CONTRACTS.sy,
+      underlyingAmount: 123n,
+      minSyOut: 120n,
+    });
+    const decoded = decodeFunctionData({ abi: syVaultAbi, data: request.data as `0x${string}` });
+    expect(decoded.functionName).toBe("deposit");
+    expect(decoded.args).toEqual([123n, 120n]);
+  });
+
+  it("encodes coupon and primary-market bond calls", () => {
+    const c = client();
+    const claim = c.buildClaimCoupon(2n);
+    expect(claim.to).toBe(CONTRACTS.bond);
+    const decodedClaim = decodeFunctionData({ abi: bondAbi, data: claim.data as `0x${string}` });
+    expect(decodedClaim.functionName).toBe("claimCoupon");
+    expect(decodedClaim.args).toEqual([2n]);
+
+    const purchase = c.buildPurchase(500n);
+    const decodedPurchase = decodeFunctionData({ abi: bondAbi, data: purchase.data as `0x${string}` });
+    expect(decodedPurchase.functionName).toBe("purchase");
+    expect(decodedPurchase.args).toEqual([500n]);
+    expect(() => c.buildPurchase(0n)).toThrow(/positive/);
+  });
+
+  it("validates positive amounts and fee ceilings", () => {
+    const c = client();
+    expect(() =>
+      c.buildSwap({ from: CONTRACTS.sy, assetIn: "SY", assetOut: "PT", amountIn: 0n, minAmountOut: 0n }),
+    ).toThrow(/positive/);
+    expect(() => c.buildSetYieldFee({ admin: CONTRACTS.tokenizer, feeBps: 2_001n })).toThrow(
+      /basis points/,
+    );
+  });
+});
+
+describe("ContractError classification", () => {
+  it("categorizes slippage and state errors", () => {
+    expect(new ContractError("SlippageExceeded", [], "").category).toBe("slippage");
+    expect(new ContractError("MarketMatured", [], "").category).toBe("state");
+    expect(new ContractError("NotAdmin", [], "").category).toBe("auth");
+    expect(new ContractError("InsufficientLiquidity", [], "").category).toBe("liquidity");
+  });
+});
