@@ -68,7 +68,7 @@ export function BondPositionCard({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="label-data">Yield source backing SY</p>
-          <p className="mt-2 text-3xl font-light tabular-nums text-ink">
+          <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
             {formatTokenAmount(bond.valuePerUnit, decimals, 4)}
             <span className="ml-2 text-xl text-graphite">value / unit</span>
           </p>

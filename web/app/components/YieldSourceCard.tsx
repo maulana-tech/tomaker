@@ -8,7 +8,7 @@ import { LiveValue } from "@/components/LiveValue";
 function sourceStatus(source: YieldSourceConfig): { label: string; body: string; tone: "live" | "idle" } {
   if (source.kind === "bond") {
     return {
-      label: "ATS bond",
+      label: "ERC-3643 bond",
       body: "Deposits are routed by the vault's strategy into an ERC-3643 tokenized bond. The SY exchange rate tracks the bond's accrued value.",
       tone: "live",
     };

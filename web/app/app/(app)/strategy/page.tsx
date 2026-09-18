@@ -88,7 +88,7 @@ export default function StrategyPage() {
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="label-data text-signal">Yield markets</p>
-            <h1 className="mt-2 text-6xl font-light tracking-tight sm:text-7xl">Strategies</h1>
+            <h1 className="mt-2 text-6xl font-normal tracking-tight sm:text-7xl">Strategies</h1>
           </div>
           <ConfiguredMarketPill />
         </div>
@@ -102,7 +102,7 @@ export default function StrategyPage() {
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink/10 pb-4">
           <div>
             <p className="label-data">Market selection</p>
-            <h2 id="strategy-selector-title" className="mt-2 text-2xl font-light text-ink">
+            <h2 id="strategy-selector-title" className="mt-2 text-2xl font-normal text-ink">
               Select a strategy
             </h2>
           </div>
@@ -141,7 +141,7 @@ export default function StrategyPage() {
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-light text-ink">{strategy.name}</h3>
+                  <h3 className="text-2xl font-normal text-ink">{strategy.name}</h3>
                 </div>
                 <dl className="space-y-3 border-y border-ink/10 py-4 text-sm">
                   <PipelineDetail label="Asset" value={strategy.asset} />
@@ -163,7 +163,7 @@ export default function StrategyPage() {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="label-data">Selected strategy</p>
-                <h2 id="selected-strategy-title" className="mt-3 max-w-xl text-3xl font-light text-ink sm:text-4xl">
+                <h2 id="selected-strategy-title" className="mt-3 max-w-xl text-3xl font-normal text-ink sm:text-4xl">
                   {selectedName}
                 </h2>
               </div>
@@ -288,7 +288,7 @@ function StrategyMetric({
   return (
     <div className="min-h-44 border-b border-ink/10 p-6 sm:[&:nth-child(odd)]:border-r lg:p-7">
       <dt className="label-data">{label}</dt>
-      <dd className={`mt-4 min-h-8 text-2xl font-light tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
+      <dd className={`mt-4 min-h-8 text-2xl font-normal tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="min-w-20" />
       </dd>
       <p className="mt-3 text-xs leading-relaxed text-ash">{detail}</p>

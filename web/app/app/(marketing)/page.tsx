@@ -116,7 +116,7 @@ export default function LandingPage() {
           <Parallax speed={0.12} className="relative mx-auto w-full max-w-[1280px] px-6 sm:px-16">
             <h1
               data-exit="headline"
-              className="hero-shimmer max-w-4xl text-5xl font-light leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl"
+              className="hero-shimmer max-w-4xl text-5xl font-normal leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl"
             >
               Split bond yield into principal and yield.
             </h1>
@@ -170,7 +170,7 @@ export default function LandingPage() {
               <div>
                 <StepNumeral>{step.n}</StepNumeral>
                 <Reveal>
-                  <h2 className="mt-6 text-4xl font-light tracking-tight sm:text-5xl">{step.title}</h2>
+                  <h2 className="mt-6 text-4xl font-normal tracking-tight sm:text-5xl">{step.title}</h2>
                   <p className="mt-3 label-data">{step.kicker}</p>
                   <p className="mt-6 max-w-xl text-lg leading-relaxed text-smoke">{step.body}</p>
                 </Reveal>
@@ -195,7 +195,7 @@ export default function LandingPage() {
         <div className="hairline" />
         <div className="relative mx-auto max-w-[1280px] px-6 py-20 sm:px-16">
           <div className="flex items-center justify-between">
-            <h2 className="text-4xl font-light tracking-tight sm:text-5xl">
+            <h2 className="text-4xl font-normal tracking-tight sm:text-5xl">
               <WordReveal brightWords={[0]}>Protocol overview</WordReveal>
             </h2>
             <MarketStatusLabel className="label-data" />
@@ -209,7 +209,7 @@ export default function LandingPage() {
                 }`}
               >
                 <p
-                  className={`text-5xl font-light tabular-nums tracking-tight sm:text-6xl ${
+                  className={`text-5xl font-normal tabular-nums tracking-tight sm:text-6xl ${
                     fact.signal ? "text-signal" : "text-ink"
                   }`}
                 >

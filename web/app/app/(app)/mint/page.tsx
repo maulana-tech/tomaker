@@ -152,7 +152,7 @@ export default function MintPage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <h1 className="text-6xl font-light tracking-tight sm:text-7xl">Mint</h1>
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Mint</h1>
         <p className="max-w-xl text-smoke">
           Deposit the underlying to receive SY, and optionally split it into equal amounts of PT and
           YT.

@@ -163,7 +163,7 @@ export default function PoolPage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <h1 className="text-6xl font-light tracking-tight sm:text-7xl">Pool</h1>
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Pool</h1>
         <p className="max-w-xl text-smoke">
           Provide PT and SY to the AMM, earn trading fees, and remove your pro-rata assets
           before or after maturity.

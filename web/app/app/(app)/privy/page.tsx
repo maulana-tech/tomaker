@@ -457,7 +457,7 @@ export default function PrivyPage() {
     <div className="space-y-8">
       <header className="space-y-4">
         <p className="label-data">Privy · embedded BOT Chain wallet</p>
-        <h1 className="text-5xl font-light tracking-tight sm:text-7xl">
+        <h1 className="text-5xl font-normal tracking-tight sm:text-7xl">
           Email to investment
         </h1>
         <p className="max-w-2xl text-smoke">

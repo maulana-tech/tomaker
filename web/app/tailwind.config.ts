@@ -10,6 +10,10 @@ import type { Config } from "tailwindcss";
 // `ink` and `paper` are colour names, not roles: ink is always the dark one.
 // The light theme uses `bg-paper text-ink`, which is why the inversion was a
 // swap of usage sites rather than of these two values.
+//
+// Display type carries one weight step more than it did on the dark stage.
+// Light-on-dark blooms and holds a 300 weight; dark-on-light does the opposite
+// and thins out, so the same headline at 300 reads spindly on paper.
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -23,12 +27,14 @@ const config: Config = {
         ink: "#0B0B0B",
         // Raised panel on paper. Replaces the darkroom's near-black `carbon`.
         chalk: "#F4F4F4",
-        // Greys are tuned for contrast against paper, not against ink: every
-        // one of these clears WCAG AA (4.5:1) on #FFFFFF as body text.
-        ash: "#6D6D6D",
-        smoke: "#767676",
-        pewter: "#6F6F6F",
-        graphite: "#4A4A4A",
+        // Greys are tuned for contrast against paper, not against ink. They
+        // clear WCAG AA (4.5:1) on #FFFFFF with headroom to spare, because most
+        // of this copy sits over a scrim rather than over pure white, and the
+        // scrim costs some of the ratio back.
+        ash: "#5F5F5F",
+        smoke: "#565656",
+        pewter: "#5F5F5F",
+        graphite: "#3D3D3D",
         // The single accent. One job: live/active signals.
         signal: "#1CD8B0",
       },

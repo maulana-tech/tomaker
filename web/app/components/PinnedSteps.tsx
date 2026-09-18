@@ -77,10 +77,10 @@ export function PinnedSteps({ steps }: { steps: PinnedStep[] }) {
                     i > 0 ? "absolute inset-0" : ""
                   } ${active ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-4"}`}
                 >
-                  <span className="block text-9xl font-light leading-none text-ink/15 lg:text-[13rem]">
+                  <span className="block text-9xl font-normal leading-none text-ink/15 lg:text-[13rem]">
                     {step.n}
                   </span>
-                  <h2 className="mt-6 text-5xl font-light tracking-tight lg:-mt-10 lg:text-7xl">
+                  <h2 className="mt-6 text-5xl font-normal tracking-tight lg:-mt-10 lg:text-7xl">
                     {step.title}
                   </h2>
                   <p className="mt-4 label-data">{step.kicker}</p>

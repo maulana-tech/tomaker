@@ -163,7 +163,7 @@ export default function TradePage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <h1 className="text-6xl font-light tracking-tight sm:text-7xl">Trade</h1>
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Trade</h1>
         <p className="max-w-xl text-smoke">
           Swap between PT, YT, and SY through the time-decay AMM. Quotes show expected output,
           price impact, and the implied APY so you can see if you are buying at a premium or
@@ -302,7 +302,7 @@ export default function TradePage() {
             </div>
             <div className="border-t border-ink/10 pt-5">
               <span className="label-data">Expected out ({direction.assetOut})</span>
-              <p className="mt-2 text-3xl font-light tabular-nums text-ink">
+              <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
                 <LiveValue
                   value={quote ? formatTokenAmount(quote.amountOut, cfg.decimals) : "0.0"}
                   loading={quoting}

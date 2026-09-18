@@ -108,7 +108,7 @@ export default function PortfolioPage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <h1 className="text-6xl font-light tracking-tight sm:text-7xl">Portfolio</h1>
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Portfolio</h1>
         <p className="max-w-xl text-smoke">
           {matured
             ? "Maturity reached. Redeem PT for its principal in SY, then unwrap SY to the underlying."
@@ -238,7 +238,7 @@ export default function PortfolioPage() {
             <p className="label-data">Time to maturity</p>
             {market !== null ? (
               <>
-                <p className="text-6xl font-light tabular-nums text-ink">
+                <p className="text-6xl font-normal tabular-nums text-ink">
                   {daysToMaturity(market.maturity)}
                   <span className="ml-2 text-2xl text-graphite">Days</span>
                 </p>

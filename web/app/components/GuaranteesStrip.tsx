@@ -74,7 +74,7 @@ function GuaranteeRow({
         />
       </span>
       <span
-        className={`text-6xl font-light leading-none transition-colors duration-700 sm:text-7xl ${
+        className={`text-6xl font-normal leading-none transition-colors duration-700 sm:text-7xl ${
           lit ? "text-ink/45" : "text-ink/15"
         }`}
       >
@@ -82,7 +82,7 @@ function GuaranteeRow({
       </span>
       <div>
         <h3
-          className={`text-2xl font-light tracking-tight transition-colors duration-700 sm:text-3xl ${
+          className={`text-2xl font-normal tracking-tight transition-colors duration-700 sm:text-3xl ${
             lit ? "text-ink" : "text-smoke"
           }`}
         >
@@ -108,7 +108,7 @@ export function GuaranteesStrip() {
     <section className="relative bg-transparent">
       <div className="mx-auto max-w-[1280px] px-6 py-20 sm:px-16 sm:py-24">
         <KickerWipe className="label-data">Design / Guarantees</KickerWipe>
-        <h2 className="mt-5 max-w-3xl text-5xl font-light tracking-tight sm:text-6xl lg:text-7xl">
+        <h2 className="mt-5 max-w-3xl text-5xl font-normal tracking-tight sm:text-6xl lg:text-7xl">
           <WordReveal brightWords={[3]}>Built into the protocol</WordReveal>
         </h2>
 

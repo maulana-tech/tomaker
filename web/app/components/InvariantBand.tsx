@@ -101,7 +101,7 @@ export function InvariantBand() {
           The smaller definitions below need the weight. */}
       <Scrim side="bottom" />
       <div ref={ref} className="relative mx-auto max-w-[1280px] px-6 py-24 sm:px-16 sm:py-28">
-        <p className="text-center font-light leading-none tracking-tight text-[clamp(3.5rem,9vw,9rem)]">
+        <p className="text-center font-normal leading-none tracking-tight text-[clamp(3.5rem,9vw,9rem)]">
           <span className={`${part("-translate-x-12 opacity-0")} ${term("PT")}`} style={style(0)} {...hover("PT")}>
             PT
           </span>{" "}
@@ -143,7 +143,7 @@ export function InvariantBand() {
                   {leg.tag}
                 </span>
               </div>
-              <h3 className="mt-6 text-2xl font-light tracking-tight sm:text-3xl">{leg.name}</h3>
+              <h3 className="mt-6 text-2xl font-normal tracking-tight sm:text-3xl">{leg.name}</h3>
               <p className="mt-4 max-w-sm leading-relaxed text-smoke">{leg.body}</p>
             </div>
           ))}

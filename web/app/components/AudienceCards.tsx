@@ -116,7 +116,7 @@ export function AudienceCards() {
       <Scrim side="bottom" />
       <div className="relative mx-auto max-w-[1280px] px-6 py-20 sm:px-16 sm:py-24">
         <KickerWipe className="label-data">Market / Roles</KickerWipe>
-        <h2 className="mt-5 text-5xl font-light tracking-tight sm:text-6xl lg:text-7xl">
+        <h2 className="mt-5 text-5xl font-normal tracking-tight sm:text-6xl lg:text-7xl">
           <WordReveal brightWords={[3]}>Who it is for</WordReveal>
         </h2>
 
@@ -154,7 +154,7 @@ export function AudienceCards() {
               {/* Watermark index: the step-numeral language, faded to texture. */}
               <span
                 aria-hidden
-                className="pointer-events-none absolute -right-2 -top-6 text-[9rem] font-light leading-none text-ink/[0.05]"
+                className="pointer-events-none absolute -right-2 -top-6 text-[9rem] font-normal leading-none text-ink/[0.05]"
               >
                 {audience.index}
               </span>
@@ -164,7 +164,7 @@ export function AudienceCards() {
                 delay={600 + index * 150}
               >
                 <Glyph role={audience.role} hidden={hidden} delay={800 + index * 150} />
-                <h3 className="mt-8 text-3xl font-light tracking-tight sm:text-4xl">
+                <h3 className="mt-8 text-3xl font-normal tracking-tight sm:text-4xl">
                   {audience.title}
                 </h3>
                 <p className="mt-5 max-w-sm leading-relaxed text-smoke">{audience.body}</p>

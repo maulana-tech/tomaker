@@ -126,7 +126,7 @@ function Step({
 }
 
 /**
- * A guided walkthrough over the live ERC-3643 / ATS bond market. Every step
+ * A guided walkthrough over the live ERC-3643 bond market. Every step
  * reads current on-chain state, executes
  * transactions through the connected wallet, and links the HashScan
  * transaction hash. Pending, confirmed, and rejected states are all surfaced by
@@ -321,7 +321,7 @@ export default function JourneyPage() {
   if (journey.status === "undeployed") {
     return (
       <div className="card p-8">
-        <h1 className="text-3xl font-light">Journey</h1>
+        <h1 className="text-3xl font-normal">Journey</h1>
         <p className="mt-3 text-sm text-smoke">
           No market is configured for this network. Set the deployment addresses to run the journey.
         </p>
@@ -333,9 +333,9 @@ export default function JourneyPage() {
     <div className="space-y-10">
       <header className="space-y-4">
         <p className="label-data">Bond market · {cfg.network}</p>
-        <h1 className="text-6xl font-light tracking-tight sm:text-7xl">One bond, end to end</h1>
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">One bond, end to end</h1>
         <p className="max-w-2xl text-smoke">
-          A single linear path over the live ERC-3643 / ATS tokenized bond: identify the asset, prove
+          A single linear path over the live ERC-3643 tokenized bond: identify the asset, prove
           eligibility, inspect backing, enter a position, split and trade, inspect the coupon, and
           redeem. Every number is read from {cfg.network}; confirmed actions include HashScan links.
         </p>
@@ -377,8 +377,8 @@ export default function JourneyPage() {
 
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="space-y-6 lg:col-span-8">
-          {/* 1. Identify the ATS asset */}
-          <Step index={1} title="Identify the ATS asset" state={bond ? "live" : "loading"}>
+          {/* 1. Identify the bond asset */}
+          <Step index={1} title="Identify the bond asset" state={bond ? "live" : "loading"}>
             <dl>
               <Stat
                 label="Bond"
@@ -427,7 +427,7 @@ export default function JourneyPage() {
               />
             </dl>
             <p className="text-xs text-ash">
-              The bond is a permissioned ERC-3643 / ATS security. Deposits route through the vault
+              The bond is a permissioned ERC-3643 security. Deposits route through the vault
               strategy, so only the strategy must hold identity verification to buy the bond.
             </p>
           </Step>
