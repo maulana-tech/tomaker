@@ -11,11 +11,10 @@ import type { Config } from "tailwindcss";
 // The light theme uses `bg-paper text-ink`, which is why the inversion was a
 // swap of usage sites rather than of these two values.
 //
-// Display type carries one weight step more than it did on the dark stage.
-// Light-on-dark blooms and holds a 300 weight; dark-on-light does the opposite
-// and thins out, so the same headline at 300 reads spindly on paper.
+// Display type carries one weight step more than a dark theme would need:
+// dark-on-light thins out where light-on-dark blooms, so a 300 headline reads
+// spindly on paper.
 const config: Config = {
-  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -24,8 +23,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Every colour resolves through a CSS variable so one `.dark` class
-        // swaps the whole theme. Values live in globals.css.
+        // Every colour resolves through a CSS variable, so the palette has one
+        // definition. Values live in globals.css.
         paper: "rgb(var(--paper) / <alpha-value>)",
         ink: "rgb(var(--ink) / <alpha-value>)",
         // Raised panel on paper.

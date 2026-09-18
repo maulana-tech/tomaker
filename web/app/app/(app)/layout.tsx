@@ -5,7 +5,6 @@ import { AppWalletProvider } from "@/components/AppWalletProvider";
 import { Wordmark } from "@/components/Logo";
 import { WalletButton } from "@/components/WalletButton";
 import { NetworkPill } from "@/components/NetworkPill";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { DeploymentBanner } from "@/components/DeploymentBanner";
 import { NetworkBanner } from "@/components/NetworkBanner";
 import { AppTabs } from "@/components/AppTabs";
@@ -30,7 +29,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
             <AppTabs />
             <div className="flex items-center gap-2 justify-self-end sm:gap-3">
-              <ThemeToggle />
               <NetworkPill />
               <TourHelpButton />
               <WalletButton />

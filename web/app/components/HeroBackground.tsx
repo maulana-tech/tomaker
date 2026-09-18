@@ -3,7 +3,6 @@
 "use client";
 
 import { Grain } from "@/components/Grain";
-import { Scrim } from "@/components/Scrim";
 
 // The hero's backdrop is the world.
 //
@@ -18,7 +17,6 @@ import { Scrim } from "@/components/Scrim";
 export function HeroBackground() {
   return (
     <div aria-hidden className="absolute inset-0">
-      <Scrim side="left" />
       {/* A little extra weight at the foot so the scroll cue and the nav's
           underside both have something to sit on. */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-paper/55 via-transparent to-paper/75" />

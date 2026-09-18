@@ -6,7 +6,6 @@ import { Wordmark } from "@/components/Logo";
 import { Atmosphere } from "@/components/Atmosphere";
 import { Grain } from "@/components/Grain";
 import { DocsSidebar } from "@/components/DocsSidebar";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: {
@@ -42,7 +41,6 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             >
               GitHub
             </a>
-            <ThemeToggle />
             <Link
               href="/mint"
               className="rounded-pill bg-ink px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-smoke"

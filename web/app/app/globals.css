@@ -30,45 +30,8 @@
   --signal: 94 166 229;
   --signal-ink: 28 95 148;
 
-  /* The 3D instrument. It reads by contrasting with the page, so its structure
-     and its lighting both have to flip with the theme, not just its fog. On
-     paper the metal has to be held down: a bright environment on a polished
-     surface blows the rings out to near-white and the instrument disappears. */
-  --world-ring: 58 64 72;
-  --world-housing: 29 31 35;
-  --world-metalness: 0.45;
-  --world-env: 0.45;
-  --world-rim: 0.25;
-  --world-key: 0.6;
 }
 
-.dark {
-  color-scheme: dark;
-
-  --paper: 19 18 17;
-  --paper-raised: 27 25 23;
-  --ink: 243 239 230;
-
-  --graphite: 216 210 198;
-  --smoke: 186 179 166;
-  --ash: 157 150 137;
-  --pewter: 157 150 137;
-
-  /* Inverted, the polarity problem goes away: the brand blue clears AA against
-     the dark page on its own, so both roles collapse back to one value. */
-  --signal: 94 166 229;
-  --signal-ink: 94 166 229;
-
-  /* Against a dark page the original values are the right ones again: the
-     instrument separates by being lighter than the field, and the rim light
-     goes back to doing the separating. */
-  --world-ring: 74 81 91;
-  --world-housing: 36 38 42;
-  --world-metalness: 0.9;
-  --world-env: 1.9;
-  --world-rim: 1.1;
-  --world-key: 1;
-}
 
 /* The app canvas is paper. The marketing route group overrides per section
    where it needs a chalk block for contrast. */
@@ -114,6 +77,73 @@ body {
 }
 *::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Glass over the dither
+
+   The field behind the marketing pages is two hard colours with pixel edges.
+   A solid card would cover it; a soft blurred one would fight it, because blur
+   is the opposite of a dither. These panels sit between: enough of the pattern
+   reads through to feel like glass, and the white half showing behind only
+   ever lightens the panel, so the worst case for the faintest text is still
+   comfortably past AA.
+
+   Text on them is deep navy, never white: white on #5EA6E5 is 2.3:1, which
+   fails even for large type, while the navy clears 8:1 and belongs to the same
+   palette.
+--------------------------------------------------------------------------- */
+
+:root {
+  --panel-ink: 11 31 49;
+  --panel-soft: 14 44 65;
+  --panel-faint: 16 49 72;
+}
+
+.panel {
+  background: rgb(var(--signal) / 0.6);
+  color: rgb(var(--panel-ink));
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: 18px;
+  backdrop-filter: blur(16px) saturate(135%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  box-shadow:
+    0 10px 34px rgb(var(--panel-ink) / 0.14),
+    inset 0 1px 0 rgb(255 255 255 / 0.45);
+}
+
+.panel-flat {
+  background: rgb(var(--signal) / 0.5);
+  color: rgb(var(--panel-ink));
+  border: 1px solid rgb(255 255 255 / 0.45);
+  border-radius: 16px;
+  backdrop-filter: blur(12px) saturate(125%);
+  -webkit-backdrop-filter: blur(12px) saturate(125%);
+}
+
+.panel-muted { color: rgb(var(--panel-soft)); }
+.panel-faint { color: rgb(var(--panel-faint)); }
+
+/* A checkerboard at the dither's own cell size, so a rule still speaks pixel. */
+.dither-rule {
+  height: 4px;
+  border-radius: 2px;
+  background-image:
+    linear-gradient(45deg, rgb(255 255 255 / 0.85) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.85) 75%),
+    linear-gradient(45deg, rgb(255 255 255 / 0.85) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.85) 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+/* No bar: the header stays transparent so the field runs edge to edge, and
+   only the controls carry enough backing of their own to stay legible over
+   both halves of the pattern. */
+.navchip {
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.75);
+  border-radius: 999px;
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
 }
 
 @layer components {

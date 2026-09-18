@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { WalletProvider } from "@/lib/wallet";
-import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 
 const TITLE = "toMaker, split, fix, and trade tokenized-bond yield";
 const DESCRIPTION =
@@ -35,12 +34,7 @@ export const metadata: Metadata = {
 // route-group layouts, so the landing page is not boxed into the app frame.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        {/* Blocking, before first paint: sets the theme class so the page never
-            renders light and then corrects itself. */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
-      </head>
+    <html lang="en" className="scroll-smooth">
       <body className="min-h-screen bg-paper font-sans text-ink">
         <WalletProvider>{children}</WalletProvider>
         {/* @vercel/analytics serves /_vercel/insights/script.js, which only

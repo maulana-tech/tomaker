@@ -3,7 +3,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Scrim } from "@/components/Scrim";
 import { clamp } from "@/lib/conductor";
 import { useConductor } from "@/lib/useConductor";
 
@@ -55,10 +54,6 @@ export function PinnedSteps({ steps }: { steps: PinnedStep[] }) {
       <div
         className="sticky top-0 flex h-screen items-center overflow-hidden bg-transparent"
       >
-          {/* The band used to darken to carbon on the split phase. It is pinned
-            over the instrument now, so it holds its copy with a scrim instead
-            of shuttering the frame the split is happening in. */}
-        <Scrim side="left" />
         {/* One column, holding the left half. The right half is the world: the
             band used to carry an SVG of the split beside the copy, which is a
             flat drawing of the mechanism the camera is now flying through. */}

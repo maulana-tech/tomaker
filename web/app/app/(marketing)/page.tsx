@@ -5,7 +5,6 @@ import { StepNumeral } from "@/components/StepNumeral";
 import { HeroBackground } from "@/components/HeroBackground";
 import { HeroExit } from "@/components/HeroExit";
 import { Parallax } from "@/components/Parallax";
-import { Scrim } from "@/components/Scrim";
 import type { ExitSequence } from "@/lib/heroExit";
 import { InvariantBand } from "@/components/InvariantBand";
 import { Reveal } from "@/components/Reveal";
@@ -191,7 +190,6 @@ export default function LandingPage() {
       {/* Protocol overview: facts as numerals in an enclosed panel, not invented
           market metrics. */}
       <section data-chapter="maturity" className="relative bg-transparent">
-        <Scrim side="bottom" />
         <div className="hairline" />
         <div className="relative mx-auto max-w-[1280px] px-6 py-20 sm:px-16">
           <div className="flex items-center justify-between">

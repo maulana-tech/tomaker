@@ -3,7 +3,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Scrim } from "@/components/Scrim";
 import { prefersReducedMotion, useInView } from "@/lib/useInView";
 
 // The band that carries the protocol's thesis. The equation is set
@@ -95,11 +94,6 @@ export function InvariantBand() {
       data-chapter="split"
       className="relative overflow-hidden bg-transparent text-ink"
     >
-      {/* Held from the floor, not evenly: the equation is enormous white type
-          and reads over anything, so the top of the frame is left open and the
-          split — the beat this chapter exists for — stays visible behind it.
-          The smaller definitions below need the weight. */}
-      <Scrim side="bottom" />
       <div ref={ref} className="relative mx-auto max-w-[1280px] px-6 py-24 sm:px-16 sm:py-28">
         <p className="text-center font-normal leading-none tracking-tight text-[clamp(3.5rem,9vw,9rem)]">
           <span className={`${part("-translate-x-12 opacity-0")} ${term("PT")}`} style={style(0)} {...hover("PT")}>
@@ -119,7 +113,7 @@ export function InvariantBand() {
           </span>
         </p>
         <p
-          className={`mt-6 text-center text-sm uppercase tracking-[0.2em] text-graphite transition-all duration-700 ${
+          className={`mt-6 text-center text-sm uppercase tracking-[0.2em] text-ink transition-all duration-700 ${
             hidden ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
           }`}
           style={style(850)}
@@ -127,15 +121,15 @@ export function InvariantBand() {
           The value identity; token quantities adjust with the SY exchange rate
         </p>
 
-        <div className="mt-16 grid border-t border-ink/15 sm:mt-20 sm:grid-cols-3">
+        <div className="panel mt-16 grid overflow-hidden sm:mt-20 sm:grid-cols-3">
           {LEGS.map((leg, i) => (
             <div
               key={leg.tag}
               onPointerEnter={() => setActive(leg.tag)}
               onPointerLeave={() => setActive(null)}
-              className={`border-t border-ink/15 py-8 transition-opacity duration-300 sm:border-t-0 sm:px-10 ${
-                i < LEGS.length - 1 ? "sm:border-r sm:border-ink/15" : ""
-              } ${i === 0 ? "sm:pl-0" : ""} ${active && active !== leg.tag ? "opacity-40" : "opacity-100"}`}
+              className={`border-t border-white/40 p-8 transition-opacity duration-300 sm:border-t-0 ${
+                i < LEGS.length - 1 ? "sm:border-r sm:border-white/40" : ""
+              } ${active && active !== leg.tag ? "opacity-60" : "opacity-100"}`}
             >
               <div className="flex items-center justify-between">
                 <LegGlyph tag={leg.tag} />
@@ -144,7 +138,7 @@ export function InvariantBand() {
                 </span>
               </div>
               <h3 className="mt-6 text-2xl font-normal tracking-tight sm:text-3xl">{leg.name}</h3>
-              <p className="mt-4 max-w-sm leading-relaxed text-smoke">{leg.body}</p>
+              <p className="panel-muted mt-4 max-w-sm leading-relaxed">{leg.body}</p>
             </div>
           ))}
         </div>
