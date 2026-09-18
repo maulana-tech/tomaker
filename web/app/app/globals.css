@@ -6,7 +6,10 @@
 
 :root {
   color-scheme: light;
-  --font-inter: "Avenir Next", "Helvetica Neue", "Arial Nova";
+  /* HarmonyOS Sans SC. The webfont ships as ~570 unicode-range subsets, so a
+     Latin-only page downloads two or three of them and never touches the CJK
+     ones. The stack behind it is what renders before the subset arrives. */
+  --font-sans: "HarmonyOS Sans SC", "Helvetica Neue", Arial, sans-serif;
 
   /* Raw palette, as space-separated RGB channels.
      The channel form is not decoration: Tailwind's alpha utilities compile to

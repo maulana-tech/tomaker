@@ -46,7 +46,7 @@ describe("GET /api/faucet", () => {
         token: UNDERLYING,
         amount: "1000",
         decimals: 6,
-        gas: "20",
+        gas: "0.5",
         chainId: 968,
       }),
     );

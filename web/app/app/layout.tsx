@@ -35,6 +35,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* HarmonyOS Sans SC, split into unicode-range subsets. Pinned to an
+            exact version so a CDN release cannot change the type under us. */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/index.css"
+        />
+      </head>
       <body className="min-h-screen bg-paper font-sans text-ink">
         <WalletProvider>{children}</WalletProvider>
         {/* @vercel/analytics serves /_vercel/insights/script.js, which only

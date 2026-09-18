@@ -43,8 +43,8 @@ const config: Config = {
         "signal-ink": "rgb(var(--signal-ink) / <alpha-value>)",
       },
       fontFamily: {
-        // Inter everywhere, wired through next/font's CSS variable.
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        // HarmonyOS Sans SC, wired through the CSS variable in globals.css.
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       borderRadius: {

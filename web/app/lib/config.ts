@@ -131,11 +131,18 @@ function rpcListFor(cfg: AppConfig): string[] {
  * not. BOT is the native gas token; the market's sdUSD cash is a separate
  * ERC-20 supplied by the authenticated demo faucet.
  */
+/** Mainnet gas is BOT; testnet gas is tBOT, per the BOT Chain developer docs. */
+function nativeCurrencyFor(chainId: number) {
+  return chainId === MAINNET_CHAIN_ID
+    ? { name: "BOT", symbol: "BOT", decimals: 18 }
+    : { name: "Test BOT", symbol: "tBOT", decimals: 18 };
+}
+
 export function evmChainParams(cfg: AppConfig): EvmChainParams {
   return {
     chainId: `0x${cfg.chainId.toString(16)}`,
     chainName: chainNameFor(cfg.chainId),
-    nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 },
+    nativeCurrency: nativeCurrencyFor(cfg.chainId),
     rpcUrls: rpcListFor(cfg),
     blockExplorerUrls: [explorerBaseFor(cfg.network)],
   };
@@ -150,7 +157,7 @@ export function viemChain(cfg: AppConfig): Chain {
   return defineChain({
     id: cfg.chainId,
     name: chainNameFor(cfg.chainId),
-    nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 },
+    nativeCurrency: nativeCurrencyFor(cfg.chainId),
     rpcUrls: { default: { http: rpcListFor(cfg) } },
     blockExplorers: {
       default: { name: "BOTScan", url: explorerBaseFor(cfg.network) },

@@ -33,6 +33,11 @@ export const dynamic = "force-dynamic";
  * This route only runs on Hedera testnet and is disabled unless the key is set.
  */
 
+// The public BOT Chain faucet grants at most 10 tBOT per address per 24 hours,
+// so the account funding this route refills slowly. A gas top-up only has to
+// cover a handful of transactions; it is not a second faucet.
+const DEFAULT_GAS_TOP_UP = "0.5";
+
 const ERC20_ABI = [
   {
     type: "function",
@@ -151,7 +156,7 @@ export async function GET() {
     token: cfg.yieldSource.underlyingAddress,
     amount: process.env.FAUCET_CASH_AMOUNT ?? cfg.faucetAmount,
     decimals: cfg.underlyingDecimals,
-    gas: process.env.FAUCET_BOT_AMOUNT ?? "20",
+    gas: process.env.FAUCET_BOT_AMOUNT ?? DEFAULT_GAS_TOP_UP,
     chainId: cfg.chainId,
   });
 }
@@ -200,7 +205,7 @@ export async function POST(request: Request) {
   try {
     // Validate amounts before reserving or submitting any transaction.
     const amount = cashAmount(cfg);
-    const gasTopUp = parseEther(process.env.FAUCET_BOT_AMOUNT ?? "20");
+    const gasTopUp = parseEther(process.env.FAUCET_BOT_AMOUNT ?? DEFAULT_GAS_TOP_UP);
     if (amount <= 0n || gasTopUp < 0n)
       return noStore(
         { error: "Invalid faucet funding amount" },

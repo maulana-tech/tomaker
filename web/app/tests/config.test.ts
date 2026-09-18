@@ -213,7 +213,8 @@ describe("evmChainParams", () => {
     expect(evmChainParams(cfg)).toEqual({
       chainId: "0x3c8",
       chainName: "BOT Chain Testnet",
-      nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 },
+      // Testnet gas is tBOT, per the BOT Chain developer docs.
+      nativeCurrency: { name: "Test BOT", symbol: "tBOT", decimals: 18 },
       rpcUrls: [TESTNET_RPC],
       blockExplorerUrls: ["https://scan.bohr.life"],
     });
