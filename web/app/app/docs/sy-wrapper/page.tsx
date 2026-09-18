@@ -74,7 +74,7 @@ export default function SyWrapperPage() {
       |
   BondStrategy (IYieldStrategy)
       |
-  ERC-3643 / ATS tokenized bond`}</pre>
+  ERC-3643 tokenized bond`}</pre>
         <p>
           Dependencies flow strictly downward. The vault doesn&rsquo;t know about the AMM, and the
           AMM doesn&rsquo;t know about the bond. If an underlying ever fails, the damage stops at

@@ -29,10 +29,10 @@ export default function ContractsPage() {
     {
       name: "Bond strategy",
       address: cfg.contracts.strategy ?? "",
-      note: "Holds the ATS bond and values it in the cash denomination",
+      note: "Holds the bond and values it in the cash denomination",
     },
     {
-      name: "Cash token (sdUSD, test only)",
+      name: "Cash token (tUSD, test only)",
       address: cfg.contracts.underlying ?? "",
       note: "6-decimal demonstration cash; not USDC and not redeemable",
     },
@@ -68,18 +68,22 @@ export default function ContractsPage() {
       <DocsHeader
         kicker="Reference"
         title="Deployed contracts"
-        summary="The Hedera testnet ATS deployment, the current market parameters, and how to verify that the deployed bytecode matches the public source."
+        summary="The BOT Chain deployment, the current market parameters, and how to verify that the deployed bytecode matches the public source."
       />
 
       <div className="docs-prose mt-8">
-        <h2>Hedera testnet (chain 296)</h2>
+        <h2>BOT Chain testnet (chain 968)</h2>
         <p>
-          The bond is issued through the real ATS factory on Hedera testnet, and the toMaker market
-          is built around it. The addresses below are the same ones the app is built with; the
-          deployment manifest and receipts live in{" "}
-          <code>contracts/deployments/hedera-ats.json</code> and{" "}
-          <code>contracts/deployments/evidence/</code>. Open any address on{" "}
-          <a href="https://hashscan.io/testnet">HashScan</a>.
+          The bond and the market around it are both created by{" "}
+          <code>contracts/script/DeployBotChain.s.sol</code>, which writes every address it created
+          to <code>contracts/deployments/botchain-testnet.json</code>. The addresses below are the
+          same ones the app is built with. Open any address on{" "}
+          <a href="https://scan.bohr.life">the testnet explorer</a>; mainnet (chain 677) is on{" "}
+          <a href="https://scan.botchain.ai">scan.botchain.ai</a>.
+        </p>
+        <p>
+          The table is empty until that script has been run against BOT Chain. An address that is
+          not there has not been deployed.
         </p>
       </div>
 
@@ -120,17 +124,18 @@ export default function ContractsPage() {
         <h2>Current market parameters</h2>
         <ul>
           <li>
-            <strong>Bond:</strong> an ATS-issued ERC-3643 security. The issuer controls KYC; the
-            market reuses those controls, so a wallet without ATS eligibility cannot deposit into
-            SY or move PT/YT.
+            <strong>Bond:</strong> a permissioned ERC-3643 security. An identity registry and a
+            compliance module gate it; the market reuses those controls, so a wallet that is not
+            verified cannot deposit into SY or move PT/YT.
           </li>
           <li>
-            <strong>Cash:</strong> sdUSD, a 6-decimal testnet demonstration token. It is not USDC,
+            <strong>Cash:</strong> tUSD, a testnet demonstration token. It is not a stablecoin,
             not redeemable, and minted only by the deployment for the demo.
           </li>
           <li>
-            <strong>Decimals:</strong> 6 for the cash and the ATS bond, 18 for SY, PT, and YT, with
-            rate math in 18-decimal WAD.
+            <strong>Decimals:</strong> 18 throughout &mdash; cash, bond, SY, PT and YT &mdash; with
+            rate math in 18-decimal WAD. The app still reads the cash decimals from the manifest
+            rather than assuming, so a 6-decimal denomination would format correctly too.
           </li>
           <li>
             <strong>Maturity:</strong> fixed per deployment and shown in the app. A separate
@@ -144,19 +149,17 @@ export default function ContractsPage() {
 
         <h2>Verifying the deployment</h2>
         <p>
-          The contracts are built reproducibly from the Foundry project. Dependencies are pinned in{" "}
-          <code>contracts/dependencies.lock.json</code>, and the build inputs are recorded with the
-          deployment evidence. All nine contracts of this deployment are verified on Sourcify
-          (chain 296); earlier verification records apply to historical addresses. To verify a
-          contract, run:
+          The contracts are built reproducibly from the Foundry project: dependencies are pinned
+          in <code>contracts/dependencies.lock.json</code>. Nothing is verified on Sourcify yet,
+          because nothing is deployed yet. Once a market exists, verify a contract with:
         </p>
         <pre>
           <code>{`forge verify-contract <address> <path/to/Contract.sol:Contract> \\
-  --chain 296 --verifier sourcify`}</code>
+  --chain 968 --verifier sourcify`}</code>
         </pre>
         <p>
           A <code>match</code> means Sourcify recompiled the source and reproduced the deployed
-          bytecode. Check the contract&rsquo;s HashScan page separately for its displayed verification status. Rebuild locally
+          bytecode. Check the contract&rsquo;s explorer page separately for its displayed verification status. Rebuild locally
           with <code>forge build</code> and compare against the recorded build inputs; the contracts
           repository is the source of truth for the deployed bytecode.
         </p>
@@ -173,9 +176,9 @@ export default function ContractsPage() {
 
       <div className="mt-8">
         <Callout label="Address drift">
-          The app components use <code>NEXT_PUBLIC_*</code> configuration with the current manifest
-          as their fallback. ATS factory and security provenance use that same checked-in deployment. If they ever disagree, the
-          on-chain address in the manifest is authoritative.
+          The app components use <code>NEXT_PUBLIC_*</code> configuration with the checked-in
+          deployment as their fallback, and bond provenance uses that same source. If they ever
+          disagree, the on-chain address in the manifest is authoritative.
         </Callout>
       </div>
 

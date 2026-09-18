@@ -12,7 +12,7 @@ export default function IntroductionPage() {
       <DocsHeader
         kicker="Overview"
         title="What is toMaker?"
-        summary="toMaker is a protocol on Hedera that takes a deposit earning interest and splits it into two tokens you can trade separately: one that locks in a fixed rate, and one that collects the interest as it comes in."
+        summary="toMaker is a protocol on BOT Chain that takes a deposit earning interest and splits it into two tokens you can trade separately: one that locks in a fixed rate, and one that collects the interest as it comes in."
       />
 
       <div className="docs-prose mt-8">
@@ -62,7 +62,7 @@ export default function IntroductionPage() {
 
         <h2>The first market</h2>
         <p>
-          The live market wraps a <strong>tokenized bond</strong> (an ERC-3643 / ATS security
+          The live market wraps a <strong>tokenized bond</strong> (an ERC-3643 security
           token) in the SY vault. Cash you deposit is used to buy the bond through the{" "}
           <code>BondStrategy</code> adapter, and the bond&rsquo;s coupon and maturity cashflow is
           the yield being split. The rate toMaker reports is the SY vault&rsquo;s derived exchange
@@ -112,9 +112,9 @@ export default function IntroductionPage() {
       </div>
 
       <div className="mt-5">
-        <Callout label="Hedera testnet demonstration · unaudited" signal>
-          toMaker runs on Hedera <strong>testnet</strong> with a real ATS-issued bond and test-only
-          sdUSD cash. It has <strong>not</strong> had a professional third-party audit, and the
+        <Callout label="BOT Chain testnet demonstration · unaudited" signal>
+          toMaker runs on BOT Chain <strong>testnet</strong> with a demonstration ERC-3643 bond and test-only
+          tUSD cash. It has <strong>not</strong> had a professional third-party audit, and the
           contracts cannot be changed after deployment, so a defect would be permanent. Treat it as
           an early, unaudited demonstration, not as safe or as a live mainnet product. See{" "}
           <Link href="/docs/security">Security and risks</Link>.

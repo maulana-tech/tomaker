@@ -12,7 +12,7 @@ const STEPS: { title: string; body: React.ReactNode }[] = [
     body: (
       <>
         Open <Link href="/privy">Invest</Link>, sign in with email, and close wallet setup with
-        All Done. Request demo funding for sdUSD, BOT and ATS eligibility. sdUSD is a
+        All Done. Request demo funding for tUSD, BOT and bond eligibility. tUSD is a
         demonstration token. This market does not require USDC.
       </>
     ),

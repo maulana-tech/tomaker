@@ -12,6 +12,7 @@ import { AppBackground } from "@/components/AppBackground";
 import { PageTransition } from "@/components/PageTransition";
 import { TourHelpButton } from "@/components/TourHelpButton";
 import { TourOverlay } from "@/components/TourOverlay";
+import { BotChainBadge } from "@/components/BotChainBadge";
 
 // Chrome for the working app: a dark, persistent top bar with the in-app tabs,
 // an always-on network indicator, wallet connection, the deployment/network
@@ -57,6 +58,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 >
                   GitHub
                 </a>
+                <BotChainBadge />
               </div>
             </div>
           </footer>

@@ -11,6 +11,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Conductor } from "@/components/Conductor";
 import { MaturityRail } from "@/components/MaturityRail";
 import { appConfig, networkLabel } from "@/lib/config";
+import { BotChainBadge } from "@/components/BotChainBadge";
 
 // Marketing chrome for the "cinematic darkroom" landing: a fixed atmospheric
 // canvas, a quiet top bar that inverts on scroll, and the existing reveal
@@ -49,6 +50,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
                 Docs
               </RollingLink>
               <span className="label-data">{cfg.yieldSource.name} · {networkLabel(cfg.network)}</span>
+              <BotChainBadge />
             </div>
           </div>
           <p className="border-t border-ink/10 pt-6 text-[13px] text-ash">

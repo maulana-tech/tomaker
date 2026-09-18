@@ -3,9 +3,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/Logo";
-import { Atmosphere } from "@/components/Atmosphere";
 import { Grain } from "@/components/Grain";
 import { DocsSidebar } from "@/components/DocsSidebar";
+import { BotChainBadge } from "@/components/BotChainBadge";
 
 export const metadata: Metadata = {
   title: {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Documentation · toMaker",
   },
   description:
-    "How toMaker splits yield-bearing positions on Hedera into principal and yield tokens: concepts, protocol design, guides, and contract reference.",
+    "How toMaker splits yield-bearing positions on BOT Chain into principal and yield tokens: concepts, protocol design, guides, and contract reference.",
 };
 
 // Docs chrome: the marketing route's star-chart atmosphere (gradient sky,
@@ -22,8 +22,10 @@ export const metadata: Metadata = {
 // carry the navigation; the content column is capped for measure.
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex min-h-screen flex-col text-ink">
-      <Atmosphere />
+    /* Paper, not the dither field. The field belongs to the marketing pages;
+       docs is long-form reading and a two-tone pattern under a column of body
+       copy costs more legibility than it buys. */
+    <div className="relative flex min-h-screen flex-col bg-paper text-ink">
       <Grain className="fixed inset-0 z-0" />
 
       <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/80 backdrop-blur-xl">
@@ -69,6 +71,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             >
               GitHub
             </a>
+            <BotChainBadge />
           </div>
         </div>
       </footer>

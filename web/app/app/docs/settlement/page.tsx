@@ -18,7 +18,7 @@ export default function SettlementPage() {
       <div className="docs-prose mt-8">
         <h2>Terminal valuation</h2>
         <p>
-          The ATS bond, strategy and market share a maturity date. The strategy values
+          The bond, strategy and market share a maturity date. The strategy values
           the terminal bond position, including attributed coupon receivables. Before
           freezing that value, the tokenizer calls SY upkeep to synchronize coupon cash.
         </p>
@@ -32,7 +32,7 @@ export default function SettlementPage() {
         </p>
         <p>
           <code>observeRate()</code> records live rates before maturity for accounting.
-          It does not select the terminal rate used by the current ATS strategy.
+          It does not select the terminal rate used by the current bond strategy.
         </p>
 
         <h2>Who gets paid first</h2>
@@ -83,7 +83,7 @@ export default function SettlementPage() {
           Contract state lives in the EVM contract&rsquo;s own storage, which is permanent: there
           is no rent to top up and no expiry timer to beat. Per-holder interest ledgers and LP
           balances are ordinary contract storage, and they remain readable and usable for as long
-          as the Hedera network keeps the contract state. Funds cannot be lost to an expired
+          as the BOT Chain network keeps the contract state. Funds cannot be lost to an expired
           storage entry.
         </p>
       </div>

@@ -17,8 +17,8 @@ export default function SecurityPage() {
 
       <div className="mt-8">
         <Callout label="Read this first" signal>
-          toMaker runs on Hedera <strong>testnet</strong> as an unaudited demonstration. The bond is
-          issued through the real ATS factory, and the cash is test-only sdUSD; no real funds are
+          toMaker runs on BOT Chain <strong>testnet</strong> as an unaudited demonstration. The bond is
+          a demonstration ERC-3643 security, and the cash is test-only tUSD; no real funds are
           involved. toMaker has <strong>not</strong> had a professional third-party audit, and the
           contracts cannot be changed after deployment, so a defect would be permanent. Use only demonstration assets.
         </Callout>
@@ -28,9 +28,11 @@ export default function SecurityPage() {
         <h2>What has been done</h2>
         <ul>
           <li>
-            <strong>Test suite:</strong> Solidity tests pass, including live ATS fork checks that
-            run issuance, deposits, splits, trades, revocation, coupons, and maturity settlement
-            against the real ATS factory. The SDK and app test suites also pass.
+            <strong>Test suite:</strong> the Solidity suite passes, covering the protocol lifecycle
+            (deposit, split, trade, claim, recombine, redeem), the AMM curve and both YT flash
+            routes, the order book&rsquo;s price-time priority, and the ERC-3643 bond: permissioned
+            transfers, issuer-funded coupons and maturity redemption. The SDK and app suites
+            also pass.
           </li>
           <li>
             <strong>Property and invariant tests:</strong> fuzzed and invariant runs exercise random
@@ -38,15 +40,17 @@ export default function SecurityPage() {
             that the escrow still covers what it owes.
           </li>
           <li>
-            <strong>Live testnet checks:</strong> the current market has confirmed deployment,
-            funding, investment, trading and liquidity receipts, including an embedded-wallet
-            investment. Coupon, revocation and maturity records from earlier markets are
-            historical evidence. See <code>contracts/deployments/evidence/</code>.
+            <strong>Live testnet checks:</strong> none yet. No market is deployed on BOT Chain at
+            the time of writing, so there are no on-chain receipts to point at. The deploy script
+            exercises the full path &mdash; issue, deposit, split, seed both venues, schedule and
+            fund a coupon &mdash; and writes a manifest, but it has only been run against a local
+            node. This page will be wrong the moment that changes; treat a missing address as
+            missing evidence.
           </li>
           <li>
-            <strong>Reproducible builds:</strong> dependencies are pinned, and the ATS deployment
-            records its compiler settings and build inputs so the deployed bytecode can be compared
-            against source (see <Link href="/docs/contracts">Deployed contracts</Link>).
+            <strong>Reproducible builds:</strong> Solidity dependencies are pinned by commit in
+            <code>dependencies.lock.json</code>, and the deploy script writes a manifest recording
+            every address it created (see <Link href="/docs/contracts">Deployed contracts</Link>).
           </li>
           <li>
             <strong>Fixed-point arithmetic:</strong> Solidity has no floating-point
@@ -130,7 +134,7 @@ export default function SecurityPage() {
               <tr>
                 <td>Network / RPC availability</td>
                 <td>
-                  Reads go through Hedera JSON-RPC with failover across endpoints. Funds and state
+                  Reads go through BOT Chain JSON-RPC with failover across endpoints. Funds and state
                   live on-chain; an RPC outage delays the app but cannot move or lose balances.
                   Contract storage does not expire, so there is no rent or TTL to lapse.
                 </td>

@@ -11,8 +11,8 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
     q: "Is toMaker live on mainnet?",
     a: (
       <>
-        No. This is a Hedera <strong>testnet</strong> demonstration. The bond is issued through the
-        ATS factory; current investment and trading flows run on testnet, but the cash is test-only sdUSD and
+        No. This is a BOT Chain <strong>testnet</strong> demonstration. The bond is issued by the
+        demo issuer; current investment and trading flows run on testnet, but the cash is test-only tUSD and
         no real funds are involved. It is early and unaudited; see{" "}
         <Link href="/docs/security">Security and risks</Link>.
       </>
@@ -46,7 +46,7 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
         Earning is automatic; collecting is not. Interest builds up on your YT as rates tick
         along, and it is credited to your personal ledger whenever your balance changes. It only
         lands in your wallet when you claim on the Portfolio page. Unclaimed interest survives
-        transfers and maturity. Collecting requires ATS eligibility and available junior surplus.
+        transfers and maturity. Collecting requires bond eligibility and available junior surplus.
       </>
     ),
   },

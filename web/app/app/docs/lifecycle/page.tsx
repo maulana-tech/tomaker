@@ -128,7 +128,7 @@ export default function LifecyclePage() {
 
       <div className="mt-8">
         <Callout label="Current market" signal>
-          The live testnet market runs a fixed cycle over an ATS-issued bond. The maturity timestamp
+          The live testnet market runs a fixed cycle over an ERC-3643 bond. The maturity timestamp
           is set at deployment and shown in the app. Contract addresses and deployment records are
           in <Link href="/docs/contracts">Deployed contracts</Link>.
         </Callout>
