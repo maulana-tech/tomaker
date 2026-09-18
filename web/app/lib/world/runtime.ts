@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import * as THREE from "three";
+import { applyThemeToMaterials, paperColor, themeNumber } from "@/lib/world/theme";
 import { clamp, damp, lerp } from "@/lib/conductor";
 import { orreryModel } from "@/lib/orrery";
 import { WORLD_CHAPTERS, stateAt, type WorldState } from "@/lib/world/chapters";
@@ -59,6 +60,9 @@ export type WorldReadout = {
 export type World = {
   setSize(width: number, height: number, dpr: number): void;
   update(frame: WorldFrame): void;
+  /** Re-reads the theme tokens and repaints in place. See theme.ts for why
+   *  this is not a rebuild. */
+  retheme(): void;
   dispose(): void;
   readout(): WorldReadout;
 };
@@ -82,11 +86,14 @@ export function isLowTier(): boolean {
   return coarse || cores <= 4 || window.innerWidth < 900;
 }
 
-const FOG_COLOR = 0xeef1f5;
 
-// Chapter key intensities were authored against a black stage. Scale them once,
-// here, so the per-frame update and the initial value cannot drift apart.
-const KEY_SCALE = 0.6;
+
+// Chapter key intensities were authored against a black stage. The theme
+// decides how much of that survives; read once per scene build so the per-frame
+// update and the initial value cannot drift apart.
+function keyScale(): number {
+  return themeNumber("--world-key", 0.6);
+}
 
 export function createWorld(
   canvas: HTMLCanvasElement,
@@ -111,7 +118,7 @@ export function createWorld(
   const scene = new THREE.Scene();
   const first = WORLD_CHAPTERS[0];
   if (!first) throw new Error("world ledger is empty");
-  const fog = new THREE.FogExp2(FOG_COLOR, first.state.fog);
+  const fog = new THREE.FogExp2(paperColor(), first.state.fog);
   scene.fog = fog;
 
   // Give the metal something to reflect before giving it anything to be lit by.
@@ -121,9 +128,7 @@ export function createWorld(
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromEquirectangular(panorama).texture;
   scene.environment = environment;
-  // Tuned for paper: the environment is now bright, so the old 1.9 blew the
-  // metal out to near-white and the instrument stopped reading at all.
-  scene.environmentIntensity = 0.45;
+  scene.environmentIntensity = themeNumber("--world-env", 0.45);
   panorama.dispose();
   pmrem.dispose();
 
@@ -131,15 +136,16 @@ export function createWorld(
   // that used to lift the rings off a dark void now works against the page:
   // on paper the silhouette reads by being darker than the background, so the
   // rim is only strong enough to keep the far side from going flat.
-  const key = new THREE.DirectionalLight(0xdfe8ff, first.state.key * KEY_SCALE);
+  let keyScaleValue = keyScale();
+  const key = new THREE.DirectionalLight(0xdfe8ff, first.state.key * keyScaleValue);
   key.position.set(-14, 18, 11);
   scene.add(key);
 
-  const rim = new THREE.DirectionalLight(0xaebfd6, 0.25);
+  const rim = new THREE.DirectionalLight(0xaebfd6, themeNumber("--world-rim", 0.25));
   rim.position.set(7, -5, -20);
   scene.add(rim);
 
-  const fill = new THREE.HemisphereLight(0x2c3b4e, FOG_COLOR, 0.25);
+  const fill = new THREE.HemisphereLight(0x2c3b4e, paperColor(), 0.25);
   scene.add(fill);
 
   const instrument: Instrument = buildInstrument(low);
@@ -242,10 +248,27 @@ export function createWorld(
 
   function applyState(state: WorldState) {
     fog.density = state.fog;
-    key.intensity = state.key * KEY_SCALE;
+    key.intensity = state.key * keyScaleValue;
   }
 
   return {
+    retheme() {
+      keyScaleValue = keyScale();
+      fog.color.set(paperColor());
+      scene.environmentIntensity = themeNumber("--world-env", 0.45);
+      rim.intensity = themeNumber("--world-rim", 0.25);
+      const metalness = themeNumber("--world-metalness", 0.45);
+      scene.traverse((node) => {
+        const mesh = node as { material?: { metalness?: number; userData?: Record<string, unknown> } };
+        const role = mesh.material?.userData?.themeRole;
+        if (role === "ring") mesh.material!.metalness = metalness;
+        if (role === "housing") mesh.material!.metalness = metalness * 0.5;
+      });
+      applyThemeToMaterials(scene);
+      // The idle throttle would otherwise sit on the old frame.
+      sinceRender = Infinity;
+    },
+
     readout() {
       return {
         px: camera.position.x,

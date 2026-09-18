@@ -31,7 +31,7 @@ export function MarketStatusLabel({ className }: { className?: string }) {
   // The signal bloom is reserved for a real live signal, so an unconfigured
   // build states the network without claiming one.
   return (
-    <p className={`${live ? "glow-signal text-signal" : "text-pewter"} ${className ?? ""}`}>
+    <p className={`${live ? "glow-signal text-signal-ink" : "text-pewter"} ${className ?? ""}`}>
       {label}
     </p>
   );

@@ -5,7 +5,7 @@ import type { BondInfo, MarketState } from "@tomaker/sdk";
 import { fixedRateDisplay, variableRateDisplay, type YieldChoiceTone } from "@/lib/yieldChoice";
 
 function toneClass(tone: YieldChoiceTone): string {
-  if (tone === "live") return "border-signal/30 bg-signal/10 text-signal";
+  if (tone === "live") return "border-signal/30 bg-signal/10 text-signal-ink";
   if (tone === "warning") return "border-yellow-500/30 bg-yellow-500/10 text-yellow-200";
   return "border-ink/15 bg-ink/[0.03] text-smoke";
 }
@@ -50,7 +50,7 @@ export function YieldChoiceCard({
           </div>
           <Link
             href={fixedHref}
-            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
           >
             {fixedCtaLabel}
           </Link>
@@ -72,7 +72,7 @@ export function YieldChoiceCard({
           </div>
           <Link
             href="/trade#buy-yt"
-            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
           >
             Buy YT
           </Link>

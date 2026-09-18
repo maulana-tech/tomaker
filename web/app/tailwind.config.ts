@@ -15,6 +15,7 @@ import type { Config } from "tailwindcss";
 // Light-on-dark blooms and holds a 300 weight; dark-on-light does the opposite
 // and thins out, so the same headline at 300 reads spindly on paper.
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -23,20 +24,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#FFFFFF",
-        ink: "#0B0B0B",
-        // Raised panel on paper. Replaces the darkroom's near-black `carbon`.
-        chalk: "#F4F4F4",
-        // Greys are tuned for contrast against paper, not against ink. They
-        // clear WCAG AA (4.5:1) on #FFFFFF with headroom to spare, because most
-        // of this copy sits over a scrim rather than over pure white, and the
-        // scrim costs some of the ratio back.
-        ash: "#5F5F5F",
-        smoke: "#565656",
-        pewter: "#5F5F5F",
-        graphite: "#3D3D3D",
-        // The single accent. One job: live/active signals.
-        signal: "#1CD8B0",
+        // Every colour resolves through a CSS variable so one `.dark` class
+        // swaps the whole theme. Values live in globals.css.
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        // Raised panel on paper.
+        chalk: "rgb(var(--paper-raised) / <alpha-value>)",
+        // Secondary type, tuned to clear WCAG AA against the page in BOTH
+        // themes, with headroom because most of this copy sits over a scrim
+        // rather than over the flat page and the scrim costs some ratio back.
+        ash: "rgb(var(--ash) / <alpha-value>)",
+        smoke: "rgb(var(--smoke) / <alpha-value>)",
+        pewter: "rgb(var(--pewter) / <alpha-value>)",
+        graphite: "rgb(var(--graphite) / <alpha-value>)",
+        // The single accent, in two values. `signal` is the brand blue and is
+        // for marks, fills and rules; `signal-ink` is the only one allowed to
+        // carry a word. See globals.css for why.
+        signal: "rgb(var(--signal) / <alpha-value>)",
+        "signal-ink": "rgb(var(--signal-ink) / <alpha-value>)",
       },
       fontFamily: {
         // Inter everywhere, wired through next/font's CSS variable.

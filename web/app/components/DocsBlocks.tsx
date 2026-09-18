@@ -40,7 +40,7 @@ export function Callout({
 }) {
   return (
     <aside className={`panel-subtle border-l-2 p-5 ${signal ? "border-l-signal" : "border-l-ink/30"}`}>
-      <p className={`label-data mb-2 ${signal ? "text-signal" : ""}`}>{label}</p>
+      <p className={`label-data mb-2 ${signal ? "text-signal-ink" : ""}`}>{label}</p>
       <div className="text-[14px] leading-6 text-smoke [&_a]:text-ink [&_a]:underline [&_a]:decoration-ink/30 [&_a]:underline-offset-4 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-ink [&_strong]:font-semibold [&_strong]:text-ink">
         {children}
       </div>

@@ -87,7 +87,7 @@ export default function StrategyPage() {
       <header className="space-y-3">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
-            <p className="label-data text-signal">Yield markets</p>
+            <p className="label-data text-signal-ink">Yield markets</p>
             <h1 className="mt-2 text-6xl font-normal tracking-tight sm:text-7xl">Strategies</h1>
           </div>
           <ConfiguredMarketPill />
@@ -133,7 +133,7 @@ export default function StrategyPage() {
                   <span
                     className={`rounded-pill border px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] ${
                       selectedOption
-                        ? "border-signal/30 bg-signal/10 text-signal"
+                        ? "border-signal/30 bg-signal/10 text-signal-ink"
                         : "border-ink/15 text-smoke"
                     }`}
                   >
@@ -148,7 +148,7 @@ export default function StrategyPage() {
                   <PipelineDetail label="Return" value={strategy.rate} />
                 </dl>
               </div>
-              <p className={`mt-5 text-[13px] uppercase tracking-[0.1em] ${selectedOption ? "text-signal" : "text-ash"}`}>
+              <p className={`mt-5 text-[13px] uppercase tracking-[0.1em] ${selectedOption ? "text-signal-ink" : "text-ash"}`}>
                 {stage}
               </p>
             </button>
@@ -167,7 +167,7 @@ export default function StrategyPage() {
                   {selectedName}
                 </h2>
               </div>
-              <span className="rounded-pill border border-signal/30 bg-signal/10 px-3 py-1 text-[13px] uppercase tracking-[0.1em] text-signal">
+              <span className="rounded-pill border border-signal/30 bg-signal/10 px-3 py-1 text-[13px] uppercase tracking-[0.1em] text-signal-ink">
                 {selectedStage}
               </span>
             </div>
@@ -288,7 +288,7 @@ function StrategyMetric({
   return (
     <div className="min-h-44 border-b border-ink/10 p-6 sm:[&:nth-child(odd)]:border-r lg:p-7">
       <dt className="label-data">{label}</dt>
-      <dd className={`mt-4 min-h-8 text-2xl font-normal tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
+      <dd className={`mt-4 min-h-8 text-2xl font-normal tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="min-w-20" />
       </dd>
       <p className="mt-3 text-xs leading-relaxed text-ash">{detail}</p>

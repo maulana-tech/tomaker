@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import * as THREE from "three";
+import { inkColor, signalColor, tagRole } from "@/lib/world/theme";
 import { orreryModel, type OrreryModel } from "@/lib/orrery";
 import { RIG } from "@/lib/world/chapters";
 import { glowSprite } from "@/lib/world/textures";
@@ -27,8 +28,7 @@ export type Bodies = {
   dispose(): void;
 };
 
-const INK = 0x0b0b0b;
-const SIGNAL = 0x1cd8b0;
+
 
 /** How far above the ring plane the bodies ride, so they never z-fight the
  *  graduation band they are being read against. */
@@ -61,7 +61,7 @@ export function buildBodies(low: boolean): Bodies {
   // Unlit, because it is a source rather than a surface, but still fogged so it
   // recedes with everything else.
   const ptGeo = new THREE.SphereGeometry(BODY_RADIUS, segments, segments);
-  const ptMat = new THREE.MeshBasicMaterial({ color: INK });
+  const ptMat = tagRole(new THREE.MeshBasicMaterial({ color: inkColor() }), "ink");
   geometries.push(ptGeo);
   materials.push(ptMat);
   const pt = new THREE.Mesh(ptGeo, ptMat);
@@ -76,27 +76,33 @@ export function buildBodies(low: boolean): Bodies {
   // ---- the yield -----------------------------------------------------------
 
   const ytGeo = new THREE.SphereGeometry(BODY_RADIUS, segments, segments);
-  const ytMat = new THREE.MeshBasicMaterial({ color: SIGNAL, transparent: true });
+  const ytMat = tagRole(
+    new THREE.MeshBasicMaterial({ color: signalColor(), transparent: true }),
+    "signal",
+  );
   geometries.push(ytGeo);
   materials.push(ytMat);
   const yt = new THREE.Mesh(ytGeo, ytMat);
   group.add(yt);
 
-  const ytGlow = makeGlow("rgba(255,172,46,0.95)", "rgba(255,120,30,0.28)");
+  const ytGlow = makeGlow("rgba(94,166,229,0.95)", "rgba(28,95,148,0.28)");
   group.add(ytGlow);
 
-  const ytLight = new THREE.PointLight(SIGNAL, 0, 8, 2);
+  const ytLight = new THREE.PointLight(signalColor(), 0, 8, 2);
   group.add(ytLight);
 
   // The socket the signal was in. It does not leave the machine at maturity —
   // the yield is spent, which is a different thing from never having been.
   const spentGeo = new THREE.TorusGeometry(BODY_RADIUS * 1.25, 0.035, 6, low ? 20 : 40);
-  const spentMat = new THREE.MeshBasicMaterial({
-    color: INK,
-    transparent: true,
-    opacity: 0,
-    depthWrite: false,
-  });
+  const spentMat = tagRole(
+    new THREE.MeshBasicMaterial({
+      color: inkColor(),
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    }),
+    "ink",
+  );
   geometries.push(spentGeo);
   materials.push(spentMat);
   const spent = new THREE.Mesh(spentGeo, spentMat);
@@ -109,12 +115,15 @@ export function buildBodies(low: boolean): Bodies {
   const spreadPoints = new Float32Array(6);
   const spreadGeo = new THREE.BufferGeometry();
   spreadGeo.setAttribute("position", new THREE.BufferAttribute(spreadPoints, 3));
-  const spreadMat = new THREE.LineBasicMaterial({
-    color: INK,
-    transparent: true,
-    opacity: 0,
-    depthWrite: false,
-  });
+  const spreadMat = tagRole(
+    new THREE.LineBasicMaterial({
+      color: inkColor(),
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    }),
+    "ink",
+  );
   geometries.push(spreadGeo);
   materials.push(spreadMat);
   const spread = new THREE.Line(spreadGeo, spreadMat);

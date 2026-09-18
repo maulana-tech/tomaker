@@ -51,7 +51,7 @@ export function YieldSourceCard({
         <span
           className={`rounded-pill border px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] ${
             status.tone === "live"
-              ? "border-signal/30 bg-signal/10 text-signal"
+              ? "border-signal/30 bg-signal/10 text-signal-ink"
               : "border-ink/15 text-smoke"
           }`}
         >
@@ -78,7 +78,7 @@ export function YieldSourceCard({
           <>
             <div className="flex justify-between gap-4">
               <dt className="label-data">Bond discount</dt>
-              <dd className="tabular-nums text-signal">
+              <dd className="tabular-nums text-signal-ink">
                 <LiveValue
                   value={bond ? bpsToPercent(bondDiscountBps(bond.valuePerUnit, par)) : ""}
                   loading={!bond}
@@ -113,7 +113,7 @@ export function YieldSourceCard({
           href={source.docsUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+          className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
         >
           Source docs
         </a>

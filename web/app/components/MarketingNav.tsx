@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Wordmark } from "@/components/Logo";
 import { RollingLink } from "@/components/RollingLink";
 import { useConductor } from "@/lib/useConductor";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const LINKS = [
   { href: "#protocol", label: "Protocol" },
@@ -55,6 +56,7 @@ export function MarketingNav() {
               </RollingLink>
             ))}
           </div>
+          <ThemeToggle />
           <Link
             href="/mint"
             className="rounded-pill bg-ink px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-smoke"

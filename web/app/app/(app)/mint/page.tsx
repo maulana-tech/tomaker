@@ -160,7 +160,7 @@ export default function MintPage() {
         <MaturityBadge maturity={market?.maturity ?? null} />
         <section className="panel-subtle max-w-3xl space-y-3 p-5" aria-labelledby="mint-getting-started">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 id="mint-getting-started" className="label-data text-signal">
+            <h2 id="mint-getting-started" className="label-data text-signal-ink">
               Getting started
             </h2>
             <span className="rounded-pill border border-ink/15 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke">
@@ -256,7 +256,7 @@ export default function MintPage() {
                     aria-pressed={mode === option.id}
                     className={`px-3 py-2.5 text-[13px] uppercase tracking-[0.08em] transition ${
                       mode === option.id
-                        ? "bg-ink/[0.04] text-signal"
+                        ? "bg-ink/[0.04] text-signal-ink"
                         : "text-smoke hover:text-ink"
                     }`}
                   >
@@ -351,7 +351,7 @@ export default function MintPage() {
             {market !== null ? (
               <>
                 <p className="text-xl tabular-nums text-ink">{formatMaturityDate(market!.maturity)}</p>
-                <p className="text-sm tabular-nums text-signal">{maturityStatus(market!.maturity)}</p>
+                <p className="text-sm tabular-nums text-signal-ink">{maturityStatus(market!.maturity)}</p>
               </>
             ) : (
               <p className="text-sm text-ash">Not deployed yet</p>

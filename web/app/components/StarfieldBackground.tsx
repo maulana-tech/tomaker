@@ -14,26 +14,26 @@ const layerDrift = (px: number) => ({
 });
 const STARS_NEAR = [
   "radial-gradient(1.4px 1.4px at 30px 40px, #fff, transparent)",
-  "radial-gradient(1px 1px at 90px 130px, rgba(0,0,0,0.7), transparent)",
-  "radial-gradient(1px 1px at 160px 70px, rgba(0,0,0,0.8), transparent)",
-  "radial-gradient(1px 1px at 200px 190px, rgba(0,0,0,0.6), transparent)",
+  "radial-gradient(1px 1px at 90px 130px, rgb(var(--ink) / 0.7), transparent)",
+  "radial-gradient(1px 1px at 160px 70px, rgb(var(--ink) / 0.8), transparent)",
+  "radial-gradient(1px 1px at 200px 190px, rgb(var(--ink) / 0.6), transparent)",
   "radial-gradient(1.6px 1.6px at 130px 210px, #fff, transparent)",
-  "radial-gradient(1px 1px at 60px 100px, rgba(0,0,0,0.5), transparent)",
-  "radial-gradient(1px 1px at 225px 45px, rgba(0,0,0,0.7), transparent)",
+  "radial-gradient(1px 1px at 60px 100px, rgb(var(--ink) / 0.5), transparent)",
+  "radial-gradient(1px 1px at 225px 45px, rgb(var(--ink) / 0.7), transparent)",
 ].join(",");
 
 const STARS_FAR = [
   "radial-gradient(1.8px 1.8px at 60px 60px, #fff, transparent)",
-  "radial-gradient(2px 2px at 330px 220px, rgba(0,0,0,0.9), transparent)",
-  "radial-gradient(1.6px 1.6px at 210px 360px, rgba(0,0,0,0.8), transparent)",
-  "radial-gradient(1.2px 1.2px at 400px 110px, rgba(0,0,0,0.6), transparent)",
+  "radial-gradient(2px 2px at 330px 220px, rgb(var(--ink) / 0.9), transparent)",
+  "radial-gradient(1.6px 1.6px at 210px 360px, rgb(var(--ink) / 0.8), transparent)",
+  "radial-gradient(1.2px 1.2px at 400px 110px, rgb(var(--ink) / 0.6), transparent)",
 ].join(",");
 
 export function StarfieldBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       {/* Paper base. */}
-      <div className="absolute inset-0 bg-[#fbfcfd]" />
+      <div className="absolute inset-0 bg-paper" />
 
       {/* Soft nebula. */}
       <div className="absolute inset-0 bg-[radial-gradient(70%_90%_at_35%_45%,rgba(120,140,180,0.10),transparent_60%)]" />

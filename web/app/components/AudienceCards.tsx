@@ -139,7 +139,7 @@ export function AudienceCards() {
                   height="99"
                   fill="none"
                   pathLength="1"
-                  stroke="rgba(255,255,255,0.25)"
+                  stroke="rgb(var(--ink) / 0.25)"
                   strokeDasharray="1"
                   strokeDashoffset={hidden ? 1 : 0}
                   strokeWidth="1"

@@ -660,7 +660,7 @@ export default function PrivyPage() {
               </details>
             )}
             {completed && (
-              <p role="status" className="text-sm text-signal">
+              <p role="status" className="text-sm text-signal-ink">
                 Investment complete. Your{" "}
                 {investedMode === "fixed" ? "PT principal" : "YT yield"}{" "}
                 position is visible above and in{" "}
@@ -697,7 +697,7 @@ export default function PrivyPage() {
                             : "your embedded wallet"}
                       </p>
                       <a
-                        className="break-all font-mono text-xs text-signal underline"
+                        className="break-all font-mono text-xs text-signal-ink underline"
                         href={explorerTxUrl(r.hash, cfg.network)}
                         target="_blank"
                         rel="noreferrer"

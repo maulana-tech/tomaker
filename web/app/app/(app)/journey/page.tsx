@@ -64,7 +64,7 @@ function Stat({ label, value, signal }: { label: string; value: ReactNode; signa
   return (
     <div className="flex items-baseline justify-between gap-4 border-t border-ink/10 py-2.5">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-right text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
+      <dd className={`text-right text-sm tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}>
         {value}
       </dd>
     </div>
@@ -84,7 +84,7 @@ function Addr({ address, kind = "contract" }: { address: string; kind?: "contrac
       target="_blank"
       rel="noopener noreferrer"
       title={address}
-      className="font-mono text-signal underline decoration-dotted underline-offset-2 transition hover:text-ink"
+      className="font-mono text-signal-ink underline decoration-dotted underline-offset-2 transition hover:text-ink"
     >
       {shortAddress(address)} ↗
     </a>
@@ -110,7 +110,7 @@ function Step({
   return (
     <section className="card space-y-5 p-6 sm:p-8">
       <header className="flex items-start gap-4">
-        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border border-signal/40 text-sm tabular-nums text-signal">
+        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border border-signal/40 text-sm tabular-nums text-signal-ink">
           {index}
         </span>
         <div className="min-w-0 flex-1">
@@ -365,7 +365,7 @@ export default function JourneyPage() {
         </p>
       ) : null}
       {journey.warnings.length > 0 ? (
-        <div className="card border-signal/30 p-4 text-sm text-signal" role="status">
+        <div className="card border-signal/30 p-4 text-sm text-signal-ink" role="status">
           <p className="label-data">Partial reads</p>
           <ul className="mt-2 space-y-1">
             {journey.warnings.map((w) => (
@@ -536,7 +536,7 @@ export default function JourneyPage() {
                       onClick={() => setSwapDirection(dir)}
                       className={`rounded-pill border px-3 py-1 text-[13px] uppercase tracking-[0.1em] transition ${
                         swapDirection === dir
-                          ? "border-signal/40 bg-signal/10 text-signal"
+                          ? "border-signal/40 bg-signal/10 text-signal-ink"
                           : "border-ink/15 text-smoke hover:text-ink"
                       }`}
                     >
@@ -575,7 +575,7 @@ export default function JourneyPage() {
                   <li key={coupon.couponId.toString()} className="panel-subtle space-y-2 p-4">
                     <div className="flex items-center justify-between gap-4">
                       <p className="text-sm font-medium text-ink">Coupon #{coupon.couponId.toString()}</p>
-                      <p className="text-sm tabular-nums text-signal">
+                      <p className="text-sm tabular-nums text-signal-ink">
                         {bpsToPercent((coupon.ratePerUnit * 10_000n) / WAD, 2)} p.a.
                       </p>
                     </div>

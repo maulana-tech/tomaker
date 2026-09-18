@@ -54,10 +54,10 @@ export function AppTabs() {
               data-tour={tab.tour}
               className={
                 active
-                  ? `glow-signal relative pb-1 text-[13px] uppercase tracking-[0.12em] text-signal ${
+                  ? `glow-signal relative pb-1 text-[13px] uppercase tracking-[0.12em] text-signal-ink ${
                       rect
                         ? ""
-                        : "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-signal after:shadow-[0_0_8px_rgba(255,172,46,0.55)]"
+                        : "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-signal after:shadow-[0_0_8px_rgb(var(--signal)/0.55)]"
                     }`
                   : "pb-1 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:text-ink"
               }
@@ -70,7 +70,7 @@ export function AppTabs() {
       {rect ? (
         <span
           aria-hidden
-          className="absolute h-px bg-signal shadow-[0_0_8px_rgba(255,172,46,0.55)] transition-all duration-300 ease-out motion-reduce:transition-none"
+          className="absolute h-px bg-signal shadow-[0_0_8px_rgb(var(--signal)/0.55)] transition-all duration-300 ease-out motion-reduce:transition-none"
           style={{
             left: rect.left,
             top: rect.top + rect.height - 1,

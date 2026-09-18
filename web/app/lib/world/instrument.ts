@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import { RIG } from "@/lib/world/chapters";
+import { housingColor, inkColor, ringColor, tagRole, themeNumber } from "@/lib/world/theme";
 import { brushedRoughness, graduations, graphiteRoughness } from "@/lib/world/textures";
 
 /** The machine the camera travels through: an armillary instrument, built from
@@ -71,18 +72,18 @@ export function buildInstrument(low: boolean): Instrument {
   const gradMap = graduations(low ? 120 : 240);
   textures.push(brushed, graphiteMap, gradMap);
 
-  const steel = new THREE.MeshStandardMaterial({
-    color: 0x3a4048,
+  const steel = tagRole(new THREE.MeshStandardMaterial({
+    color: ringColor(),
     roughness: 0.42,
-    metalness: 0.45,
+    metalness: themeNumber("--world-metalness", 0.45),
     roughnessMap: brushed,
-  });
-  const graphite = new THREE.MeshStandardMaterial({
-    color: 0x1d1f23,
+  }), "ring");
+  const graphite = tagRole(new THREE.MeshStandardMaterial({
+    color: housingColor(),
     roughness: 0.72,
-    metalness: 0.22,
+    metalness: themeNumber("--world-metalness", 0.45) * 0.5,
     roughnessMap: graphiteMap,
-  });
+  }), "housing");
   // The engraving is light caught in a cut, not a lamp: unlit, additive, and
   // never writing depth so it cannot z-fight the band it sits on.
   const engraved = new THREE.MeshBasicMaterial({
@@ -93,13 +94,13 @@ export function buildInstrument(low: boolean): Instrument {
     depthWrite: false,
     blending: THREE.AdditiveBlending,
   });
-  const engravedPlain = new THREE.MeshBasicMaterial({
-    color: 0x0b0b0b,
+  const engravedPlain = tagRole(new THREE.MeshBasicMaterial({
+    color: inkColor(),
     transparent: true,
     opacity: 0.55,
     side: THREE.DoubleSide,
     depthWrite: false,
-  });
+  }), "ink");
   materials.push(steel, graphite, engraved, engravedPlain);
 
   const radial = low ? 8 : 14;

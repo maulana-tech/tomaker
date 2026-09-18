@@ -210,7 +210,7 @@ export default function LandingPage() {
               >
                 <p
                   className={`text-5xl font-normal tabular-nums tracking-tight sm:text-6xl ${
-                    fact.signal ? "text-signal" : "text-ink"
+                    fact.signal ? "text-signal-ink" : "text-ink"
                   }`}
                 >
                   {fact.value === null ? (

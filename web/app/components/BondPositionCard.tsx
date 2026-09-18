@@ -50,12 +50,12 @@ export function BondPositionCard({
               {formatTokenAmount(bond.totalSupply, decimals)} {bond.denomination ? "bond units" : "units"}
             </span>{" "}
             of {source.name}, currently at a{" "}
-            <span className="tabular-nums text-signal">{discount}</span> discount to par.
+            <span className="tabular-nums text-signal-ink">{discount}</span> discount to par.
           </p>
         </div>
         <Link
           href="/mint"
-          className="inline-flex shrink-0 text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+          className="inline-flex shrink-0 text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
         >
           Mint
         </Link>
@@ -73,7 +73,7 @@ export function BondPositionCard({
             <span className="ml-2 text-xl text-graphite">value / unit</span>
           </p>
         </div>
-        <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal">
+        <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal-ink">
           {discount} discount
         </span>
       </div>
@@ -106,7 +106,7 @@ export function BondPositionCard({
 
       <Link
         href="/mint"
-        className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+        className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
       >
         Mint against this yield source →
       </Link>

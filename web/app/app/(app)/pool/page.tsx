@@ -213,7 +213,7 @@ export default function PoolPage() {
             />
 
             {matured ? (
-              <p className="panel-subtle px-4 py-3 text-[13px] text-signal">
+              <p className="panel-subtle px-4 py-3 text-[13px] text-signal-ink">
                 Add liquidity is closed after maturity. Removing LP remains open.
               </p>
             ) : !poolSeeded ? (
@@ -402,7 +402,7 @@ function SlippageControl({
             aria-pressed={slippageBps === opt.bps}
             className={`px-3 py-1.5 text-[13px] tabular-nums transition ${
               slippageBps === opt.bps
-                ? "bg-signal/10 text-signal"
+                ? "bg-signal/10 text-signal-ink"
                 : "text-smoke hover:text-ink"
             }`}
           >
@@ -426,7 +426,7 @@ function PreviewRow({
   return (
     <div className="flex justify-between gap-4 border-t border-ink/10 py-2 first:border-t-0 first:pt-0">
       <dt className="text-ash">{label}</dt>
-      <dd className={`tabular-nums ${signal ? "text-signal" : "text-ink"}`}>{value}</dd>
+      <dd className={`tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}>{value}</dd>
     </div>
   );
 }
@@ -445,7 +445,7 @@ function Stat({
   return (
     <div className="flex items-center justify-between gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
+      <dd className={`text-sm tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="w-14" />
       </dd>
     </div>

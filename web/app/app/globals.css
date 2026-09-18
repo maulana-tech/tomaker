@@ -7,6 +7,67 @@
 :root {
   color-scheme: light;
   --font-inter: "Avenir Next", "Helvetica Neue", "Arial Nova";
+
+  /* Raw palette, as space-separated RGB channels.
+     The channel form is not decoration: Tailwind's alpha utilities compile to
+     `rgb(var(--x) / 0.1)`, and this codebase leans on them heavily for
+     hairlines (`border-ink/10`) and washes. A `#hex` variable would break
+     every one of those. */
+  --paper: 250 247 240;
+  --paper-raised: 255 253 248;
+  --ink: 21 19 16;
+
+  /* Secondary type, darkest to lightest. */
+  --graphite: 64 58 49;
+  --smoke: 92 86 76;
+  --ash: 107 101 90;
+  --pewter: 107 101 90;
+
+  /* The accent carries two values because one cannot do both jobs on paper:
+     #5EA6E5 is 2.5:1 against the page, which is right for a dot, a fill or a
+     rule and fails outright for a word. `signal-ink` is the same hue taken
+     down until it clears AA as type. */
+  --signal: 94 166 229;
+  --signal-ink: 28 95 148;
+
+  /* The 3D instrument. It reads by contrasting with the page, so its structure
+     and its lighting both have to flip with the theme, not just its fog. On
+     paper the metal has to be held down: a bright environment on a polished
+     surface blows the rings out to near-white and the instrument disappears. */
+  --world-ring: 58 64 72;
+  --world-housing: 29 31 35;
+  --world-metalness: 0.45;
+  --world-env: 0.45;
+  --world-rim: 0.25;
+  --world-key: 0.6;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper: 19 18 17;
+  --paper-raised: 27 25 23;
+  --ink: 243 239 230;
+
+  --graphite: 216 210 198;
+  --smoke: 186 179 166;
+  --ash: 157 150 137;
+  --pewter: 157 150 137;
+
+  /* Inverted, the polarity problem goes away: the brand blue clears AA against
+     the dark page on its own, so both roles collapse back to one value. */
+  --signal: 94 166 229;
+  --signal-ink: 94 166 229;
+
+  /* Against a dark page the original values are the right ones again: the
+     instrument separates by being lighter than the field, and the rim light
+     goes back to doing the separating. */
+  --world-ring: 74 81 91;
+  --world-housing: 36 38 42;
+  --world-metalness: 0.9;
+  --world-env: 1.9;
+  --world-rim: 1.1;
+  --world-key: 1;
 }
 
 /* The app canvas is paper. The marketing route group overrides per section
@@ -16,7 +77,7 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgb(var(--ink) / 0.12);
 }
 
 /* A hairline ink thumb floating on an invisible track, inset from the edge,
@@ -28,7 +89,7 @@ body {
 @supports (-moz-appearance: none) {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
+    scrollbar-color: rgb(var(--ink) / 0.28) transparent;
   }
 }
 *::-webkit-scrollbar {
@@ -41,13 +102,13 @@ body {
 *::-webkit-scrollbar-thumb {
   /* The transparent border + background-clip insets a 4px-wide thumb inside
      the 12px gutter, so it reads as a floating filament, not a bar. */
-  background: rgba(0, 0, 0, 0.28);
+  background: rgb(var(--ink) / 0.28);
   background-clip: padding-box;
   border: 4px solid transparent;
   border-radius: 9999px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(var(--ink) / 0.5);
   background-clip: padding-box;
   border: 3px solid transparent;
 }
@@ -101,11 +162,11 @@ body {
 .hero-shimmer {
   background-image: linear-gradient(
     105deg,
-    #0b0b0b 0%,
-    #0b0b0b 40%,
-    #8f8f8f 50%,
-    #0b0b0b 60%,
-    #0b0b0b 100%
+    rgb(var(--ink)) 0%,
+    rgb(var(--ink)) 40%,
+    rgb(var(--pewter)) 50%,
+    rgb(var(--ink)) 60%,
+    rgb(var(--ink)) 100%
   );
   background-size: 250% 100%;
   -webkit-background-clip: text;
@@ -282,7 +343,7 @@ body {
 }
 @keyframes lv-flash {
   from {
-    color: #1CD8B0;
+    color: rgb(var(--signal-ink));
   }
 }
 
@@ -295,9 +356,9 @@ body {
   vertical-align: middle;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.06) 25%,
-    rgba(0, 0, 0, 0.16) 50%,
-    rgba(0, 0, 0, 0.06) 75%
+    rgb(var(--ink) / 0.06) 25%,
+    rgb(var(--ink) / 0.16) 50%,
+    rgb(var(--ink) / 0.06) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-sheen 1.4s linear infinite;
@@ -319,10 +380,10 @@ body {
    (pulse dots, the active tab, Live labels). Glow as signal, never as
    decoration; everything else keeps the no-shadow rule. */
 .glow-signal {
-  text-shadow: 0 0 8px rgba(255, 172, 46, 0.45);
+  text-shadow: 0 0 8px rgb(var(--signal) / 0.45);
 }
 .glow-signal-dot {
-  box-shadow: 0 0 6px 1px rgba(255, 172, 46, 0.6);
+  box-shadow: 0 0 6px 1px rgb(var(--signal) / 0.6);
 }
 
 /* Fixed marketing atmosphere. The mobile render keeps only the base gradient;
@@ -337,7 +398,7 @@ body {
 .atmosphere-nebula-white {
   left: -28rem;
   top: 18%;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.055), transparent 68%);
+  background: radial-gradient(circle, rgb(var(--ink) / 0.055), transparent 68%);
   animation: atmosphere-drift-white 48s ease-in-out infinite;
 }
 .atmosphere-nebula-blue {
@@ -376,7 +437,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 0, 0, 0.25),
+    rgb(var(--ink) / 0.25),
     transparent
   );
 }
@@ -398,7 +459,7 @@ body {
     inset: 0;
     background: radial-gradient(
       200px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(0, 0, 0, 0.05),
+      rgb(var(--ink) / 0.05),
       transparent
     );
     content: "";
@@ -459,7 +520,7 @@ body {
   }
   .audience-card:hover {
     transform: translateY(-6px);
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: rgb(var(--ink) / 0.04);
   }
 }
 

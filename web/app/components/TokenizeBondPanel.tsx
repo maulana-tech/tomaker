@@ -40,7 +40,7 @@ export function TokenizeBondPanel({
             <span className="ml-2 text-xl text-graphite">bond value / unit</span>
           </p>
         </div>
-        <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal">
+        <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal-ink">
           {discount} to par
         </span>
       </div>
@@ -80,7 +80,7 @@ export function TokenizeBondPanel({
 
       <Link
         href="#mint-form"
-        className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
+        className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal-ink transition hover:text-ink"
       >
         Use the mint form
       </Link>

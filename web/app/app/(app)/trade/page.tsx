@@ -264,7 +264,7 @@ export default function TradePage() {
                   aria-pressed={d.id === directionId}
                   className={`relative px-3 py-2.5 text-[13px] uppercase tracking-[0.08em] transition ${
                     d.id === directionId
-                      ? `text-signal ${directionRect ? "" : "bg-ink/[0.04]"}`
+                      ? `text-signal-ink ${directionRect ? "" : "bg-ink/[0.04]"}`
                       : "text-smoke hover:text-ink"
                   }`}
                 >
@@ -323,7 +323,7 @@ export default function TradePage() {
                     aria-pressed={slippageBps === opt.bps}
                     className={`px-3 py-1.5 text-[13px] tabular-nums transition ${
                       slippageBps === opt.bps
-                        ? "bg-signal/10 text-signal"
+                        ? "bg-signal/10 text-signal-ink"
                         : "text-smoke hover:text-ink"
                     }`}
                   >
@@ -350,7 +350,7 @@ export default function TradePage() {
               </div>
               <div className="flex justify-between">
                 <dt className="text-ash">Implied APY (TWAP)</dt>
-                <dd className="tabular-nums text-signal">
+                <dd className="tabular-nums text-signal-ink">
                   <LiveValue value={bpsToPercent(quote.impliedApyBps)} />
                 </dd>
               </div>
@@ -370,7 +370,7 @@ export default function TradePage() {
           ) : null}
 
           {priceImpactTooHigh ? (
-            <p className="panel-subtle px-4 py-3 text-[13px] text-signal">
+            <p className="panel-subtle px-4 py-3 text-[13px] text-signal-ink">
               Price impact is too high for the current pool depth, so this swap would be rejected
               on-chain. Reduce the amount and try again.
             </p>
@@ -406,7 +406,7 @@ function Stat({
   return (
     <div className="flex items-center justify-between border-t border-ink/10 py-3">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
+      <dd className={`text-sm tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="w-14" />
       </dd>
     </div>

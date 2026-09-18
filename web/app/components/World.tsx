@@ -22,6 +22,15 @@ export function World() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const worldRef = useRef<WorldRuntime | null>(null);
   const [ready, setReady] = useState(false);
+  // Materials sample the CSS tokens when they are built, so a theme flip has to
+  // tell the scene to re-read them. Repainting in place rather than rebuilding:
+  // the world spans two canvases and the near one belongs to the layout, so a
+  // second renderer on it would get a null WebGL context.
+  useEffect(() => {
+    const onThemeChange = () => worldRef.current?.retheme();
+    window.addEventListener("tomaker:themechange", onThemeChange);
+    return () => window.removeEventListener("tomaker:themechange", onThemeChange);
+  }, []);
 
   // Pointer parallax: an immediate target, damped on render, so a flick of the
   // mouse leans the frame rather than snapping it.

@@ -8,7 +8,7 @@
 export function AppBackground() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-paper">
-      <div className="absolute inset-0 animate-glass-sheen bg-[radial-gradient(120%_80%_at_70%_8%,rgba(0,0,0,0.035),transparent_55%)]" />
+      <div className="absolute inset-0 animate-glass-sheen bg-[radial-gradient(120%_80%_at_70%_8%,rgb(var(--ink)/0.035),transparent_55%)]" />
     </div>
   );
 }

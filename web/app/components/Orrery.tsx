@@ -26,12 +26,47 @@ const SPIN_SECONDS = 240;
 const TAU_EPSILON = 0.0002;
 const IDLE_FRAME = 1 / 30;
 
+/** The `--ink` channels as the canvas needs them, e.g. "21 19 16". */
+function inkChannels(): string {
+  if (typeof window === "undefined") return "21 19 16";
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue("--ink")
+    .trim();
+  return value || "21 19 16";
+}
+
+function ink(alpha: number): string {
+  return `rgb(${inkChannels()} / ${alpha})`;
+}
+
+/** The accent, read the same way. Hardcoding it here is how the old amber
+ *  survived the palette change: it was written as decimal RGB, so neither the
+ *  hex nor the token sweep could see it. */
+function signal(alpha: number): string {
+  const channels =
+    typeof window === "undefined"
+      ? "94 166 229"
+      : getComputedStyle(document.documentElement).getPropertyValue("--signal").trim() ||
+        "94 166 229";
+  return `rgb(${channels} / ${alpha})`;
+}
+
 const INK = {
-  ring: "rgba(255, 255, 255, 0.04)",
-  eccentric: "rgba(255, 255, 255, 0.07)",
-  tick: "rgba(255, 255, 255, 0.1)",
-  route: "rgba(255, 255, 255, 0.05)",
-  travelled: "rgba(255, 255, 255, 0.12)",
+  get ring() {
+    return ink(0.06);
+  },
+  get eccentric() {
+    return ink(0.1);
+  },
+  get tick() {
+    return ink(0.14);
+  },
+  get route() {
+    return ink(0.07);
+  },
+  get travelled() {
+    return ink(0.16);
+  },
 };
 
 type Geometry = { width: number; height: number };
@@ -97,7 +132,7 @@ function drawRun(ctx: CanvasRenderingContext2D, g: Geometry, m: OrreryModel) {
 
   // The par mark: where the principal redeems, brightening as it is approached.
   if (m.parMark > 0.001) {
-    ctx.strokeStyle = `rgba(255, 255, 255, ${(0.28 * m.parMark).toFixed(3)})`;
+    ctx.strokeStyle = ink(Number((0.28 * m.parMark).toFixed(3)));
     ctx.beginPath();
     ctx.arc(a, 0, base * 0.62, 0, Math.PI * 2);
     ctx.stroke();
@@ -115,7 +150,7 @@ function drawRun(ctx: CanvasRenderingContext2D, g: Geometry, m: OrreryModel) {
   // The gap between the legs is the spread, so draw it as one.
   const spread = m.separation * m.ytLife;
   if (spread > 0.001) {
-    ctx.strokeStyle = `rgba(255, 255, 255, ${(0.16 * spread).toFixed(3)})`;
+    ctx.strokeStyle = ink(Number((0.16 * spread).toFixed(3)));
     ctx.beginPath();
     ctx.moveTo(ptX, ptY);
     ctx.lineTo(ytX, ytY);
@@ -125,7 +160,7 @@ function drawRun(ctx: CanvasRenderingContext2D, g: Geometry, m: OrreryModel) {
   // Where the yield leg was. It does not leave the chart at maturity — it is
   // spent, which is a different thing from absent.
   if (m.separation > 0.001) {
-    ctx.strokeStyle = `rgba(255, 255, 255, ${(0.1 * m.separation).toFixed(3)})`;
+    ctx.strokeStyle = ink(Number((0.1 * m.separation).toFixed(3)));
     ctx.beginPath();
     ctx.arc(ytX, ytY, base * m.ytSize, 0, Math.PI * 2);
     ctx.stroke();
@@ -133,14 +168,14 @@ function drawRun(ctx: CanvasRenderingContext2D, g: Geometry, m: OrreryModel) {
 
   // The yield leg itself: the one signal thing on the page, and it goes out.
   if (m.ytLife > 0.001 && m.ytSize > 0.001) {
-    ctx.fillStyle = `rgba(255, 172, 46, ${(0.44 * m.ytLife).toFixed(3)})`;
+    ctx.fillStyle = signal(Number((0.44 * m.ytLife).toFixed(3)));
     ctx.beginPath();
     ctx.arc(ytX, ytY, base * m.ytSize, 0, Math.PI * 2);
     ctx.fill();
   }
 
   // The principal, which is simply always there.
-  ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+  ctx.fillStyle = ink(0.3);
   ctx.beginPath();
   ctx.arc(ptX, ptY, base * m.ptSize, 0, Math.PI * 2);
   ctx.fill();

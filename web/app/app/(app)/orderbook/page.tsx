@@ -321,7 +321,7 @@ function InsideMarket({ midWad, spreadBps }: { midWad: bigint | null; spreadBps:
   return (
     <div className="flex items-center justify-between border-y border-ink/10 bg-ink/[0.025] px-5 py-3">
       <span className="label-data">Inside market</span>
-      <span className="font-mono text-[14px] text-signal">
+      <span className="font-mono text-[14px] text-signal-ink">
         {midWad === null ? "—" : formatPriceWad(midWad)}
       </span>
       <span className="font-mono text-[12px] text-ash">

@@ -242,7 +242,7 @@ export default function PortfolioPage() {
                   {daysToMaturity(market.maturity)}
                   <span className="ml-2 text-2xl text-graphite">Days</span>
                 </p>
-                <p className="text-sm tabular-nums text-signal">{maturityStatus(market.maturity)}</p>
+                <p className="text-sm tabular-nums text-signal-ink">{maturityStatus(market.maturity)}</p>
                 <p className="text-sm tabular-nums text-smoke">{formatMaturityDate(market.maturity)}</p>
               </>
             ) : (
@@ -261,7 +261,7 @@ export default function PortfolioPage() {
             </div>
             <div className="flex justify-between">
               <span className="label-data">At maturity</span>
-              <span className="text-sm tabular-nums text-signal">1 PT = 1.000 underlying, paid in SY</span>
+              <span className="text-sm tabular-nums text-signal-ink">1 PT = 1.000 underlying, paid in SY</span>
             </div>
           </div>
         </aside>

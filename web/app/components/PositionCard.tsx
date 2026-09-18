@@ -11,7 +11,7 @@ function Cell({ label, value, signal }: { label: string; value: string; signal?:
     <div className="border-t border-ink/10 px-1 pt-4">
       <dt className="label-data">{label}</dt>
       <dd
-        className={`mt-3 text-3xl font-normal tabular-nums ${signal ? "text-signal" : "text-ink"}`}
+        className={`mt-3 text-3xl font-normal tabular-nums ${signal ? "text-signal-ink" : "text-ink"}`}
       >
         <LiveValue value={value} />
       </dd>

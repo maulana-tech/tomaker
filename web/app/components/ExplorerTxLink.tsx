@@ -17,7 +17,7 @@ export function ExplorerTxLink({ hash, className }: { hash: string; className?: 
       target="_blank"
       rel="noopener noreferrer"
       title="View transaction on HashScan"
-      className={`font-mono text-signal underline decoration-dotted underline-offset-2 transition hover:text-ink ${className ?? ""}`}
+      className={`font-mono text-signal-ink underline decoration-dotted underline-offset-2 transition hover:text-ink ${className ?? ""}`}
     >
       {hash.slice(0, 10)}… ↗
     </a>
