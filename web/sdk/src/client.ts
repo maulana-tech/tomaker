@@ -132,7 +132,7 @@ function toRestingOrder(raw: unknown): RestingOrder {
 }
 
 /**
- * Typed client for the toMaker protocol on Hedera.
+ * Typed client for the toMaker protocol on BOT Chain.
  *
  * Reads go through a viem `PublicClient` with RPC failover. Transaction builders
  * return an unsigned `{ to, data, value }` request for a wallet to sign; the
@@ -165,7 +165,7 @@ export class ToMakerClient {
     args?: readonly unknown[];
   }): Promise<T> {
     try {
-      // Hedera's latest-state reads can briefly lag a mined receipt. An explicit
+      // BOT Chain's latest-state reads can briefly lag a mined receipt. An explicit
       // block prevents the next step from seeing pre-transaction balances.
       const head = this.confirmedReadFloor === null
         ? undefined
@@ -866,7 +866,7 @@ export class ToMakerClient {
   }
 
   /**
-   * Waits for a transaction to be included on Hedera. Throws when the receipt
+   * Waits for a transaction to be included on BOT Chain. Throws when the receipt
    * status is not success, so a reverted call is never reported as confirmed.
    */
   async waitForReceipt(hash: string): Promise<void> {

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout, DocsHeader, DocsPager } from "@/components/DocsBlocks";
 import { appConfig } from "@/lib/config";
+import { explorerContractUrl } from "@/lib/explorer";
 import { TESTNET_DEPLOYMENT } from "@/lib/deployments";
 
 export const metadata: Metadata = { title: "Deployed contracts" };
@@ -108,7 +109,7 @@ export default function ContractsPage() {
                 </td>
                 <td className="border-b border-ink/10 py-3 pr-4 align-top">
                   <a
-                    href={`https://hashscan.io/testnet/contract/${c.address}`}
+                    href={explorerContractUrl(c.address, cfg.network)}
                     className="break-all font-mono text-[12px] text-smoke underline decoration-ink/20 underline-offset-4 hover:text-ink"
                   >
                     {c.address}

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /**
- * Domain types for the toMaker Hedera SDK.
+ * Domain types for the toMaker SDK.
  *
  * These mirror the Solidity contracts' public surface. On-chain integers are
  * `uint256`; we surface them as `bigint` to avoid precision loss. Human-readable
@@ -59,11 +59,11 @@ export interface ContractAddresses {
 }
 
 export interface ToMakerOptions {
-  /** Hedera JSON-RPC endpoint, e.g. https://testnet.hashio.io/api. */
+  /** BOT Chain JSON-RPC endpoint, e.g. https://rpc.bohr.life. */
   rpcUrl: string;
   /** Additional RPC endpoints tried in order when the primary is unavailable. */
   rpcFallbackUrls?: string[];
-  /** Hedera chain id: 295 mainnet, 296 testnet. */
+  /** BOT Chain id: 677 mainnet, 968 testnet. */
   chainId: number;
   /** Deployed contract addresses for the target market. */
   contracts: ContractAddresses;
@@ -302,7 +302,7 @@ export interface BondInfo {
   totalSupply: bigint;
   /**
    * Cash value of one bond unit right now, in the bond's cash base units
-   * (for sdUSD, 6 decimals). This is NOT WAD-scaled: use `faceValuePerUnit` as
+   * (for tUSD, 6 decimals). This is NOT WAD-scaled: use `faceValuePerUnit` as
    * the par when computing a discount, or `valuePerUnit` will look near zero.
    */
   valuePerUnit: bigint;

@@ -128,7 +128,7 @@ function rpcListFor(cfg: AppConfig): string[] {
  * Chain parameters for `wallet_addEthereumChain`, so a wallet that does not yet
  * know BOT Chain can add it in one prompt. Most visitors will not have it
  * configured, so this is the difference between the app working for them and
- * not. BOT is the native gas token; the market's sdUSD cash is a separate
+ * not. BOT is the native gas token; the market's tUSD cash is a separate
  * ERC-20 supplied by the authenticated demo faucet.
  */
 /** Mainnet gas is BOT; testnet gas is tBOT, per the BOT Chain developer docs. */

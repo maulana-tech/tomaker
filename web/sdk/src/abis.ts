@@ -3,7 +3,7 @@
 import { parseAbi } from "viem";
 
 /**
- * Human-readable ABIs for the Hedera/EVM deployment. Kept local to the SDK so it
+ * Human-readable ABIs for the BOT Chain/EVM deployment. Kept local to the SDK so it
  * has no build-time dependency on the Foundry artifacts.
  */
 

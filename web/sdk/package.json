@@ -1,7 +1,7 @@
 {
   "name": "@tomaker/sdk",
   "version": "0.2.0",
-  "description": "TypeScript SDK for the tomaker yield-tokenization protocol on Hedera (EVM).",
+  "description": "TypeScript SDK for the toMaker yield-tokenization protocol on BOT Chain (EVM).",
   "license": "Apache-2.0",
   "type": "module",
   "main": "./dist/index.js",

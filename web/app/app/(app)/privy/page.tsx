@@ -151,7 +151,7 @@ export default function PrivyPage() {
         throw new Error("This market has matured. Choose an active market.");
       const starting = await readBalances(holder);
       if (selected > starting.cash)
-        throw new Error("Insufficient sdUSD. Fund your demo wallet first.");
+        throw new Error("Insufficient tUSD. Fund your demo wallet first.");
       stage = "Checking market liquidity";
       const projectedShares = await client.previewDeposit(selected);
       const projectedFace =
@@ -489,15 +489,15 @@ export default function PrivyPage() {
           Start here: your five-step demo guide
         </summary>
         <p className="mt-4 text-sm text-smoke">
-          This demonstration uses BOT Chain testnet and free demo assets. sdUSD is
+          This demonstration uses BOT Chain testnet and free demo assets. tUSD is
           a demonstration token, separate from USDC.
         </p>
         <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-smoke">
           <li><strong className="text-ink">Sign in with email.</strong> Complete the code sent to your inbox, then click All Done on the wallet setup screen. Your embedded wallet follows you across the app.</li>
-          <li><strong className="text-ink">Fund your demo wallet.</strong> Click Fund demo wallet below after signing in. Wait for sdUSD to appear; funding also supplies BOT for transaction fees and test-only eligibility.</li>
-          <li><strong className="text-ink">Choose an amount and exposure.</strong> Start with 100 sdUSD. Fixed principal keeps PT, your principal exposure. Variable yield keeps YT, your exposure to available yield until maturity.</li>
+          <li><strong className="text-ink">Fund your demo wallet.</strong> Click Fund demo wallet below after signing in. Wait for tUSD to appear; funding also supplies BOT for transaction fees and test-only eligibility.</li>
+          <li><strong className="text-ink">Choose an amount and exposure.</strong> Start with 100 tUSD. Fixed principal keeps PT, your principal exposure. Variable yield keeps YT, your exposure to available yield until maturity.</li>
           <li><strong className="text-ink">Invest and confirm.</strong> Click Invest once; toMaker runs the deposit, split and sale steps as a sequence without prompting you for each one. Each step confirms before the next, so a failure can leave a partial position. Keep this page open until it completes.</li>
-          <li><strong className="text-ink">Check your result.</strong> Compare the before and after balances, visit Portfolio, and download the investment receipts. Open the HashScan links to check confirmations.</li>
+          <li><strong className="text-ink">Check your result.</strong> Compare the before and after balances, visit Portfolio, and download the investment receipts. Open the the explorer links to check confirmations.</li>
         </ol>
         <p className="mt-4 text-xs text-ash">
           If a step fails, the steps already confirmed remain onchain. Check
@@ -513,7 +513,7 @@ export default function PrivyPage() {
               {(["cash", "sy", "pt", "yt"] as const).map((key) => (
                 <div className="p-4" key={key}>
                   <p className="label-data">
-                    {key === "cash" ? "sdUSD" : key.toUpperCase()}
+                    {key === "cash" ? "tUSD" : key.toUpperCase()}
                   </p>
                   <p className="mt-2 font-mono text-lg">
                     {balances
@@ -540,7 +540,7 @@ export default function PrivyPage() {
               ))}
             </div>
             <label className="block">
-              Amount (sdUSD)
+              Amount (tUSD)
               <input
                 className="field mt-3"
                 inputMode="decimal"
@@ -594,12 +594,12 @@ export default function PrivyPage() {
                 disabled={!!progress || !market || !balances}
                 onClick={() => void invest()}
               >
-                {progress ?? `Invest ${amount} sdUSD`}
+                {progress ?? `Invest ${amount} tUSD`}
               </button>
             </div>
             <p className="text-xs text-ash">
               BOT Chain testnet only. Funding grants issuer-controlled demo
-              eligibility, sdUSD and BOT. Privy authentication is not KYC.
+              eligibility, tUSD and BOT. Privy authentication is not KYC.
               Start the investment once and the sequence runs without a
               per-step prompt; each step confirms before the next, so a failure
               can leave a partial position. Approvals are limited to the exact
@@ -681,7 +681,7 @@ export default function PrivyPage() {
             {receipts.length === 0 ? (
               <p className="text-sm text-smoke">
                 Signed transaction hashes appear here as they are submitted.
-                Check HashScan for confirmation.
+                Check the explorer for confirmation.
               </p>
             ) : (
               <>

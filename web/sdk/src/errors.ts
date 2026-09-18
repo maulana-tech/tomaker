@@ -3,7 +3,7 @@
 import { BaseError, ContractFunctionRevertedError } from "viem";
 
 /**
- * Typed error for a failed contract call. Hedera's EVM surfaces Solidity custom
+ * Typed error for a failed contract call. BOT Chain's EVM surfaces Solidity custom
  * errors; viem decodes the revert data into a `ContractFunctionRevertedError`
  * carrying the error name and args. This wrapper keeps the decoded name, the
  * raw reason, and the original error so callers can branch on it.

@@ -14,7 +14,7 @@ import { useWallet } from "../lib/wallet";
 /**
  * Warns when the connected wallet is on a different network than the app, adds
  * the expected BOT Chain network to the wallet in one prompt, and points at the
- * testnet faucet so the wallet has BOT for gas. The market's sdUSD cash is a
+ * testnet faucet so the wallet has BOT for gas. The market's tUSD cash is a
  * separate ERC-20 and is not minted by the faucet.
  */
 export function NetworkBanner() {

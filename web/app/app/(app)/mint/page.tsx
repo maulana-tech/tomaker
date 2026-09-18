@@ -55,7 +55,7 @@ export default function MintPage() {
   const preview = useMemo(() => {
     if (!amount || market === null || market.exchangeRate <= 0n) return null;
     try {
-      // The vault normalizes a lower-decimal cash (sdUSD is 6) to 18-decimal SY
+      // The vault normalizes a lower-decimal cash (tUSD is 6) to 18-decimal SY
       // shares with `assetScale`; the on-chain previewDeposit applies the same
       // factor. Mirroring it here keeps the preview aligned with the contract.
       const assetScale = 10n ** BigInt(cfg.shareDecimals - cfg.underlyingDecimals);

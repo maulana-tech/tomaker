@@ -184,7 +184,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         data: request.data as Hex,
         value: request.value,
         chain: null,
-        // Hedera's eth_estimateGas under-reports for multi-contract calls
+        // Some RPCs under-report eth_estimateGas for multi-contract calls
         // (deposit -> strategy -> bond purchase). A fixed, generous cap keeps
         // the demo reliable; unused gas is not charged.
         gas: 6_000_000n,

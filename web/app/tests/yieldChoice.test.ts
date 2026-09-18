@@ -103,7 +103,7 @@ describe("variableRateDisplay", () => {
   });
 
   it("measures the discount against cash-denominated par, not WAD", () => {
-    // Regression: valuePerUnit is cash base units (sdUSD, 6 decimals), so par
+    // Regression: valuePerUnit is cash base units (tUSD, 6 decimals), so par
     // is faceValuePerUnit. Treating it as WAD showed ~99.99% instead of ~5%.
     expect(
       variableRateDisplay({

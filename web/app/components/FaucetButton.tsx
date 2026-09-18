@@ -13,7 +13,7 @@ const BUTTON_CLASS =
 type FaucetState = "idle" | "working" | "done" | "error";
 
 /**
- * Testnet faucet button. sdUSD has no public mint, so this asks the server-side
+ * Testnet faucet button. tUSD has no public mint, so this asks the server-side
  * `/api/faucet` route to grant KYC and transfer test cash and gas BOT. The
  * browser wallet does not sign for the faucet.
  */

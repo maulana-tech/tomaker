@@ -128,7 +128,7 @@ function Step({
 /**
  * A guided walkthrough over the live ERC-3643 bond market. Every step
  * reads current on-chain state, executes
- * transactions through the connected wallet, and links the HashScan
+ * transactions through the connected wallet, and links the the explorer
  * transaction hash. Pending, confirmed, and rejected states are all surfaced by
  * the shared TxStatus; a reverting call is never shown as success.
  */
@@ -146,7 +146,7 @@ export default function JourneyPage() {
   const [history, setHistory] = useState<{ label: string; hash: string }[]>([]);
   const seenHash = useRef<string | null>(null);
 
-  // The faucet runs server-side (sdUSD has no public mint), so it has its own
+  // The faucet runs server-side (tUSD has no public mint), so it has its own
   // status instead of the wallet `phase`.
   const [faucetBusy, setFaucetBusy] = useState(false);
   const [faucetError, setFaucetError] = useState<string | null>(null);
@@ -337,7 +337,7 @@ export default function JourneyPage() {
         <p className="max-w-2xl text-smoke">
           A single linear path over the live ERC-3643 tokenized bond: identify the asset, prove
           eligibility, inspect backing, enter a position, split and trade, inspect the coupon, and
-          redeem. Every number is read from {cfg.network}; confirmed actions include HashScan links.
+          redeem. Every number is read from {cfg.network}; confirmed actions include the explorer links.
         </p>
         <div className="flex flex-wrap items-center gap-3">
           {address === null ? (
@@ -675,7 +675,7 @@ export default function JourneyPage() {
             <p className="label-data">Session transactions</p>
             {history.length === 0 ? (
               <p className="text-sm text-smoke">
-                Confirmed transactions from this session appear here with HashScan links.
+                Confirmed transactions from this session appear here with the explorer links.
               </p>
             ) : (
               <ul className="space-y-3">

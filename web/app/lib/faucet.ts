@@ -27,7 +27,7 @@ function responseMessage(body: unknown, fallback: string): string {
 
 /**
  * Asks the same-origin `/api/faucet` route to fund the connected wallet. The
- * server holds the funded key and sends a KYC grant, test sdUSD, and a little
+ * server holds the funded key and sends a KYC grant, test tUSD, and a little
  * BOT for gas; the browser wallet never signs for the faucet.
  */
 export async function requestFaucetFunds(

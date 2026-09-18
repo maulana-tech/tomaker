@@ -100,7 +100,7 @@ export function BondWalkthrough() {
       title: isTestnet ? "Get test cash" : "Fund the wallet",
       state: funded || deposited || tokenized ? "done" : "todo",
       detail: isTestnet
-        ? "Demo funding supplies sdUSD, BOT and issuer-controlled eligibility after authenticating your embedded wallet."
+        ? "Demo funding supplies tUSD, BOT and issuer-controlled eligibility after authenticating your embedded wallet."
         : "Fund the connected wallet with the configured cash denomination before depositing. toMaker only reads that exact asset for this market.",
       live:
         cashBalance !== null

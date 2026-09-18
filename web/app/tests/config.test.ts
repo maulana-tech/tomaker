@@ -295,7 +295,7 @@ describe("market status", () => {
 });
 
 describe("ATS cash denomination defaults", () => {
-  it("uses six decimals for the checked-in sdUSD deployment", () => {
+  it("uses six decimals for the checked-in tUSD deployment", () => {
     vi.stubEnv("NEXT_PUBLIC_BOT_CHAIN_ID", "968");
     vi.stubEnv("NEXT_PUBLIC_UNDERLYING_ADDRESS", "");
     vi.stubEnv("NEXT_PUBLIC_UNDERLYING_DECIMALS", "");

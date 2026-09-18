@@ -57,7 +57,7 @@ function retryableReadError(error: unknown): boolean {
     normalized.includes("too many requests") ||
     normalized.includes("temporarily unavailable") ||
     normalized.includes("tryagainlater") ||
-    // Hedera RPC can transiently fail view execution while catching up.
+    // The RPC can transiently fail view execution while catching up.
     normalized.includes("fail_invalid")
   );
 }
@@ -67,7 +67,7 @@ async function withReadClient<T>(
   reader: (client: ToMakerClient) => Promise<T>,
 ): Promise<T> {
   const client = makeClient(cfg);
-  let lastError: unknown = new Error("No Hedera RPC URL configured");
+  let lastError: unknown = new Error("No RPC URL configured");
 
   for (let attempt = 0; attempt < READ_RETRY_DELAYS_MS.length; attempt += 1) {
     try {

@@ -153,7 +153,7 @@ describe("transaction builders", () => {
 
   it("encodes a deposit with the slippage floor", () => {
     const request = client().buildDeposit({
-      marketId: "hedera",
+      marketId: "botchain",
       from: CONTRACTS.sy,
       underlyingAmount: 123n,
       minSyOut: 120n,

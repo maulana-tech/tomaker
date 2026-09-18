@@ -24,13 +24,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Testnet cash faucet, funded from a server-side key. sdUSD has no public
+ * Testnet cash faucet, funded from a server-side key. tUSD has no public
  * `mint`, so the route transfers from a funded account instead: it grants ATS
  * KYC to the recipient (so they can deposit into SY) and sends test cash plus a
  * little BOT for gas. The market admin key never leaves the server; it is read
  * from `FAUCET_PRIVATE_KEY` and is never logged.
  *
- * This route only runs on Hedera testnet and is disabled unless the key is set.
+ * This route only runs on BOT Chain testnet and is disabled unless the key is set.
  */
 
 // The public BOT Chain faucet grants at most 10 tBOT per address per 24 hours,
@@ -169,7 +169,7 @@ export async function POST(request: Request) {
   }
   if (cfg.chainId !== TESTNET_CHAIN_ID) {
     return noStore(
-      { error: "The test cash faucet only runs on Hedera testnet" },
+      { error: "The test cash faucet only runs on BOT Chain testnet" },
       { status: 403 },
     );
   }

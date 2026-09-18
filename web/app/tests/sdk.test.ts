@@ -50,7 +50,7 @@ const cfg: AppConfig = {
   chainId: 677,
   rpcUrl: "https://primary-rpc.example",
   rpcFallbackUrls: ["https://fallback-rpc.example"],
-  networkPassphrase: "hedera-mainnet",
+  networkPassphrase: "botchain-mainnet",
   simulationSourceAccount: "0x0000000000000000000000000000000000000000",
   marketId: "bond-usdc-q3",
   decimals: 18,

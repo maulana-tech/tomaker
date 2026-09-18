@@ -335,7 +335,7 @@ describe("exact investment approvals", () => {
 });
 
 describe("six-decimal cash face", () => {
-  it("normalizes sdUSD into eighteen-decimal PT/YT face", () => {
+  it("normalizes tUSD into eighteen-decimal PT/YT face", () => {
     expect(
       estimateBondTokenizationFace({ exchangeRate: 2n * WAD }, 100_000_000n, 6),
     ).toEqual({ faceAmount: 100n * WAD });

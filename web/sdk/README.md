@@ -1,7 +1,7 @@
 # @tomaker/sdk
 
 TypeScript client for the [tomaker](../README.md) yield-tokenization protocol
-on Hedera. It wraps the Solidity contracts in typed [viem](https://viem.sh)
+on BOT Chain. It wraps the Solidity contracts in typed [viem](https://viem.sh)
 calls: reads decode on-chain state, builders return an unsigned
 `{ to, data, value }` request, and `send` hands that request to a wallet.
 
@@ -20,13 +20,13 @@ pnpm add @tomaker/sdk viem
 import { ToMakerClient } from "@tomaker/sdk";
 
 const client = new ToMakerClient({
-  rpcUrl: "https://testnet.hashio.io/api", // 296 testnet, 295 mainnet
-  chainId: 296,
+  rpcUrl: "https://rpc.bohr.life", // 968 testnet, 677 mainnet
+  chainId: 968,
   contracts: { sy, pt, yt, tokenizer, market, orderbook, bond, strategy, underlying },
 });
 
 // Read market state (reserves, exchange rate, TWAP implied APY, maturity).
-const market = await client.getMarket("hedera-bond-q3");
+const market = await client.getMarket("botchain-bond-q4");
 
 // Quote a swap before signing.
 const quote = await client.quoteSwap({
@@ -85,11 +85,11 @@ Sending:
 
 ## Integration ABI and units
 
-The frontend integrates the ERC-3643 / ATS bond market through the following
+The frontend integrates the ERC-3643 / ERC-3643 bond market through the following
 surface. These are the exact functions the SDK reads and encodes; treat them as
 the agreed integration ABI before building sponsor-specific screens.
 
-Layer 1 bond (`ERC3643Bond`, the ATS security):
+Layer 1 bond (`ERC3643Bond`, the ERC-3643 security):
 
 ```
 denomination() startDate() maturity() isMatured() nominalValue()

@@ -67,7 +67,7 @@ export default function StrategyPage() {
   const { bond } = useBondInfo();
   const fixed = fixedRateDisplay(market, cfg.decimals);
   const deploymentStatus = deploymentStage(cfg);
-  // valuePerUnit is cash-denominated (sdUSD, 6 decimals), so par is the bond's
+  // valuePerUnit is cash-denominated (tUSD, 6 decimals), so par is the bond's
   // face value per unit, not WAD. Falling back to 10**underlyingDecimals only
   // matters before the adapter publishes a face value.
   const bondPar =
