@@ -35,7 +35,7 @@ import { TxStatus } from "@/components/TxStatus";
 
 // Bond provenance for the BOT Chain testnet demo. The settlement adapter
 // reports the bond via `securityToken()`; these constants come from the
-// deployment manifest written by `contracts/script/Deploy.s.sol`.
+// deployment manifest written by `contracts/script/DeployBotChain.s.sol`.
 const BOND_TOKEN_FALLBACK = TESTNET_DEPLOYMENT.bondToken;
 const ISSUANCE_TX = TESTNET_DEPLOYMENT.issuanceTx;
 

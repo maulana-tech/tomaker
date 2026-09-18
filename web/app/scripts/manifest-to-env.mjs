@@ -156,9 +156,8 @@ function envFromManifest(manifest, path) {
   // Always emit the faucet flag rather than leaving it to the code default.
   // `appConfig()` turns the faucet on for any testnet build that has an
   // underlying address, which was right when the cash asset was a mintable
-  // mock. `Deploy.s.sol` now requires a real ERC-3643 bond and real
-  // denomination, and calling `mint` on one of those reverts — so the manifest
-  // has to say so, and silence means no faucet.
+  // mock. A market wrapping a real bond and a real denomination reverts on
+  // `mint`, so the manifest has to say so, and silence means no faucet.
   const mintable = manifest.cashMintable ?? manifest.faucetEnabled ?? false;
   if (typeof mintable !== "boolean") {
     fail(`${path}: cashMintable must be true or false, got ${JSON.stringify(mintable)}`);

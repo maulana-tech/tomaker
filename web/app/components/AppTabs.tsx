@@ -5,7 +5,6 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { appConfig } from "@/lib/config";
 import { privyConfigured } from "@/lib/privyConfig";
 import { useSlideRect } from "@/lib/useSlideRect";
 
@@ -19,7 +18,6 @@ const TABS = [
   { href: "/pool", label: "Pool", tour: undefined },
   { href: "/portfolio", label: "Portfolio", tour: "nav-portfolio" },
   { href: "/admin", label: "Admin", tour: undefined },
-  { href: "/demo", label: "Demo", tour: undefined },
 ];
 
 /** In-app navigation tabs. The active tab is the one live signal here, so it
@@ -31,9 +29,6 @@ export function AppTabs() {
   const pathname = usePathname();
   const tabs = useMemo(() => {
     let visible = TABS;
-    if (appConfig().network !== "testnet") {
-      visible = visible.filter((tab) => tab.href !== "/demo");
-    }
     if (!privyConfigured()) {
       visible = visible.filter((tab) => tab.href !== "/privy");
     }

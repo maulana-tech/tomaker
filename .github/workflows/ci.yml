@@ -31,8 +31,6 @@ jobs:
         run: forge build
       - name: Test
         run: forge test
-      - name: Build Hedera deployment artifacts
-        run: FOUNDRY_PROFILE=hedera_live forge build --out "$RUNNER_TEMP/tomaker-out" --cache-path "$RUNNER_TEMP/tomaker-cache"
 
   sdk:
     name: sdk (typecheck + test + build)

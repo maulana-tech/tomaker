@@ -28,10 +28,10 @@ import {Orderbook} from "../src/Orderbook.sol";
 /// @notice One-shot deploy of a complete toMaker market on BOT Chain, plus the
 ///         seed that makes it usable by a visitor on the first click.
 ///
-///         `script/Deploy.s.sol` wraps a bond that already exists. BOT Chain has
-///         none, so this script issues the bond as well, then runs the same
-///         market construction, and finally seeds the AMM and the order book so
-///         a first-time visitor can trade rather than meeting an empty pool.
+///         BOT Chain has no bond to wrap, so this script issues one as well,
+///         then runs the market construction, and finally seeds the AMM and the
+///         order book so a first-time visitor can trade rather than meeting an
+///         empty pool.
 ///
 ///         The manifest it writes is the input to the frontend's env generator:
 ///           cd web/app && pnpm gen:env ../../contracts/deployments/botchain-testnet.json

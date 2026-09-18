@@ -12,13 +12,9 @@
     "cf:build": "pnpm --filter @tomaker/sdk build && opennextjs-cloudflare build",
     "cf:deploy": "pnpm run cf:build && opennextjs-cloudflare deploy",
     "cf:preview": "pnpm run cf:build && opennextjs-cloudflare preview",
-    "access-worker:dev": "wrangler dev --config ../workers/access-requests/wrangler.jsonc",
-    "access-worker:typecheck": "tsc -p ../workers/access-requests/tsconfig.json --noEmit",
-    "access-worker:deploy": "wrangler deploy --config ../workers/access-requests/wrangler.jsonc",
     "lint": "next lint",
     "typecheck": "tsc --noEmit --incremental false",
     "test": "vitest run",
-    "wallet:flow": "node scripts/assisted-wallet-flow.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

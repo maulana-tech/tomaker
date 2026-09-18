@@ -11,7 +11,7 @@ import type { ContractAddresses } from "@tomaker/sdk";
  * Mainnet builds never fall back to these addresses.
  *
  * These addresses are public. Fill them from the manifest that
- * `contracts/script/Deploy.s.sol` writes after deploying to BOT Chain; until
+ * `contracts/script/DeployBotChain.s.sol` writes after deploying; until
  * then every address is empty, `isDeployed()` stays false, and the app reports
  * "Preview" rather than pointing at a market that is not there.
  */

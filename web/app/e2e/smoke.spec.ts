@@ -5,11 +5,6 @@ import { test, expect } from "@playwright/test";
 // Smoke coverage that runs without a deployed market: the app boots, routes
 // render, navigation works, and the wallet entry point is present.
 
-// The demo runner is intentionally disabled on Hedera mainnet. The chain id is
-// the public configuration signal: 295 is mainnet, 296 is testnet.
-const MAINNET_CHAIN_ID = "295";
-const isPublicProfile = process.env.NEXT_PUBLIC_HEDERA_CHAIN_ID === MAINNET_CHAIN_ID;
-
 test("landing page renders the protocol pitch and an Open App CTA", async ({ page }) => {
   await page.goto("/");
   // Marketing hero: editorial headline, the PT+YT=SY value identity, and the app CTA.
@@ -100,24 +95,6 @@ test("pool page exposes liquidity actions and live stats shell", async ({ page }
   await expect(page.getByRole("button", { name: /connect wallet to remove liquidity/i })).toBeVisible();
   await expect(page.getByText("Pool status")).toBeVisible();
   await expect(page.getByText("Your LP position")).toBeVisible();
-});
-
-test("demo page exposes the automated proof runner without starting it", async ({ page }) => {
-  await page.goto("/demo?manual=1");
-  await expect(page.getByRole("heading", { name: "Demo", exact: true })).toBeVisible();
-  if (isPublicProfile) {
-    await expect(page.getByText(/automation disabled/i)).toBeVisible();
-    await expect(page.getByLabel("Maturity date")).toHaveCount(0);
-    await expect(page.getByText("No output yet.")).toHaveCount(0);
-    return;
-  }
-  await expect(page.getByRole("button", { name: /run full demo|run locally/i })).toBeVisible();
-  await expect(page.getByLabel("Maturity date")).toBeVisible();
-  for (const label of ["Auth invariant", "Live AMM proof"]) {
-    await expect(page.getByRole("heading", { name: label })).toBeVisible();
-  }
-  await expect(page.getByRole("heading", { name: "Browser smoke" })).toHaveCount(0);
-  await expect(page.getByText("No output yet.")).toBeVisible();
 });
 
 test("production public contract configuration reaches the browser", async ({ page }) => {

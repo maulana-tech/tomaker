@@ -2,8 +2,8 @@
 pragma solidity 0.8.28;
 
 /// @title IBond3643
-/// @notice toMaker settlement interface implemented by ATSBondAdapter or the local
-///         reference ERC3643Bond. This is NOT the ATS token ABI. A
+/// @notice toMaker settlement interface implemented by the reference
+///         ERC3643Bond. A
 ///         permissioned security whose yield is the issuer's **cash coupon and
 ///         maturity cashflow**, not a capitalized per-unit rate.
 /// @dev Coupons are scheduled by the issuer, funded in cash, and claimed by
