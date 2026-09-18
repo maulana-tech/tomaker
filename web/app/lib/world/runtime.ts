@@ -82,7 +82,11 @@ export function isLowTier(): boolean {
   return coarse || cores <= 4 || window.innerWidth < 900;
 }
 
-const FOG_COLOR = 0x05070d;
+const FOG_COLOR = 0xeef1f5;
+
+// Chapter key intensities were authored against a black stage. Scale them once,
+// here, so the per-frame update and the initial value cannot drift apart.
+const KEY_SCALE = 0.6;
 
 export function createWorld(
   canvas: HTMLCanvasElement,
@@ -117,22 +121,25 @@ export function createWorld(
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromEquirectangular(panorama).texture;
   scene.environment = environment;
-  scene.environmentIntensity = 1.9;
+  // Tuned for paper: the environment is now bright, so the old 1.9 blew the
+  // metal out to near-white and the instrument stopped reading at all.
+  scene.environmentIntensity = 0.45;
   panorama.dispose();
   pmrem.dispose();
 
-  // Key from high camera-left, cold. Rim from behind to lift the rings off the
-  // void — without it the far side of the instrument disappears into the fog
-  // and the silhouette stops reading.
-  const key = new THREE.DirectionalLight(0xdfe8ff, first.state.key);
+  // Key from high camera-left, cold, for the modelling highlights. The rim
+  // that used to lift the rings off a dark void now works against the page:
+  // on paper the silhouette reads by being darker than the background, so the
+  // rim is only strong enough to keep the far side from going flat.
+  const key = new THREE.DirectionalLight(0xdfe8ff, first.state.key * KEY_SCALE);
   key.position.set(-14, 18, 11);
   scene.add(key);
 
-  const rim = new THREE.DirectionalLight(0xaebfd6, 1.1);
+  const rim = new THREE.DirectionalLight(0xaebfd6, 0.25);
   rim.position.set(7, -5, -20);
   scene.add(rim);
 
-  const fill = new THREE.HemisphereLight(0x2c3b4e, FOG_COLOR, 0.5);
+  const fill = new THREE.HemisphereLight(0x2c3b4e, FOG_COLOR, 0.25);
   scene.add(fill);
 
   const instrument: Instrument = buildInstrument(low);
@@ -235,7 +242,7 @@ export function createWorld(
 
   function applyState(state: WorldState) {
     fog.density = state.fog;
-    key.intensity = state.key;
+    key.intensity = state.key * KEY_SCALE;
   }
 
   return {

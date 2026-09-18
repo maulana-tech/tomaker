@@ -16,7 +16,7 @@ export function WalletButton() {
       <button
         type="button"
         onClick={disconnect}
-        className="rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] tabular-nums text-paper transition hover:bg-paper hover:text-ink"
+        className="rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] tabular-nums text-ink transition hover:bg-ink hover:text-paper"
         title={address}
         data-tour="wallet"
       >
@@ -30,7 +30,7 @@ export function WalletButton() {
       type="button"
       onClick={connect}
       disabled={connecting}
-      className="rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-paper transition hover:bg-paper hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
+      className="rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-50"
       data-tour="wallet"
     >
       {connecting

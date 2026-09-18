@@ -8,10 +8,10 @@ import { LiveValue } from "./LiveValue";
 
 function Cell({ label, value, signal }: { label: string; value: string; signal?: boolean }) {
   return (
-    <div className="border-t border-white/10 px-1 pt-4">
+    <div className="border-t border-ink/10 px-1 pt-4">
       <dt className="label-data">{label}</dt>
       <dd
-        className={`mt-3 text-3xl font-light tabular-nums ${signal ? "text-amber" : "text-paper"}`}
+        className={`mt-3 text-3xl font-light tabular-nums ${signal ? "text-signal" : "text-ink"}`}
       >
         <LiveValue value={value} />
       </dd>

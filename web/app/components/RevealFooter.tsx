@@ -60,7 +60,7 @@ export function RevealFooter({ children }: { children: React.ReactNode }) {
       <div aria-hidden ref={spacerRef} style={{ height }} />
       <footer
         ref={ref}
-        className="fixed inset-x-0 bottom-0 z-0 overflow-hidden bg-carbon"
+        className="fixed inset-x-0 bottom-0 z-0 overflow-hidden bg-chalk"
       >
         <StarfieldBackground />
         <div className="relative z-10">{children}</div>

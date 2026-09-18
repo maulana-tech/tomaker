@@ -8,7 +8,7 @@ import { clamp, smoothstep } from "@/lib/conductor";
  *  like: a position travels the orbit from issuance on the left to the par mark
  *  on the right. A quarter of the way along it resolves into two legs — the
  *  principal stays on the route and converges on par, the yield leg drifts off
- *  it and spends itself. At maturity the amber is out and only the outline of
+ *  it and spends itself. At maturity the signal is out and only the outline of
  *  where it was remains.
  *
  *  Everything here is unitless so it can be tested without a canvas: angles in
@@ -36,7 +36,7 @@ export type OrreryModel = {
   /** Body size, in units of the base body radius. */
   ptSize: number;
   ytSize: number;
-  /** Ink of the amber leg: 1 while the yield is live, exactly 0 at maturity.
+  /** Ink of the signal leg: 1 while the yield is live, exactly 0 at maturity.
    *  The accent has one job on this site, and this is it going out. */
   ytLife: number;
   /** Ink of the par mark the principal is converging on. */

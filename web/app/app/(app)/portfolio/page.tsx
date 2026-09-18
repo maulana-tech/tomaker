@@ -135,7 +135,7 @@ export default function PortfolioPage() {
         <div className="space-y-6 lg:col-span-7">
           <div className="card space-y-5 p-8">
             <div>
-              <h2 className="text-lg font-semibold text-paper">Claim YT yield</h2>
+              <h2 className="text-lg font-semibold text-ink">Claim YT yield</h2>
               <p className="mt-1 text-xs text-ash">
                 Claim the accrued yield shown in your position. The payout is received as SY.
               </p>
@@ -156,7 +156,7 @@ export default function PortfolioPage() {
           </div>
 
           <div className="card space-y-5 p-8">
-            <h2 className="text-lg font-semibold text-paper">
+            <h2 className="text-lg font-semibold text-ink">
               {matured ? "Redeem PT" : "Recombine PT + YT"}
             </h2>
             <AmountField
@@ -188,7 +188,7 @@ export default function PortfolioPage() {
 
           <div className="card space-y-5 p-8">
             <div>
-              <h2 className="text-lg font-semibold text-paper">Redeem SY to underlying</h2>
+              <h2 className="text-lg font-semibold text-ink">Redeem SY to underlying</h2>
               <p className="mt-1 text-xs text-ash">
                 Burn SY shares and withdraw their current value from the vault.
               </p>
@@ -204,7 +204,7 @@ export default function PortfolioPage() {
             />
 
             {underlyingPreview !== null ? (
-              <p className="panel-subtle p-4 text-sm tabular-nums text-paper">
+              <p className="panel-subtle p-4 text-sm tabular-nums text-ink">
                 You will receive ~{formatTokenAmount(underlyingPreview, cfg.decimals)} underlying
               </p>
             ) : null}
@@ -238,11 +238,11 @@ export default function PortfolioPage() {
             <p className="label-data">Time to maturity</p>
             {market !== null ? (
               <>
-                <p className="text-6xl font-light tabular-nums text-paper">
+                <p className="text-6xl font-light tabular-nums text-ink">
                   {daysToMaturity(market.maturity)}
                   <span className="ml-2 text-2xl text-graphite">Days</span>
                 </p>
-                <p className="text-sm tabular-nums text-amber">{maturityStatus(market.maturity)}</p>
+                <p className="text-sm tabular-nums text-signal">{maturityStatus(market.maturity)}</p>
                 <p className="text-sm tabular-nums text-smoke">{formatMaturityDate(market.maturity)}</p>
               </>
             ) : (
@@ -253,7 +253,7 @@ export default function PortfolioPage() {
           <div className="card space-y-3 p-6">
             <div className="flex justify-between">
               <span className="label-data">Exchange rate</span>
-              <span className="text-sm tabular-nums text-paper">
+              <span className="text-sm tabular-nums text-ink">
                 {market !== null
                   ? `1 SY = ${formatTokenAmount(market.exchangeRate, 18, 4)} underlying`
                   : "n/a"}
@@ -261,7 +261,7 @@ export default function PortfolioPage() {
             </div>
             <div className="flex justify-between">
               <span className="label-data">At maturity</span>
-              <span className="text-sm tabular-nums text-amber">1 PT = 1.000 underlying, paid in SY</span>
+              <span className="text-sm tabular-nums text-signal">1 PT = 1.000 underlying, paid in SY</span>
             </div>
           </div>
         </aside>

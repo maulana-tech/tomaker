@@ -214,7 +214,7 @@ export function TourOverlay() {
     <div className="pointer-events-none fixed inset-0 z-50" aria-live="polite">
       <div
         data-tour-halo
-        className="absolute border-2 border-amber"
+        className="absolute border-2 border-signal"
         style={{
           left: boxes.target.left,
           top: boxes.target.top,
@@ -226,7 +226,7 @@ export function TourOverlay() {
         }}
       >
         <div
-          className="absolute inset-0 motion-safe:animate-ping border border-amber/70"
+          className="absolute inset-0 motion-safe:animate-ping border border-signal/70"
           style={{ borderRadius: boxes.target.radius }}
         />
       </div>
@@ -234,7 +234,7 @@ export function TourOverlay() {
       <section
         role="dialog"
         aria-label="Guided tour"
-        className="pointer-events-auto absolute border border-amber/30 bg-carbon p-4 shadow-2xl shadow-black/40"
+        className="pointer-events-auto absolute border border-signal/30 bg-chalk p-4 shadow-2xl shadow-ink/20"
         style={{
           left: boxes.callout.left,
           top: boxes.callout.top,
@@ -243,7 +243,7 @@ export function TourOverlay() {
       >
         <span
           aria-hidden
-          className={`absolute h-3 w-3 rotate-45 border border-amber/30 bg-carbon ${
+          className={`absolute h-3 w-3 rotate-45 border border-signal/30 bg-chalk ${
             boxes.callout.placement === "below"
               ? "-top-1.5 border-b-0 border-r-0"
               : "-bottom-1.5 border-l-0 border-t-0"
@@ -255,14 +255,14 @@ export function TourOverlay() {
             <p className="label-data">
               Step {step.index} of {step.total}
             </p>
-            <h2 className="mt-2 text-base font-semibold text-paper">
+            <h2 className="mt-2 text-base font-semibold text-ink">
               {step.title}
             </h2>
           </div>
           <button
             type="button"
             onClick={skipTour}
-            className="rounded-pill border border-white/20 px-3 py-1.5 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-paper hover:text-paper"
+            className="rounded-pill border border-ink/20 px-3 py-1.5 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-ink hover:text-ink"
           >
             Skip
           </button>

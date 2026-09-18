@@ -34,7 +34,7 @@ export function AmountField({
           <button
             type="button"
             onClick={() => onChange(formatTokenAmount(max, decimals))}
-            className="rounded-pill border border-white/20 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-paper hover:text-paper"
+            className="rounded-pill border border-ink/20 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-ink hover:text-ink"
           >
             Max {formatTokenAmount(max, decimals)}
           </button>

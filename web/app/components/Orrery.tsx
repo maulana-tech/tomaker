@@ -11,7 +11,7 @@ import { useConductor } from "@/lib/useConductor";
 // ring system: the rings and their cardinal ticks are still the backdrop and
 // still turn once every four minutes, but the chart now carries the protocol on
 // it — one position travelling from issuance to par, resolving into a principal
-// leg and a yield leg on the way, with the amber going out exactly at maturity.
+// leg and a yield leg on the way, with the signal going out exactly at maturity.
 //
 // Line work on black, one accent, no glows: depth is tonal contrast only, as
 // everywhere else on this site. It sits behind the page's content, so every ink
@@ -131,7 +131,7 @@ function drawRun(ctx: CanvasRenderingContext2D, g: Geometry, m: OrreryModel) {
     ctx.stroke();
   }
 
-  // The yield leg itself: the one amber thing on the page, and it goes out.
+  // The yield leg itself: the one signal thing on the page, and it goes out.
   if (m.ytLife > 0.001 && m.ytSize > 0.001) {
     ctx.fillStyle = `rgba(255, 172, 46, ${(0.44 * m.ytLife).toFixed(3)})`;
     ctx.beginPath();

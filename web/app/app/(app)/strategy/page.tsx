@@ -87,7 +87,7 @@ export default function StrategyPage() {
       <header className="space-y-3">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
-            <p className="label-data text-amber">Yield markets</p>
+            <p className="label-data text-signal">Yield markets</p>
             <h1 className="mt-2 text-6xl font-light tracking-tight sm:text-7xl">Strategies</h1>
           </div>
           <ConfiguredMarketPill />
@@ -99,10 +99,10 @@ export default function StrategyPage() {
       </header>
 
       <section className="space-y-5" aria-labelledby="strategy-selector-title">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink/10 pb-4">
           <div>
             <p className="label-data">Market selection</p>
-            <h2 id="strategy-selector-title" className="mt-2 text-2xl font-light text-paper">
+            <h2 id="strategy-selector-title" className="mt-2 text-2xl font-light text-ink">
               Select a strategy
             </h2>
           </div>
@@ -121,10 +121,10 @@ export default function StrategyPage() {
               type="button"
               aria-pressed={selectedOption}
               onClick={() => setSelectedId(strategy.id)}
-              className={`card flex min-h-64 flex-col justify-between p-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper ${
+              className={`card flex min-h-64 flex-col justify-between p-5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
                 selectedOption
-                  ? "border-amber/40 bg-amber/[0.06]"
-                  : "hover:border-white/25 hover:bg-white/[0.04]"
+                  ? "border-signal/40 bg-signal/[0.06]"
+                  : "hover:border-ink/25 hover:bg-ink/[0.04]"
               }`}
             >
               <div className="space-y-5">
@@ -133,22 +133,22 @@ export default function StrategyPage() {
                   <span
                     className={`rounded-pill border px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] ${
                       selectedOption
-                        ? "border-amber/30 bg-amber/10 text-amber"
-                        : "border-white/15 text-smoke"
+                        ? "border-signal/30 bg-signal/10 text-signal"
+                        : "border-ink/15 text-smoke"
                     }`}
                   >
                     {selectedOption ? "Selected" : stage}
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-light text-paper">{strategy.name}</h3>
+                  <h3 className="text-2xl font-light text-ink">{strategy.name}</h3>
                 </div>
-                <dl className="space-y-3 border-y border-white/10 py-4 text-sm">
+                <dl className="space-y-3 border-y border-ink/10 py-4 text-sm">
                   <PipelineDetail label="Asset" value={strategy.asset} />
                   <PipelineDetail label="Return" value={strategy.rate} />
                 </dl>
               </div>
-              <p className={`mt-5 text-[13px] uppercase tracking-[0.1em] ${selectedOption ? "text-amber" : "text-ash"}`}>
+              <p className={`mt-5 text-[13px] uppercase tracking-[0.1em] ${selectedOption ? "text-signal" : "text-ash"}`}>
                 {stage}
               </p>
             </button>
@@ -163,20 +163,20 @@ export default function StrategyPage() {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="label-data">Selected strategy</p>
-                <h2 id="selected-strategy-title" className="mt-3 max-w-xl text-3xl font-light text-paper sm:text-4xl">
+                <h2 id="selected-strategy-title" className="mt-3 max-w-xl text-3xl font-light text-ink sm:text-4xl">
                   {selectedName}
                 </h2>
               </div>
-              <span className="rounded-pill border border-amber/30 bg-amber/10 px-3 py-1 text-[13px] uppercase tracking-[0.1em] text-amber">
+              <span className="rounded-pill border border-signal/30 bg-signal/10 px-3 py-1 text-[13px] uppercase tracking-[0.1em] text-signal">
                 {selectedStage}
               </span>
             </div>
 
             <p className="max-w-2xl text-sm leading-relaxed text-smoke">{selected.summary}</p>
 
-            <div className="border-y border-white/10 py-4">
+            <div className="border-y border-ink/10 py-4">
               <p className="label-data">Position path</p>
-              <p className="mt-2 font-mono text-xs leading-relaxed text-paper sm:text-sm">
+              <p className="mt-2 font-mono text-xs leading-relaxed text-ink sm:text-sm">
                 {selected.path}
               </p>
             </div>
@@ -185,13 +185,13 @@ export default function StrategyPage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/mint"
-                  className="inline-flex items-center justify-center rounded-pill bg-paper px-5 py-2.5 text-[13px] font-semibold uppercase tracking-[0.1em] text-ink transition hover:bg-smoke"
+                  className="inline-flex items-center justify-center rounded-pill bg-ink px-5 py-2.5 text-[13px] font-semibold uppercase tracking-[0.1em] text-paper transition hover:bg-smoke"
                 >
                   Open market
                 </Link>
                 <Link
                   href="/trade"
-                  className="inline-flex items-center justify-center rounded-pill border border-white/25 px-5 py-2.5 text-[13px] uppercase tracking-[0.1em] text-paper transition hover:border-paper hover:bg-paper hover:text-ink"
+                  className="inline-flex items-center justify-center rounded-pill border border-ink/25 px-5 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ink transition hover:border-ink hover:bg-ink hover:text-paper"
                 >
                   Trade yield
                 </Link>
@@ -200,7 +200,7 @@ export default function StrategyPage() {
                     href={cfg.yieldSource.docsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center px-2 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:text-paper"
+                    className="inline-flex items-center px-2 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:text-ink"
                   >
                     Source details
                   </a>
@@ -210,7 +210,7 @@ export default function StrategyPage() {
               <button
                 type="button"
                 disabled
-                className="inline-flex cursor-not-allowed items-center justify-center rounded-pill border border-white/15 px-5 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ash"
+                className="inline-flex cursor-not-allowed items-center justify-center rounded-pill border border-ink/15 px-5 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ash"
               >
                 Not available yet
               </button>
@@ -219,7 +219,7 @@ export default function StrategyPage() {
 
           <dl
             key={selected.id}
-            className="grid border-t border-white/10 bg-white/[0.015] sm:grid-cols-2 lg:col-span-5 lg:border-l lg:border-t-0"
+            className="grid border-t border-ink/10 bg-ink/[0.015] sm:grid-cols-2 lg:col-span-5 lg:border-l lg:border-t-0"
           >
             {selectedIsLive ? (
               <>
@@ -262,7 +262,7 @@ export default function StrategyPage() {
         </div>
       </section>
 
-      <section className="grid gap-px border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4" aria-label="Strategy market rules">
+      <section className="grid gap-px border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-4" aria-label="Strategy market rules">
         <MarketRule label="Market unit" value="One strategy per SY" />
         <MarketRule label="Binding" value="Immutable at deployment" />
         <MarketRule label="Settlement" value="Independent PT and YT" />
@@ -286,9 +286,9 @@ function StrategyMetric({
   signal?: boolean;
 }) {
   return (
-    <div className="min-h-44 border-b border-white/10 p-6 sm:[&:nth-child(odd)]:border-r lg:p-7">
+    <div className="min-h-44 border-b border-ink/10 p-6 sm:[&:nth-child(odd)]:border-r lg:p-7">
       <dt className="label-data">{label}</dt>
-      <dd className={`mt-4 min-h-8 text-2xl font-light tabular-nums ${signal ? "text-amber" : "text-paper"}`}>
+      <dd className={`mt-4 min-h-8 text-2xl font-light tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="min-w-20" />
       </dd>
       <p className="mt-3 text-xs leading-relaxed text-ash">{detail}</p>
@@ -300,16 +300,16 @@ function PipelineDetail({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-5">
       <dt className="label-data">{label}</dt>
-      <dd className="text-right text-sm text-paper">{value}</dd>
+      <dd className="text-right text-sm text-ink">{value}</dd>
     </div>
   );
 }
 
 function MarketRule({ label, value }: { label: string; value: string }) {
   return (
-    <div className="min-h-28 bg-ink p-5">
+    <div className="min-h-28 bg-paper p-5">
       <p className="label-data">{label}</p>
-      <p className="mt-3 text-sm text-paper">{value}</p>
+      <p className="mt-3 text-sm text-ink">{value}</p>
     </div>
   );
 }

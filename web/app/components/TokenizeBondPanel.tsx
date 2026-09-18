@@ -31,16 +31,16 @@ export function TokenizeBondPanel({
     : "n/a";
 
   return (
-    <div className="card space-y-5 border-amber/20 p-8">
+    <div className="card space-y-5 border-signal/20 p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="label-data">Tokenize into PT + YT</p>
-          <p className="mt-2 text-3xl font-light tabular-nums text-paper">
+          <p className="mt-2 text-3xl font-light tabular-nums text-ink">
             {bond ? formatTokenAmount(bond.valuePerUnit, decimals, 4) : "—"}
             <span className="ml-2 text-xl text-graphite">bond value / unit</span>
           </p>
         </div>
-        <span className="rounded-pill border border-amber/30 bg-amber/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-amber">
+        <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal">
           {discount} to par
         </span>
       </div>
@@ -59,20 +59,20 @@ export function TokenizeBondPanel({
         <li>4. Optionally sell the newly minted YT to lock a fixed rate</li>
       </ul>
 
-      <dl className="space-y-2 border-t border-white/10 pt-4 text-sm">
+      <dl className="space-y-2 border-t border-ink/10 pt-4 text-sm">
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Bond maturity</dt>
-          <dd className="tabular-nums text-paper">{bond ? formatMaturityDate(bond.maturity) : "n/a"}</dd>
+          <dd className="tabular-nums text-ink">{bond ? formatMaturityDate(bond.maturity) : "n/a"}</dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Bond supply</dt>
-          <dd className="tabular-nums text-paper">
+          <dd className="tabular-nums text-ink">
             {bond ? formatTokenAmount(bond.totalSupply, decimals) : "n/a"}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Strategy assets</dt>
-          <dd className="tabular-nums text-paper">
+          <dd className="tabular-nums text-ink">
             {strategy ? formatTokenAmount(strategy.totalAssets, decimals, 4) : "n/a"}
           </dd>
         </div>
@@ -80,7 +80,7 @@ export function TokenizeBondPanel({
 
       <Link
         href="#mint-form"
-        className="inline-flex text-[13px] uppercase tracking-[0.1em] text-amber transition hover:text-paper"
+        className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
       >
         Use the mint form
       </Link>

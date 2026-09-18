@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-/** toMaker mark: a four-point star (tomaker = "relating to the stars"). */
+/** toMaker mark: a four-point star. */
 export function Logo({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
@@ -16,7 +16,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`flex items-center gap-2 ${className}`}>
       <Logo />
-      <span className="text-lg font-semibold tracking-tight">tomaker</span>
+      <span className="text-lg font-semibold tracking-tight">toMaker</span>
     </span>
   );
 }

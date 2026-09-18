@@ -17,9 +17,9 @@ export function DocsHeader({
   summary: string;
 }) {
   return (
-    <header className="border-b border-white/10 pb-8">
+    <header className="border-b border-ink/10 pb-8">
       <p className="label-data">{kicker}</p>
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-paper sm:text-4xl">
+      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
         {title}
       </h1>
       <p className="mt-4 max-w-2xl text-[15px] leading-7 text-smoke">{summary}</p>
@@ -28,7 +28,7 @@ export function DocsHeader({
 }
 
 // Quiet aside panel. `signal` marks live-network caveats: the one place docs
-// use amber, consistent with the app's "amber = signal, never decoration".
+// use signal, consistent with the app's "signal = signal, never decoration".
 export function Callout({
   label,
   signal = false,
@@ -39,9 +39,9 @@ export function Callout({
   children: React.ReactNode;
 }) {
   return (
-    <aside className={`panel-subtle border-l-2 p-5 ${signal ? "border-l-amber" : "border-l-white/30"}`}>
-      <p className={`label-data mb-2 ${signal ? "text-amber" : ""}`}>{label}</p>
-      <div className="text-[14px] leading-6 text-smoke [&_a]:text-paper [&_a]:underline [&_a]:decoration-white/30 [&_a]:underline-offset-4 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-paper [&_strong]:font-semibold [&_strong]:text-paper">
+    <aside className={`panel-subtle border-l-2 p-5 ${signal ? "border-l-signal" : "border-l-ink/30"}`}>
+      <p className={`label-data mb-2 ${signal ? "text-signal" : ""}`}>{label}</p>
+      <div className="text-[14px] leading-6 text-smoke [&_a]:text-ink [&_a]:underline [&_a]:decoration-ink/30 [&_a]:underline-offset-4 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-ink [&_strong]:font-semibold [&_strong]:text-ink">
         {children}
       </div>
     </aside>
@@ -56,11 +56,11 @@ export function DocsPager({ current }: { current: string }) {
   const next = idx >= 0 && idx < DOCS_PAGES.length - 1 ? DOCS_PAGES[idx + 1] : null;
 
   return (
-    <nav aria-label="Documentation pages" className="mt-16 flex gap-4 border-t border-white/10 pt-8">
+    <nav aria-label="Documentation pages" className="mt-16 flex gap-4 border-t border-ink/10 pt-8">
       {prev ? (
-        <Link href={prev.href} className="group flex-1 border border-white/10 p-5 transition hover:border-white/40">
+        <Link href={prev.href} className="group flex-1 border border-ink/10 p-5 transition hover:border-ink/40">
           <p className="label-data mb-2">Previous</p>
-          <p className="text-[15px] text-paper">{prev.label}</p>
+          <p className="text-[15px] text-ink">{prev.label}</p>
         </Link>
       ) : (
         <div className="flex-1" />
@@ -68,10 +68,10 @@ export function DocsPager({ current }: { current: string }) {
       {next ? (
         <Link
           href={next.href}
-          className="group flex-1 border border-white/10 p-5 text-right transition hover:border-white/40"
+          className="group flex-1 border border-ink/10 p-5 text-right transition hover:border-ink/40"
         >
           <p className="label-data mb-2">Next</p>
-          <p className="text-[15px] text-paper">{next.label}</p>
+          <p className="text-[15px] text-ink">{next.label}</p>
         </Link>
       ) : (
         <div className="flex-1" />

@@ -41,7 +41,7 @@ export function TourHelpButton() {
         clearTourPreference(window.localStorage);
         window.dispatchEvent(new Event(TOUR_REPLAY_EVENT));
       }}
-      className="rounded-pill border border-white/20 px-3 py-2 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:border-paper hover:text-paper"
+      className="rounded-pill border border-ink/20 px-3 py-2 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:border-ink hover:text-ink"
       data-tour="tour-help"
     >
       ?

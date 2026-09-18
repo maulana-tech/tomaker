@@ -5,9 +5,9 @@ import type { BondInfo, MarketState } from "@tomaker/sdk";
 import { fixedRateDisplay, variableRateDisplay, type YieldChoiceTone } from "@/lib/yieldChoice";
 
 function toneClass(tone: YieldChoiceTone): string {
-  if (tone === "live") return "border-amber/30 bg-amber/10 text-amber";
+  if (tone === "live") return "border-signal/30 bg-signal/10 text-signal";
   if (tone === "warning") return "border-yellow-500/30 bg-yellow-500/10 text-yellow-200";
-  return "border-white/15 bg-white/[0.03] text-smoke";
+  return "border-ink/15 bg-ink/[0.03] text-smoke";
 }
 
 export function YieldChoiceCard({
@@ -30,14 +30,14 @@ export function YieldChoiceCard({
     <div className="card space-y-5 p-6">
       <div>
         <p className="label-data">Choose your yield exposure</p>
-        <h2 className="mt-2 text-lg font-semibold text-paper">Fixed PT or variable YT</h2>
+        <h2 className="mt-2 text-lg font-semibold text-ink">Fixed PT or variable YT</h2>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <section className="panel-subtle flex min-h-48 flex-col justify-between gap-5 p-5">
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-3">
-              <h3 className="text-sm font-semibold text-paper">Lock a fixed rate with PT</h3>
+              <h3 className="text-sm font-semibold text-ink">Lock a fixed rate with PT</h3>
               <span className={`rounded-pill border px-2 py-0.5 text-[13px] ${toneClass(fixed.tone)}`}>
                 {fixed.value}
               </span>
@@ -50,7 +50,7 @@ export function YieldChoiceCard({
           </div>
           <Link
             href={fixedHref}
-            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-amber transition hover:text-paper"
+            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
           >
             {fixedCtaLabel}
           </Link>
@@ -59,7 +59,7 @@ export function YieldChoiceCard({
         <section className="panel-subtle flex min-h-48 flex-col justify-between gap-5 p-5">
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-3">
-              <h3 className="text-sm font-semibold text-paper">Stay variable or buy YT</h3>
+              <h3 className="text-sm font-semibold text-ink">Stay variable or buy YT</h3>
               <span className={`rounded-pill border px-2 py-0.5 text-[13px] ${toneClass(variable.tone)}`}>
                 {variable.value}
               </span>
@@ -72,7 +72,7 @@ export function YieldChoiceCard({
           </div>
           <Link
             href="/trade#buy-yt"
-            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-amber transition hover:text-paper"
+            className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
           >
             Buy YT
           </Link>

@@ -2,10 +2,14 @@
 
 import type { Config } from "tailwindcss";
 
-// "Cinematic darkroom" monochrome design system. One accent (signal-amber) that
-// marks live/active signals only. Shape is binary: pill (999px) for buttons and
-// tags, sharp (0px) for cards, inputs, and panels. No shadows or glows; depth is
-// white/dark tonal contrast only.
+// "Daylight paper" monochrome design system: ink on paper, not paper on ink.
+// One accent (signal-signal) that marks live/active signals only. Shape is
+// binary: pill (999px) for buttons and tags, sharp (0px) for cards, inputs and
+// panels. No shadows or glows; depth is tonal contrast only.
+//
+// `ink` and `paper` are colour names, not roles: ink is always the dark one.
+// The light theme uses `bg-paper text-ink`, which is why the inversion was a
+// swap of usage sites rather than of these two values.
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -16,14 +20,17 @@ const config: Config = {
     extend: {
       colors: {
         paper: "#FFFFFF",
-        ink: "#000000",
-        carbon: "#181818",
+        ink: "#0B0B0B",
+        // Raised panel on paper. Replaces the darkroom's near-black `carbon`.
+        chalk: "#F4F4F4",
+        // Greys are tuned for contrast against paper, not against ink: every
+        // one of these clears WCAG AA (4.5:1) on #FFFFFF as body text.
         ash: "#6D6D6D",
-        smoke: "#9A9A9A",
-        pewter: "#808080",
-        graphite: "#636363",
+        smoke: "#767676",
+        pewter: "#6F6F6F",
+        graphite: "#4A4A4A",
         // The single accent. One job: live/active signals.
-        amber: "#FFAC2E",
+        signal: "#1CD8B0",
       },
       fontFamily: {
         // Inter everywhere, wired through next/font's CSS variable.

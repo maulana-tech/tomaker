@@ -147,9 +147,9 @@ export default function FaqPage() {
 
       <dl className="mt-8 flex flex-col">
         {FAQS.map((item) => (
-          <div key={item.q} className="border-b border-white/10 py-6 last:border-b-0">
-            <dt className="text-base font-semibold text-paper">{item.q}</dt>
-            <dd className="mt-2 text-[15px] leading-7 text-smoke [&_a]:text-paper [&_a]:underline [&_a]:decoration-white/30 [&_a]:underline-offset-4 [&_em]:italic">
+          <div key={item.q} className="border-b border-ink/10 py-6 last:border-b-0">
+            <dt className="text-base font-semibold text-ink">{item.q}</dt>
+            <dd className="mt-2 text-[15px] leading-7 text-smoke [&_a]:text-ink [&_a]:underline [&_a]:decoration-ink/30 [&_a]:underline-offset-4 [&_em]:italic">
               {item.a}
             </dd>
           </div>

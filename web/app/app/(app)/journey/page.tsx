@@ -62,9 +62,9 @@ const CONTEXT: Record<Action, ErrorContext> = {
 
 function Stat({ label, value, signal }: { label: string; value: ReactNode; signal?: boolean }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 border-t border-white/10 py-2.5">
+    <div className="flex items-baseline justify-between gap-4 border-t border-ink/10 py-2.5">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-right text-sm tabular-nums ${signal ? "text-amber" : "text-paper"}`}>
+      <dd className={`text-right text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
         {value}
       </dd>
     </div>
@@ -84,7 +84,7 @@ function Addr({ address, kind = "contract" }: { address: string; kind?: "contrac
       target="_blank"
       rel="noopener noreferrer"
       title={address}
-      className="font-mono text-amber underline decoration-dotted underline-offset-2 transition hover:text-paper"
+      className="font-mono text-signal underline decoration-dotted underline-offset-2 transition hover:text-ink"
     >
       {shortAddress(address)} ↗
     </a>
@@ -110,13 +110,13 @@ function Step({
   return (
     <section className="card space-y-5 p-6 sm:p-8">
       <header className="flex items-start gap-4">
-        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border border-amber/40 text-sm tabular-nums text-amber">
+        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-pill border border-signal/40 text-sm tabular-nums text-signal">
           {index}
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="text-lg font-semibold text-paper">{title}</h2>
+          <h2 className="text-lg font-semibold text-ink">{title}</h2>
         </div>
-        <span className="shrink-0 rounded-pill border border-white/15 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke">
+        <span className="shrink-0 rounded-pill border border-ink/15 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke">
           {state}
         </span>
       </header>
@@ -345,13 +345,13 @@ export default function JourneyPage() {
               Connect a wallet to act
             </button>
           ) : (
-            <span className="panel-subtle px-4 py-2 text-sm text-paper">
+            <span className="panel-subtle px-4 py-2 text-sm text-ink">
               Acting as <Addr address={address} kind="account" />
             </span>
           )}
           <button
             type="button"
-            className="rounded-pill border border-white/20 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:border-paper hover:text-paper"
+            className="rounded-pill border border-ink/20 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:border-ink hover:text-ink"
             onClick={journey.refresh}
           >
             Refresh state
@@ -365,7 +365,7 @@ export default function JourneyPage() {
         </p>
       ) : null}
       {journey.warnings.length > 0 ? (
-        <div className="card border-amber/30 p-4 text-sm text-amber" role="status">
+        <div className="card border-signal/30 p-4 text-sm text-signal" role="status">
           <p className="label-data">Partial reads</p>
           <ul className="mt-2 space-y-1">
             {journey.warnings.map((w) => (
@@ -453,7 +453,7 @@ export default function JourneyPage() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 type="button"
-                className="rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-paper transition hover:bg-paper hover:text-ink disabled:opacity-50"
+                className="rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper disabled:opacity-50"
                 disabled={!address || faucetBusy || !cfg.faucetEnabled}
                 onClick={() => {
                   if (!address) return;
@@ -536,8 +536,8 @@ export default function JourneyPage() {
                       onClick={() => setSwapDirection(dir)}
                       className={`rounded-pill border px-3 py-1 text-[13px] uppercase tracking-[0.1em] transition ${
                         swapDirection === dir
-                          ? "border-amber/40 bg-amber/10 text-amber"
-                          : "border-white/15 text-smoke hover:text-paper"
+                          ? "border-signal/40 bg-signal/10 text-signal"
+                          : "border-ink/15 text-smoke hover:text-ink"
                       }`}
                     >
                       {dir === "pt->sy" ? "PT → SY" : "SY → PT"}
@@ -574,8 +574,8 @@ export default function JourneyPage() {
                 {coupons.map((coupon) => (
                   <li key={coupon.couponId.toString()} className="panel-subtle space-y-2 p-4">
                     <div className="flex items-center justify-between gap-4">
-                      <p className="text-sm font-medium text-paper">Coupon #{coupon.couponId.toString()}</p>
-                      <p className="text-sm tabular-nums text-amber">
+                      <p className="text-sm font-medium text-ink">Coupon #{coupon.couponId.toString()}</p>
+                      <p className="text-sm tabular-nums text-signal">
                         {bpsToPercent((coupon.ratePerUnit * 10_000n) / WAD, 2)} p.a.
                       </p>
                     </div>
@@ -596,7 +596,7 @@ export default function JourneyPage() {
             <div className="flex flex-wrap gap-3">
               <button
                 type="button"
-                className="rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-paper transition hover:bg-paper hover:text-ink disabled:opacity-50"
+                className="rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper disabled:opacity-50"
                 disabled={!address || busy}
                 onClick={() => void run("touch", () => Promise.resolve(client.buildTouch()))}
               >
@@ -647,7 +647,7 @@ export default function JourneyPage() {
             />
             <TxStatus phase={actionPhase("redeem")} context={CONTEXT.redeem} />
 
-            <div className="space-y-4 border-t border-white/10 pt-5">
+            <div className="space-y-4 border-t border-ink/10 pt-5">
               <AmountField
                 label="SY to redeem for cash"
                 value={syRedeemAmount}
@@ -680,8 +680,8 @@ export default function JourneyPage() {
             ) : (
               <ul className="space-y-3">
                 {history.map((entry) => (
-                  <li key={entry.hash} className="border-t border-white/10 pt-3">
-                    <p className="text-sm text-paper">{entry.label}</p>
+                  <li key={entry.hash} className="border-t border-ink/10 pt-3">
+                    <p className="text-sm text-ink">{entry.label}</p>
                     <p className="mt-1 text-xs">
                       <ExplorerTxLink hash={entry.hash} />
                     </p>
@@ -699,8 +699,8 @@ export default function JourneyPage() {
             </p>
             <ul className="space-y-3">
               {TESTNET_DEPLOYMENT.demoWallets.map((wallet) => (
-                <li key={wallet.address} className="border-t border-white/10 pt-3">
-                  <p className="text-sm text-paper">{wallet.label}</p>
+                <li key={wallet.address} className="border-t border-ink/10 pt-3">
+                  <p className="text-sm text-ink">{wallet.label}</p>
                   <p className="mt-1 text-xs">
                     <Addr address={wallet.address} kind="account" />
                   </p>

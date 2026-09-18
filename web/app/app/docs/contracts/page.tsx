@@ -87,10 +87,10 @@ export default function ContractsPage() {
         <table className="w-full border-collapse text-[14px]">
           <thead>
             <tr>
-              <th className="border-b border-white/15 py-2 pr-4 text-left font-medium text-paper">
+              <th className="border-b border-ink/15 py-2 pr-4 text-left font-medium text-ink">
                 Component
               </th>
-              <th className="border-b border-white/15 py-2 pr-4 text-left font-medium text-paper">
+              <th className="border-b border-ink/15 py-2 pr-4 text-left font-medium text-ink">
                 Address
               </th>
             </tr>
@@ -98,14 +98,14 @@ export default function ContractsPage() {
           <tbody>
             {rows.map((c) => (
               <tr key={c.name}>
-                <td className="border-b border-white/10 py-3 pr-4 align-top">
-                  <p className="text-paper">{c.name}</p>
+                <td className="border-b border-ink/10 py-3 pr-4 align-top">
+                  <p className="text-ink">{c.name}</p>
                   <p className="mt-0.5 text-[13px] text-ash">{c.note}</p>
                 </td>
-                <td className="border-b border-white/10 py-3 pr-4 align-top">
+                <td className="border-b border-ink/10 py-3 pr-4 align-top">
                   <a
                     href={`https://hashscan.io/testnet/contract/${c.address}`}
-                    className="break-all font-mono text-[12px] text-smoke underline decoration-white/20 underline-offset-4 hover:text-paper"
+                    className="break-all font-mono text-[12px] text-smoke underline decoration-ink/20 underline-offset-4 hover:text-ink"
                   >
                     {c.address}
                   </a>

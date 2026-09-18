@@ -22,28 +22,28 @@ export const metadata: Metadata = {
 // carry the navigation; the content column is capped for measure.
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex min-h-screen flex-col text-paper">
+    <div className="relative flex min-h-screen flex-col text-ink">
       <Atmosphere />
       <Grain className="fixed inset-0 z-0" />
 
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/80 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-4">
             <Link href="/" aria-label="toMaker home">
               <Wordmark />
             </Link>
-            <span className="hidden border-l border-white/15 pl-4 label-data sm:inline">Docs</span>
+            <span className="hidden border-l border-ink/15 pl-4 label-data sm:inline">Docs</span>
           </div>
           <div className="flex items-center gap-6">
             <a
               href="https://github.com/guha-rahul/tomaker"
-              className="label-data transition hover:text-paper"
+              className="label-data transition hover:text-ink"
             >
               GitHub
             </a>
             <Link
               href="/mint"
-              className="rounded-pill bg-paper px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-smoke"
+              className="rounded-pill bg-ink px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-smoke"
             >
               Open App
             </Link>
@@ -56,16 +56,16 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <main className="min-w-0 max-w-3xl flex-1 py-10 lg:py-14">{children}</main>
       </div>
 
-      <footer className="relative z-10 border-t border-white/10 bg-ink/50 backdrop-blur-sm">
+      <footer className="relative z-10 border-t border-ink/10 bg-paper/50 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[1280px] flex-col items-start justify-between gap-3 px-6 py-8 sm:flex-row sm:items-center">
           <p className="label-data">© 2026 toMaker Protocol</p>
           <div className="flex flex-wrap items-center gap-6">
-            <Link href="/" className="label-data transition hover:text-paper">
+            <Link href="/" className="label-data transition hover:text-ink">
               Home
             </Link>
             <a
               href="https://github.com/guha-rahul/tomaker"
-              className="label-data transition hover:text-paper"
+              className="label-data transition hover:text-ink"
             >
               GitHub
             </a>

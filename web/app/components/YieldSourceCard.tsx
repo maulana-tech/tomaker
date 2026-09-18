@@ -46,13 +46,13 @@ export function YieldSourceCard({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="label-data">Yield source</p>
-          <h2 className="mt-2 text-lg font-semibold text-paper">{source.name}</h2>
+          <h2 className="mt-2 text-lg font-semibold text-ink">{source.name}</h2>
         </div>
         <span
           className={`rounded-pill border px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] ${
             status.tone === "live"
-              ? "border-amber/30 bg-amber/10 text-amber"
-              : "border-white/15 text-smoke"
+              ? "border-signal/30 bg-signal/10 text-signal"
+              : "border-ink/15 text-smoke"
           }`}
         >
           {status.label}
@@ -61,16 +61,16 @@ export function YieldSourceCard({
 
       <p className="text-sm leading-relaxed text-smoke">{status.body}</p>
 
-      <dl className="space-y-2 border-t border-white/10 pt-4 text-sm">
+      <dl className="space-y-2 border-t border-ink/10 pt-4 text-sm">
         <div className="flex justify-between gap-4">
           <dt className="label-data">SY rate</dt>
-          <dd className="tabular-nums text-paper">
+          <dd className="tabular-nums text-ink">
             {market ? `1 SY = ${formatTokenAmount(market.exchangeRate, 18, 6)} underlying` : "n/a"}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="label-data">Underlying</dt>
-          <dd className="tabular-nums text-paper" title={underlying}>
+          <dd className="tabular-nums text-ink" title={underlying}>
             {shortAddress(underlying || "n/a")}
           </dd>
         </div>
@@ -78,7 +78,7 @@ export function YieldSourceCard({
           <>
             <div className="flex justify-between gap-4">
               <dt className="label-data">Bond discount</dt>
-              <dd className="tabular-nums text-amber">
+              <dd className="tabular-nums text-signal">
                 <LiveValue
                   value={bond ? bpsToPercent(bondDiscountBps(bond.valuePerUnit, par)) : ""}
                   loading={!bond}
@@ -88,19 +88,19 @@ export function YieldSourceCard({
             </div>
             <div className="flex justify-between gap-4">
               <dt className="label-data">Bond value / unit</dt>
-              <dd className="tabular-nums text-paper">
+              <dd className="tabular-nums text-ink">
                 {bond ? formatTokenAmount(bond.valuePerUnit, assetDecimals, 4) : "n/a"}
               </dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="label-data">Strategy assets</dt>
-              <dd className="tabular-nums text-paper">
+              <dd className="tabular-nums text-ink">
                 {strategy ? formatTokenAmount(strategy.totalAssets, assetDecimals, 4) : "n/a"}
               </dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="label-data">Tokenized bond</dt>
-              <dd className="tabular-nums text-paper" title={bondAddress}>
+              <dd className="tabular-nums text-ink" title={bondAddress}>
                 {shortAddress(bondAddress || "n/a")}
               </dd>
             </div>
@@ -113,7 +113,7 @@ export function YieldSourceCard({
           href={source.docsUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex text-[13px] uppercase tracking-[0.1em] text-amber transition hover:text-paper"
+          className="inline-flex text-[13px] uppercase tracking-[0.1em] text-signal transition hover:text-ink"
         >
           Source docs
         </a>

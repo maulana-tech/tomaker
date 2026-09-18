@@ -20,9 +20,9 @@ import { TourOverlay } from "@/components/TourOverlay";
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <AppWalletProvider>
-      <div className="relative flex min-h-screen flex-col bg-ink text-paper">
+      <div className="relative flex min-h-screen flex-col bg-paper text-ink">
         <AppBackground />
-        <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
+        <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/90 backdrop-blur-xl">
           <nav className="mx-auto grid max-w-[1280px] grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-3 px-4 py-3 sm:flex sm:gap-4 sm:px-6 sm:py-4">
             <Link href="/" className="shrink-0" aria-label="Back to home">
               <Wordmark />
@@ -41,19 +41,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 py-12 sm:py-16">
             <PageTransition>{children}</PageTransition>
           </main>
-          <footer className="border-t border-white/10">
+          <footer className="border-t border-ink/10">
             <div className="mx-auto flex max-w-[1280px] flex-col items-start justify-between gap-3 px-6 py-8 sm:flex-row sm:items-center">
               <p className="label-data">© 2026 toMaker Protocol</p>
               <div className="flex flex-wrap items-center gap-6">
                 <a
                   href="/docs"
-                  className="label-data transition hover:text-paper"
+                  className="label-data transition hover:text-ink"
                 >
                   Docs
                 </a>
                 <a
                   href="https://github.com/guha-rahul/tomaker"
-                  className="label-data transition hover:text-paper"
+                  className="label-data transition hover:text-ink"
                 >
                   GitHub
                 </a>

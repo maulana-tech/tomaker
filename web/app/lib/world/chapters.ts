@@ -57,7 +57,7 @@ export const WORLD_CHAPTERS: readonly WorldChapter[] = [
     landmark: "outer graduation ring",
     change: "Establishing. Outside the instrument, long lens, the whole silhouette in frame.",
     camera: { p: [-6.0, 10.0, -28.0], t: [ 0.0, 1.0, 0.0], fov: 34 },
-    state: { key: 1.5, fog: 0.016, spin: 0.6, bloom: 0.35, follow: 0.45, near: 0.0 },
+    state: { key: 1.5, fog: 0.0088, spin: 0.6, bloom: 0.35, follow: 0.45, near: 0.0 },
   },
   {
     id: "split",
@@ -65,7 +65,7 @@ export const WORLD_CHAPTERS: readonly WorldChapter[] = [
     landmark: "central gimbal",
     change: "The camera crosses inside the outer ring; the gimbal fills the right of frame.",
     camera: { p: [ 5.5, 3.4, -15.0], t: [ 0.0, 1.0, -2.0], fov: 44 },
-    state: { key: 0.95, fog: 0.026, spin: 1.0, bloom: 0.6, follow: 0.5, near: 0.35 },
+    state: { key: 0.95, fog: 0.0143, spin: 1.0, bloom: 0.6, follow: 0.5, near: 0.35 },
   },
   {
     id: "mechanism",
@@ -73,7 +73,7 @@ export const WORLD_CHAPTERS: readonly WorldChapter[] = [
     landmark: "armature spine",
     change: "Close travel along the armature. Structure passes the near plane on both sides.",
     camera: { p: [ 9.5, 3.0, -1.0], t: [-2.0, 1.6, -9.0], fov: 48 },
-    state: { key: 1.0, fog: 0.032, spin: 1.25, bloom: 0.7, follow: 0.45, near: 1.0 },
+    state: { key: 1.0, fog: 0.0176, spin: 1.25, bloom: 0.7, follow: 0.45, near: 1.0 },
   },
   {
     id: "market",
@@ -81,15 +81,15 @@ export const WORLD_CHAPTERS: readonly WorldChapter[] = [
     landmark: "counter-rotating ring pair",
     change: "Pull back and orbit to the far side; the two rings are seen opposing each other.",
     camera: { p: [-4.0, 6.5, -14.0], t: [ 2.0, 1.2, -3.0], fov: 42 },
-    state: { key: 0.85, fog: 0.027, spin: 1.4, bloom: 0.55, follow: 0.6, near: 0.5 },
+    state: { key: 0.85, fog: 0.0149, spin: 1.4, bloom: 0.55, follow: 0.6, near: 0.5 },
   },
   {
     id: "maturity",
     beat: "The yield is spent and the principal seats at par.",
     landmark: "the par detent",
-    change: "The rig settles square to the detent. The rings slow, and the amber goes out.",
+    change: "The rig settles square to the detent. The rings slow, and the signal goes out.",
     camera: { p: [ 0.0, 2.0, 15.0], t: [ 0.0, 1.0, -2.0], fov: 44 },
-    state: { key: 0.6, fog: 0.019, spin: 0.25, bloom: 0.25, follow: 0.5, near: 0.15 },
+    state: { key: 0.6, fog: 0.0105, spin: 0.25, bloom: 0.25, follow: 0.5, near: 0.15 },
   },
 ] as const;
 

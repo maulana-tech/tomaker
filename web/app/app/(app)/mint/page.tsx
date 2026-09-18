@@ -160,28 +160,28 @@ export default function MintPage() {
         <MaturityBadge maturity={market?.maturity ?? null} />
         <section className="panel-subtle max-w-3xl space-y-3 p-5" aria-labelledby="mint-getting-started">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 id="mint-getting-started" className="label-data text-amber">
+            <h2 id="mint-getting-started" className="label-data text-signal">
               Getting started
             </h2>
-            <span className="rounded-pill border border-white/15 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke">
+            <span className="rounded-pill border border-ink/15 px-2.5 py-1 text-[13px] uppercase tracking-[0.1em] text-smoke">
               {networkName}
             </span>
           </div>
           <ol className="grid gap-2 text-xs leading-relaxed text-smoke sm:grid-cols-2">
             <li>
-              <span className="text-paper">Connect:</span> an EVM wallet on Hedera{" "}
+              <span className="text-ink">Connect:</span> an EVM wallet on BOT Chain{" "}
               {networkLabel(cfg.network, "lower")}. All transactions are signed by you.
             </li>
             <li>
-              <span className="text-paper">Approve:</span> the first mint asks you to approve the
+              <span className="text-ink">Approve:</span> the first mint asks you to approve the
               underlying for the SY vault. The approval is reused on later mints.
             </li>
             <li>
-              <span className="text-paper">Mint:</span> deposit to receive SY, and optionally split
+              <span className="text-ink">Mint:</span> deposit to receive SY, and optionally split
               it into equal amounts of PT and YT.
             </li>
             <li>
-              <span className="text-paper">Track:</span> see your SY, PT, and YT balances on the
+              <span className="text-ink">Track:</span> see your SY, PT, and YT balances on the
               Portfolio page after each transaction confirms.
             </li>
           </ol>
@@ -232,7 +232,7 @@ export default function MintPage() {
             </p>
 
             {address && underlyingBalance === 0n ? (
-              <div className="rounded-card border border-amber/30 bg-amber/5 p-3">
+              <div className="rounded-card border border-signal/30 bg-signal/5 p-3">
                 <p className="text-xs leading-relaxed text-smoke">
                   This wallet has no {cfg.yieldSource.kind === "bond" ? "cash" : "underlying"} yet.
                   {cfg.faucetEnabled
@@ -245,9 +245,9 @@ export default function MintPage() {
               </div>
             ) : null}
 
-            <div className="border-t border-white/10 pt-5">
+            <div className="border-t border-ink/10 pt-5">
               <span className="label-data">Mint mode</span>
-              <div className="mt-3 grid grid-cols-2 gap-px border border-white/10">
+              <div className="mt-3 grid grid-cols-2 gap-px border border-ink/10">
                 {MINT_MODES.map((option) => (
                   <button
                     key={option.id}
@@ -256,8 +256,8 @@ export default function MintPage() {
                     aria-pressed={mode === option.id}
                     className={`px-3 py-2.5 text-[13px] uppercase tracking-[0.08em] transition ${
                       mode === option.id
-                        ? "bg-white/[0.04] text-amber"
-                        : "text-smoke hover:text-paper"
+                        ? "bg-ink/[0.04] text-signal"
+                        : "text-smoke hover:text-ink"
                     }`}
                   >
                     {option.label}
@@ -277,30 +277,30 @@ export default function MintPage() {
               <div className="label-data">Receipt preview</div>
               <div className="flex justify-between">
                 <span className="text-ash">You will receive (approx.)</span>
-                <span className="tabular-nums text-paper">
+                <span className="tabular-nums text-ink">
                   ~{formatTokenAmount(preview.syOut, cfg.decimals)} SY
                 </span>
               </div>
               {split ? (
                 <>
-                  <div className="flex justify-between border-t border-white/10 pt-3">
+                  <div className="flex justify-between border-t border-ink/10 pt-3">
                     <span className="text-ash">↳ Split into PT</span>
-                    <span className="tabular-nums text-paper">
+                    <span className="tabular-nums text-ink">
                       {formatTokenAmount(preview.splitOut, cfg.decimals)} PT
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-ash">↳ Split into YT</span>
-                    <span className="tabular-nums text-paper">
+                    <span className="tabular-nums text-ink">
                       {formatTokenAmount(preview.splitOut, cfg.decimals)} YT
                     </span>
                   </div>
                 </>
               ) : null}
               {market !== null ? (
-                <div className="flex justify-between border-t border-white/10 pt-3">
+                <div className="flex justify-between border-t border-ink/10 pt-3">
                   <span className="text-ash">Exchange rate</span>
-                  <span className="tabular-nums text-paper">
+                  <span className="tabular-nums text-ink">
                     1 SY = {formatTokenAmount(market.exchangeRate, 18, 4)} underlying
                   </span>
                 </div>
@@ -350,8 +350,8 @@ export default function MintPage() {
             <p className="label-data">Maturity date</p>
             {market !== null ? (
               <>
-                <p className="text-xl tabular-nums text-paper">{formatMaturityDate(market!.maturity)}</p>
-                <p className="text-sm tabular-nums text-amber">{maturityStatus(market!.maturity)}</p>
+                <p className="text-xl tabular-nums text-ink">{formatMaturityDate(market!.maturity)}</p>
+                <p className="text-sm tabular-nums text-signal">{maturityStatus(market!.maturity)}</p>
               </>
             ) : (
               <p className="text-sm text-ash">Not deployed yet</p>
@@ -380,8 +380,8 @@ export default function MintPage() {
               ].map((d) => (
                 <div key={d.name}>
                   <dt className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-semibold text-paper">{d.name}</span>
-                    <span className="rounded-pill border border-white/15 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-smoke">
+                    <span className="text-sm font-semibold text-ink">{d.name}</span>
+                    <span className="rounded-pill border border-ink/15 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-smoke">
                       {d.tag}
                     </span>
                   </dt>

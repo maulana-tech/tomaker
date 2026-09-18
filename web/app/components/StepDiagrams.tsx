@@ -8,7 +8,7 @@ import { prefersReducedMotion, useInView } from "@/lib/useInView";
 // Monochrome diagrams for the landing "how it works" steps, animated when they
 // scroll into view: step 01 draws its ring and pulses a deposit ripple, step 02
 // splits (the circles pop in around a marching flow line), step 03 sends a dot
-// travelling the PT-to-YT timeline. Amber stays reserved for live signals, so
+// travelling the PT-to-YT timeline. Signal stays reserved for live signals, so
 // all motion here is paper/ash only. The server renders the finished static
 // diagram; reduced-motion and no-JS visitors keep exactly that.
 

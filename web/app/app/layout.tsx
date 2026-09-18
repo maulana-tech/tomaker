@@ -7,7 +7,7 @@ import { WalletProvider } from "@/lib/wallet";
 
 const TITLE = "toMaker, split, fix, and trade tokenized-bond yield";
 const DESCRIPTION =
-  "Separate principal and yield exposure for an ATS-issued bond on Hedera testnet. Trade PT and YT through an AMM and PT/SY order book.";
+  "Separate principal and yield exposure for a tokenized bond on BOT Chain. Trade PT and YT through an AMM and PT/SY order book.";
 
 // metadataBase resolves the icon and opengraph-image file conventions in
 // app/ to absolute URLs, which is what link unfurlers require.

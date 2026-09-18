@@ -41,7 +41,7 @@ export function SubmitButton({
       {working ? (
         <span
           aria-hidden
-          className="h-3.5 w-3.5 animate-spin rounded-pill border border-ink/40 border-t-ink"
+          className="h-3.5 w-3.5 animate-spin rounded-pill border border-paper/40 border-t-ink"
         />
       ) : null}
       {label}

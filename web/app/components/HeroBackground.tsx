@@ -21,7 +21,7 @@ export function HeroBackground() {
       <Scrim side="left" />
       {/* A little extra weight at the foot so the scroll cue and the nav's
           underside both have something to sit on. */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-ink/55 via-transparent to-ink/75" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-paper/55 via-transparent to-paper/75" />
       <Grain className="absolute inset-0 -z-10" />
     </div>
   );

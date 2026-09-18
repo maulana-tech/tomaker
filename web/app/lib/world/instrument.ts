@@ -72,15 +72,15 @@ export function buildInstrument(low: boolean): Instrument {
   textures.push(brushed, graphiteMap, gradMap);
 
   const steel = new THREE.MeshStandardMaterial({
-    color: 0x4a515b,
-    roughness: 0.33,
-    metalness: 0.9,
+    color: 0x3a4048,
+    roughness: 0.42,
+    metalness: 0.45,
     roughnessMap: brushed,
   });
   const graphite = new THREE.MeshStandardMaterial({
-    color: 0x24262a,
+    color: 0x1d1f23,
     roughness: 0.72,
-    metalness: 0.35,
+    metalness: 0.22,
     roughnessMap: graphiteMap,
   });
   // The engraving is light caught in a cut, not a lamp: unlit, additive, and
@@ -94,7 +94,7 @@ export function buildInstrument(low: boolean): Instrument {
     blending: THREE.AdditiveBlending,
   });
   const engravedPlain = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+    color: 0x0b0b0b,
     transparent: true,
     opacity: 0.55,
     side: THREE.DoubleSide,

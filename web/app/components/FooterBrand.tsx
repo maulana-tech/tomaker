@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 import { clamp } from "@/lib/conductor";
 import { useConductor } from "@/lib/useConductor";
 
-// Giant "tomaker" signature that sweeps right-to-left as the revealed footer
+// Giant "toMaker" signature that sweeps right-to-left as the revealed footer
 // scrolls into view. The footer is fixed (RevealFooter), so its own rect does
 // not move with scroll; instead the sweep is driven by how far the document has
 // scrolled into its final footer-tall stretch. Driven by the page conductor,
@@ -53,9 +53,9 @@ export function FooterBrand() {
         ref={ref}
         className="flex w-max items-center gap-[2vw] whitespace-nowrap will-change-transform"
       >
-        <Logo className="h-[12vw] w-[12vw] shrink-0 text-paper" />
-        <span className="text-[16vw] font-light leading-none tracking-tighter text-paper">
-          tomaker
+        <Logo className="h-[12vw] w-[12vw] shrink-0 text-ink" />
+        <span className="text-[16vw] font-light leading-none tracking-tighter text-ink">
+          toMaker
         </span>
       </div>
     </div>

@@ -456,7 +456,7 @@ export default function PrivyPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <p className="label-data">Privy · embedded Hedera wallet</p>
+        <p className="label-data">Privy · embedded BOT Chain wallet</p>
         <h1 className="text-5xl font-light tracking-tight sm:text-7xl">
           Email to investment
         </h1>
@@ -489,15 +489,15 @@ export default function PrivyPage() {
           Start here: your five-step demo guide
         </summary>
         <p className="mt-4 text-sm text-smoke">
-          This demonstration uses Hedera testnet and free demo assets. sdUSD is
+          This demonstration uses BOT Chain testnet and free demo assets. sdUSD is
           a demonstration token, separate from USDC.
         </p>
         <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-smoke">
-          <li><strong className="text-paper">Sign in with email.</strong> Complete the code sent to your inbox, then click All Done on the wallet setup screen. Your embedded wallet follows you across the app.</li>
-          <li><strong className="text-paper">Fund your demo wallet.</strong> Click Fund demo wallet below after signing in. Wait for sdUSD to appear; funding also supplies BOT for transaction fees and test-only eligibility.</li>
-          <li><strong className="text-paper">Choose an amount and exposure.</strong> Start with 100 sdUSD. Fixed principal keeps PT, your principal exposure. Variable yield keeps YT, your exposure to available yield until maturity.</li>
-          <li><strong className="text-paper">Invest and confirm.</strong> Click Invest once; toMaker runs the deposit, split and sale steps as a sequence without prompting you for each one. Each step confirms before the next, so a failure can leave a partial position. Keep this page open until it completes.</li>
-          <li><strong className="text-paper">Check your result.</strong> Compare the before and after balances, visit Portfolio, and download the investment receipts. Open the HashScan links to check confirmations.</li>
+          <li><strong className="text-ink">Sign in with email.</strong> Complete the code sent to your inbox, then click All Done on the wallet setup screen. Your embedded wallet follows you across the app.</li>
+          <li><strong className="text-ink">Fund your demo wallet.</strong> Click Fund demo wallet below after signing in. Wait for sdUSD to appear; funding also supplies BOT for transaction fees and test-only eligibility.</li>
+          <li><strong className="text-ink">Choose an amount and exposure.</strong> Start with 100 sdUSD. Fixed principal keeps PT, your principal exposure. Variable yield keeps YT, your exposure to available yield until maturity.</li>
+          <li><strong className="text-ink">Invest and confirm.</strong> Click Invest once; toMaker runs the deposit, split and sale steps as a sequence without prompting you for each one. Each step confirms before the next, so a failure can leave a partial position. Keep this page open until it completes.</li>
+          <li><strong className="text-ink">Check your result.</strong> Compare the before and after balances, visit Portfolio, and download the investment receipts. Open the HashScan links to check confirmations.</li>
         </ol>
         <p className="mt-4 text-xs text-ash">
           If a step fails, the steps already confirmed remain onchain. Check
@@ -509,7 +509,7 @@ export default function PrivyPage() {
       {address && (
         <div className="grid gap-8 lg:grid-cols-12">
           <section className="card space-y-6 p-6 lg:col-span-7">
-            <div className="grid grid-cols-2 gap-px border border-white/10 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-px border border-ink/10 md:grid-cols-4">
               {(["cash", "sy", "pt", "yt"] as const).map((key) => (
                 <div className="p-4" key={key}>
                   <p className="label-data">
@@ -583,7 +583,7 @@ export default function PrivyPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <button
-                className="rounded-pill border border-white/30 px-4 py-2 disabled:opacity-50"
+                className="rounded-pill border border-ink/30 px-4 py-2 disabled:opacity-50"
                 disabled={!!progress}
                 onClick={() => void fund()}
               >
@@ -598,7 +598,7 @@ export default function PrivyPage() {
               </button>
             </div>
             <p className="text-xs text-ash">
-              Hedera testnet only. Funding grants issuer-controlled demo
+              BOT Chain testnet only. Funding grants issuer-controlled demo
               eligibility, sdUSD and BOT. Privy authentication is not KYC.
               Start the investment once and the sequence runs without a
               per-step prompt; each step confirms before the next, so a failure
@@ -606,13 +606,13 @@ export default function PrivyPage() {
               amount used here.
             </p>
             {delegated && addDelegatedSigner && (
-              <details className="border-t border-white/10 pt-5">
-                <summary className="cursor-pointer text-sm font-medium text-paper">
+              <details className="border-t border-ink/10 pt-5">
+                <summary className="cursor-pointer text-sm font-medium text-ink">
                   Optional: policy-authorized PT exit
                 </summary>
                 <p className="mt-3 text-sm text-smoke">
                   Authorize toMaker once, then execute a PT-to-SY exit without
-                  another wallet popup. Privy enforces the permission: Hedera
+                  another wallet popup. Privy enforces the permission: BOT Chain
                   testnet, this AMM, <code>swapPtForSy</code>, zero BOT value,
                   and at most {delegated.maxPt} PT. Every other action is denied.
                 </p>
@@ -631,7 +631,7 @@ export default function PrivyPage() {
                 </label>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <button
-                    className="rounded-pill border border-white/30 px-4 py-2 disabled:opacity-50"
+                    className="rounded-pill border border-ink/30 px-4 py-2 disabled:opacity-50"
                     disabled={!!progress || !balances}
                     onClick={() => void authorizeDelegatedExit()}
                   >
@@ -646,7 +646,7 @@ export default function PrivyPage() {
                   </button>
                   {removeDelegatedSigners && (
                     <button
-                      className="rounded-pill border border-white/30 px-4 py-2 disabled:opacity-50"
+                      className="rounded-pill border border-ink/30 px-4 py-2 disabled:opacity-50"
                       disabled={!!progress}
                       onClick={() => void revokeDelegatedExit()}
                     >
@@ -660,7 +660,7 @@ export default function PrivyPage() {
               </details>
             )}
             {completed && (
-              <p role="status" className="text-sm text-amber">
+              <p role="status" className="text-sm text-signal">
                 Investment complete. Your{" "}
                 {investedMode === "fixed" ? "PT principal" : "YT yield"}{" "}
                 position is visible above and in{" "}
@@ -687,7 +687,7 @@ export default function PrivyPage() {
               <>
                 <ul className="space-y-3">
                   {receipts.map((r) => (
-                    <li key={r.hash} className="border-t border-white/10 pt-3">
+                    <li key={r.hash} className="border-t border-ink/10 pt-3">
                       <p className="text-sm">
                         {r.label} · {r.status} ·{" "}
                         {r.signer === "faucet"
@@ -697,7 +697,7 @@ export default function PrivyPage() {
                             : "your embedded wallet"}
                       </p>
                       <a
-                        className="break-all font-mono text-xs text-amber underline"
+                        className="break-all font-mono text-xs text-signal underline"
                         href={explorerTxUrl(r.hash, cfg.network)}
                         target="_blank"
                         rel="noreferrer"
@@ -708,7 +708,7 @@ export default function PrivyPage() {
                   ))}
                 </ul>
                 <button
-                  className="rounded-pill border border-white/30 px-4 py-2"
+                  className="rounded-pill border border-ink/30 px-4 py-2"
                   onClick={downloadEvidence}
                 >
                   Download investment receipts

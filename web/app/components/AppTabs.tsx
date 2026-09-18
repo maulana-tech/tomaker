@@ -21,7 +21,7 @@ const TABS = [
 ];
 
 /** In-app navigation tabs. The active tab is the one live signal here, so it
- *  carries the single accent plus the sanctioned signal bloom. The amber
+ *  carries the single accent plus the sanctioned signal bloom. The signal
  *  underline is a single measured element that slides between tabs on route
  *  change; before measurement (server render, no-JS) the active tab keeps a
  *  static underline so nothing is missing. */
@@ -54,12 +54,12 @@ export function AppTabs() {
               data-tour={tab.tour}
               className={
                 active
-                  ? `glow-signal relative pb-1 text-[13px] uppercase tracking-[0.12em] text-amber ${
+                  ? `glow-signal relative pb-1 text-[13px] uppercase tracking-[0.12em] text-signal ${
                       rect
                         ? ""
-                        : "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-amber after:shadow-[0_0_8px_rgba(255,172,46,0.55)]"
+                        : "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-signal after:shadow-[0_0_8px_rgba(255,172,46,0.55)]"
                     }`
-                  : "pb-1 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:text-paper"
+                  : "pb-1 text-[13px] uppercase tracking-[0.12em] text-smoke transition hover:text-ink"
               }
             >
               {tab.label}
@@ -70,7 +70,7 @@ export function AppTabs() {
       {rect ? (
         <span
           aria-hidden
-          className="absolute h-px bg-amber shadow-[0_0_8px_rgba(255,172,46,0.55)] transition-all duration-300 ease-out motion-reduce:transition-none"
+          className="absolute h-px bg-signal shadow-[0_0_8px_rgba(255,172,46,0.55)] transition-all duration-300 ease-out motion-reduce:transition-none"
           style={{
             left: rect.left,
             top: rect.top + rect.height - 1,

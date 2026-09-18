@@ -28,7 +28,7 @@ export function WordReveal({
   const hidden = armed && !inView;
   const words = children.split(" ");
   const tone = (index: number) =>
-    brightWords === undefined ? "" : brightWords.includes(index) ? "text-paper" : "text-smoke";
+    brightWords === undefined ? "" : brightWords.includes(index) ? "text-ink" : "text-smoke";
 
   return (
     <span ref={ref}>

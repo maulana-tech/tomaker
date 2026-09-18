@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-// Faded "tomaker" starfield behind the footer: a deep-space base, two tiled
+// Faded "toMaker" starfield behind the footer: a paper base, two tiled
 // star layers for depth, a faint concentric star-chart grid, and a soft nebula
 // glow. Everything is dimmed so the giant wordmark stays dominant. Recreated in
 // CSS/SVG rather than shipping the reference render.
@@ -14,29 +14,29 @@ const layerDrift = (px: number) => ({
 });
 const STARS_NEAR = [
   "radial-gradient(1.4px 1.4px at 30px 40px, #fff, transparent)",
-  "radial-gradient(1px 1px at 90px 130px, rgba(255,255,255,0.7), transparent)",
-  "radial-gradient(1px 1px at 160px 70px, rgba(255,255,255,0.8), transparent)",
-  "radial-gradient(1px 1px at 200px 190px, rgba(255,255,255,0.6), transparent)",
+  "radial-gradient(1px 1px at 90px 130px, rgba(0,0,0,0.7), transparent)",
+  "radial-gradient(1px 1px at 160px 70px, rgba(0,0,0,0.8), transparent)",
+  "radial-gradient(1px 1px at 200px 190px, rgba(0,0,0,0.6), transparent)",
   "radial-gradient(1.6px 1.6px at 130px 210px, #fff, transparent)",
-  "radial-gradient(1px 1px at 60px 100px, rgba(255,255,255,0.5), transparent)",
-  "radial-gradient(1px 1px at 225px 45px, rgba(255,255,255,0.7), transparent)",
+  "radial-gradient(1px 1px at 60px 100px, rgba(0,0,0,0.5), transparent)",
+  "radial-gradient(1px 1px at 225px 45px, rgba(0,0,0,0.7), transparent)",
 ].join(",");
 
 const STARS_FAR = [
   "radial-gradient(1.8px 1.8px at 60px 60px, #fff, transparent)",
-  "radial-gradient(2px 2px at 330px 220px, rgba(255,255,255,0.9), transparent)",
-  "radial-gradient(1.6px 1.6px at 210px 360px, rgba(255,255,255,0.8), transparent)",
-  "radial-gradient(1.2px 1.2px at 400px 110px, rgba(255,255,255,0.6), transparent)",
+  "radial-gradient(2px 2px at 330px 220px, rgba(0,0,0,0.9), transparent)",
+  "radial-gradient(1.6px 1.6px at 210px 360px, rgba(0,0,0,0.8), transparent)",
+  "radial-gradient(1.2px 1.2px at 400px 110px, rgba(0,0,0,0.6), transparent)",
 ].join(",");
 
 export function StarfieldBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* Deep space base. */}
-      <div className="absolute inset-0 bg-[#080a10]" />
+      {/* Paper base. */}
+      <div className="absolute inset-0 bg-[#fbfcfd]" />
 
       {/* Soft nebula. */}
-      <div className="absolute inset-0 bg-[radial-gradient(70%_90%_at_35%_45%,rgba(120,140,180,0.12),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(70%_90%_at_35%_45%,rgba(120,140,180,0.10),transparent_60%)]" />
 
       {/* Two tiled star layers. */}
       <div
@@ -63,7 +63,7 @@ export function StarfieldBackground() {
           since an inline transform would override the utility class. */}
       <svg
         style={{ transform: "translate3d(0, calc(-50% + (1 - var(--reveal, 1)) * 14px), 0)" }}
-        className="absolute left-[10%] top-1/2 h-[160%] w-auto text-white/[0.06]"
+        className="absolute left-[10%] top-1/2 h-[160%] w-auto text-ink/[0.06]"
         viewBox="0 0 600 600"
         fill="none"
         stroke="currentColor"
@@ -84,7 +84,7 @@ export function StarfieldBackground() {
       </svg>
 
       {/* Dim the whole field so the wordmark reads on top. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/40 to-ink/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-paper/70 via-paper/40 to-paper/30" />
     </div>
   );
 }

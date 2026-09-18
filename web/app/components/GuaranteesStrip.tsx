@@ -54,14 +54,14 @@ function GuaranteeRow({
   return (
     <div
       ref={ref}
-      className="relative grid gap-4 border-b border-white/10 py-8 sm:grid-cols-[8rem_1fr] sm:items-center sm:py-10"
+      className="relative grid gap-4 border-b border-ink/10 py-8 sm:grid-cols-[8rem_1fr] sm:items-center sm:py-10"
     >
       <span
         aria-hidden
         className="absolute -left-[2.15rem] top-10 sm:-left-[3.7rem] sm:top-1/2 sm:-translate-y-1/2"
       >
         <span
-          className="block h-2 w-2 bg-paper transition-all duration-500"
+          className="block h-2 w-2 bg-ink transition-all duration-500"
           style={
             stripHidden
               ? { opacity: 0, transform: "scale(0)" }
@@ -75,7 +75,7 @@ function GuaranteeRow({
       </span>
       <span
         className={`text-6xl font-light leading-none transition-colors duration-700 sm:text-7xl ${
-          lit ? "text-white/45" : "text-white/15"
+          lit ? "text-ink/45" : "text-ink/15"
         }`}
       >
         {guarantee.index}
@@ -83,7 +83,7 @@ function GuaranteeRow({
       <div>
         <h3
           className={`text-2xl font-light tracking-tight transition-colors duration-700 sm:text-3xl ${
-            lit ? "text-paper" : "text-smoke"
+            lit ? "text-ink" : "text-smoke"
           }`}
         >
           {guarantee.title}
@@ -115,7 +115,7 @@ export function GuaranteesStrip() {
         <div ref={ref} className="relative mt-14 pl-8 sm:pl-14">
           <span
             aria-hidden
-            className="absolute inset-y-0 left-0 w-px origin-top bg-white/20 transition-transform duration-[1500ms] ease-out"
+            className="absolute inset-y-0 left-0 w-px origin-top bg-ink/20 transition-transform duration-[1500ms] ease-out"
             style={{ transform: hidden ? "scaleY(0)" : "scaleY(1)" }}
           />
 

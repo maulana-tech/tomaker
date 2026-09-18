@@ -64,7 +64,7 @@ export default function AdminPage() {
   if (!cfg.contracts.orderbook?.trim()) {
     return (
       <section className="panel mx-auto max-w-2xl p-6">
-        <h1 className="text-2xl font-semibold text-paper">Protocol administration</h1>
+        <h1 className="text-2xl font-semibold text-ink">Protocol administration</h1>
         <p className="mt-4 text-[14px] leading-7 text-smoke">
           This legacy deployment does not advertise mutable-fee contracts. No admin transactions
           are offered, preventing the UI from calling setters that are absent from deployed Wasm.
@@ -181,7 +181,7 @@ function FeeCard({
   return (
     <section className="panel p-5">
       <h2 className="label-data">{title}</h2>
-      <p className="mt-3 font-mono text-xl text-paper">{bpsToPercent(current)}</p>
+      <p className="mt-3 font-mono text-xl text-ink">{bpsToPercent(current)}</p>
       <p className="mt-2 text-[11px] text-ash">Admin {shortAddress(admin)}</p>
       <label className="mt-5 block text-[12px] text-smoke">
         New fee · basis points

@@ -26,8 +26,8 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                     aria-current={active ? "page" : undefined}
                     className={`block border-l py-1.5 pl-4 text-[14px] transition ${
                       active
-                        ? "border-paper text-paper"
-                        : "border-white/10 text-ash hover:border-white/40 hover:text-paper"
+                        ? "border-ink text-ink"
+                        : "border-ink/10 text-ash hover:border-ink/40 hover:text-ink"
                     }`}
                   >
                     {item.label}
@@ -49,11 +49,11 @@ export function DocsSidebar() {
 
   return (
     <>
-      <aside className="sticky top-[81px] hidden max-h-[calc(100vh-81px)] w-60 shrink-0 overflow-y-auto border-r border-white/10 py-10 pr-8 lg:block">
+      <aside className="sticky top-[81px] hidden max-h-[calc(100vh-81px)] w-60 shrink-0 overflow-y-auto border-r border-ink/10 py-10 pr-8 lg:block">
         <NavList />
       </aside>
 
-      <div className="border-b border-white/10 lg:hidden">
+      <div className="border-b border-ink/10 lg:hidden">
         <button
           type="button"
           aria-expanded={open}

@@ -199,7 +199,7 @@ export default function TradePage() {
           <div className="flex items-center justify-between">
             <p className="label-data">Market status</p>
             <span className="flex items-center gap-2 text-[13px] text-smoke">
-              <span className="glow-signal-dot h-1.5 w-1.5 animate-pulse rounded-pill bg-amber" />
+              <span className="glow-signal-dot h-1.5 w-1.5 animate-pulse rounded-pill bg-signal" />
               Live feed
             </span>
           </div>
@@ -242,12 +242,12 @@ export default function TradePage() {
                 fill so server render and no-JS look identical. */}
             <div
               ref={directionsRef}
-              className="relative grid grid-cols-2 gap-px border border-white/10 sm:grid-cols-4"
+              className="relative grid grid-cols-2 gap-px border border-ink/10 sm:grid-cols-4"
             >
               {directionRect ? (
                 <span
                   aria-hidden
-                  className="absolute bg-white/[0.04] transition-all duration-300 ease-out motion-reduce:transition-none"
+                  className="absolute bg-ink/[0.04] transition-all duration-300 ease-out motion-reduce:transition-none"
                   style={{
                     left: directionRect.left,
                     top: directionRect.top,
@@ -264,8 +264,8 @@ export default function TradePage() {
                   aria-pressed={d.id === directionId}
                   className={`relative px-3 py-2.5 text-[13px] uppercase tracking-[0.08em] transition ${
                     d.id === directionId
-                      ? `text-amber ${directionRect ? "" : "bg-white/[0.04]"}`
-                      : "text-smoke hover:text-paper"
+                      ? `text-signal ${directionRect ? "" : "bg-ink/[0.04]"}`
+                      : "text-smoke hover:text-ink"
                   }`}
                 >
                   {d.label}
@@ -293,16 +293,16 @@ export default function TradePage() {
             <div className="flex items-center justify-center">
               <span
                 aria-hidden
-                className={`flex h-8 w-8 items-center justify-center border border-white/15 text-smoke ${
+                className={`flex h-8 w-8 items-center justify-center border border-ink/15 text-smoke ${
                   quoting ? "animate-spin motion-reduce:animate-none" : ""
                 }`}
               >
                 ↓
               </span>
             </div>
-            <div className="border-t border-white/10 pt-5">
+            <div className="border-t border-ink/10 pt-5">
               <span className="label-data">Expected out ({direction.assetOut})</span>
-              <p className="mt-2 text-3xl font-light tabular-nums text-paper">
+              <p className="mt-2 text-3xl font-light tabular-nums text-ink">
                 <LiveValue
                   value={quote ? formatTokenAmount(quote.amountOut, cfg.decimals) : "0.0"}
                   loading={quoting}
@@ -311,10 +311,10 @@ export default function TradePage() {
             </div>
 
             {/* Slippage tolerance: 0.5% default, chips swap the local guard. The
-                selected chip is a permitted amber location (active signal). */}
-            <div className="flex items-center justify-between border-t border-white/10 pt-5">
+                selected chip is a permitted signal location (active signal). */}
+            <div className="flex items-center justify-between border-t border-ink/10 pt-5">
               <span className="label-data">Slippage tolerance</span>
-              <div className="flex gap-px border border-white/10">
+              <div className="flex gap-px border border-ink/10">
                 {SLIPPAGE_OPTIONS.map((opt) => (
                   <button
                     key={opt.label}
@@ -323,8 +323,8 @@ export default function TradePage() {
                     aria-pressed={slippageBps === opt.bps}
                     className={`px-3 py-1.5 text-[13px] tabular-nums transition ${
                       slippageBps === opt.bps
-                        ? "bg-amber/10 text-amber"
-                        : "text-smoke hover:text-paper"
+                        ? "bg-signal/10 text-signal"
+                        : "text-smoke hover:text-ink"
                     }`}
                   >
                     {opt.label}
@@ -338,19 +338,19 @@ export default function TradePage() {
             <dl className="panel-subtle space-y-2 p-5 text-sm">
               <div className="flex justify-between">
                 <dt className="text-ash">Expected out ({direction.assetOut})</dt>
-                <dd className="tabular-nums text-paper">
+                <dd className="tabular-nums text-ink">
                   <LiveValue value={formatTokenAmount(quote.amountOut, cfg.decimals)} />
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-ash">Price impact</dt>
-                <dd className="tabular-nums text-paper">
+                <dd className="tabular-nums text-ink">
                   <LiveValue value={bpsToPercent(quote.priceImpactBps)} />
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-ash">Implied APY (TWAP)</dt>
-                <dd className="tabular-nums text-amber">
+                <dd className="tabular-nums text-signal">
                   <LiveValue value={bpsToPercent(quote.impliedApyBps)} />
                 </dd>
               </div>
@@ -358,7 +358,7 @@ export default function TradePage() {
                 <dt className="text-ash">
                   Min received ({SLIPPAGE_OPTIONS.find((o) => o.bps === slippageBps)?.label} slippage)
                 </dt>
-                <dd className="tabular-nums text-paper">
+                <dd className="tabular-nums text-ink">
                   <LiveValue
                     value={formatTokenAmount(applySlippage(quote.amountOut, slippageBps), cfg.decimals)}
                   />
@@ -370,7 +370,7 @@ export default function TradePage() {
           ) : null}
 
           {priceImpactTooHigh ? (
-            <p className="panel-subtle px-4 py-3 text-[13px] text-amber">
+            <p className="panel-subtle px-4 py-3 text-[13px] text-signal">
               Price impact is too high for the current pool depth, so this swap would be rejected
               on-chain. Reduce the amount and try again.
             </p>
@@ -404,9 +404,9 @@ function Stat({
   loading?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between border-t border-white/10 py-3">
+    <div className="flex items-center justify-between border-t border-ink/10 py-3">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-sm tabular-nums ${signal ? "text-amber" : "text-paper"}`}>
+      <dd className={`text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="w-14" />
       </dd>
     </div>

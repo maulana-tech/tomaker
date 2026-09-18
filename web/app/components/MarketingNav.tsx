@@ -35,7 +35,7 @@ export function MarketingNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "border-b border-white/10 bg-ink/90 backdrop-blur-xl" : "border-b border-transparent"
+        scrolled ? "border-b border-ink/10 bg-paper/90 backdrop-blur-xl" : "border-b border-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-6 sm:px-16">
@@ -49,7 +49,7 @@ export function MarketingNav() {
               <RollingLink
                 key={l.label}
                 href={l.href}
-                className="label-data transition hover:text-paper"
+                className="label-data transition hover:text-ink"
               >
                 {l.label}
               </RollingLink>
@@ -57,7 +57,7 @@ export function MarketingNav() {
           </div>
           <Link
             href="/mint"
-            className="rounded-pill bg-paper px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-smoke"
+            className="rounded-pill bg-ink px-5 py-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-smoke"
           >
             Open App
           </Link>
@@ -70,13 +70,13 @@ export function MarketingNav() {
           >
             <span className="relative block h-3 w-5">
               <span
-                className={`absolute left-0 block h-px w-5 bg-paper transition ${open ? "top-1.5 rotate-45" : "top-0"}`}
+                className={`absolute left-0 block h-px w-5 bg-ink transition ${open ? "top-1.5 rotate-45" : "top-0"}`}
               />
               <span
-                className={`absolute left-0 top-1.5 block h-px w-5 bg-paper transition ${open ? "opacity-0" : "opacity-100"}`}
+                className={`absolute left-0 top-1.5 block h-px w-5 bg-ink transition ${open ? "opacity-0" : "opacity-100"}`}
               />
               <span
-                className={`absolute left-0 block h-px w-5 bg-paper transition ${open ? "top-1.5 -rotate-45" : "top-3"}`}
+                className={`absolute left-0 block h-px w-5 bg-ink transition ${open ? "top-1.5 -rotate-45" : "top-3"}`}
               />
             </span>
           </button>
@@ -84,14 +84,14 @@ export function MarketingNav() {
       </nav>
 
       {open ? (
-        <div className="border-t border-white/10 bg-ink/95 px-6 py-4 sm:hidden">
+        <div className="border-t border-ink/10 bg-paper/95 px-6 py-4 sm:hidden">
           <ul className="flex flex-col gap-4">
             {LINKS.map((l) => (
               <li key={l.label}>
                 <RollingLink
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="label-data transition hover:text-paper"
+                  className="label-data transition hover:text-ink"
                 >
                   {l.label}
                 </RollingLink>

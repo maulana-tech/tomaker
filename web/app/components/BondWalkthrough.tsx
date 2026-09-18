@@ -15,7 +15,7 @@ import { bpsToPercent, formatTokenAmount } from "@/lib/format";
 
 const REFRESH_MS = 15_000;
 const LINK_CLASS =
-  "inline-flex rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-paper transition hover:bg-paper hover:text-ink";
+  "inline-flex rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper";
 
 type StepState = "todo" | "done";
 
@@ -25,7 +25,7 @@ function StepChip({ state }: { state: StepState }) {
       className={`rounded-pill border px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] ${
         state === "done"
           ? "border-emerald-300/40 bg-emerald-300/10 text-emerald-300"
-          : "border-white/15 text-smoke"
+          : "border-ink/15 text-smoke"
       }`}
     >
       {state === "done" ? "Done" : "Waiting"}
@@ -91,8 +91,8 @@ export function BondWalkthrough() {
       title: "Connect a wallet",
       state: address ? "done" : "todo",
       detail: walletKind === "privy"
-        ? `Sign in with email or Google to use an embedded wallet on Hedera ${networkName}.`
-        : `Connect an EVM wallet on Hedera ${networkName}.`,
+        ? `Sign in with email or Google to use an embedded wallet on BOT Chain ${networkName}.`
+        : `Connect an EVM wallet on BOT Chain ${networkName}.`,
       live: address ? `Connected: ${address.slice(0, 6)}...${address.slice(-4)}` : "Not connected",
       action: address ? null : <WalletButton />,
     },
@@ -163,16 +163,16 @@ export function BondWalkthrough() {
             you complete it.
           </p>
         </div>
-        <span className="font-mono text-sm tabular-nums text-paper">
+        <span className="font-mono text-sm tabular-nums text-ink">
           {doneCount}/{steps.length}
         </span>
       </div>
 
       <ol className="mt-5 grid gap-4 lg:grid-cols-2">
         {steps.map((step, index) => (
-          <li key={step.title} className="border border-white/10 bg-carbon p-4">
+          <li key={step.title} className="border border-ink/10 bg-chalk p-4">
             <div className="flex items-start justify-between gap-3">
-              <p className="text-sm font-semibold text-paper">
+              <p className="text-sm font-semibold text-ink">
                 <span className="mr-2 font-mono text-ash">{index + 1}</span>
                 <span>{step.title}</span>
               </p>

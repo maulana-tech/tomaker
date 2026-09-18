@@ -72,11 +72,11 @@ export default function QuickstartPage() {
 
       <ol className="mt-8 flex flex-col">
         {STEPS.map((step, i) => (
-          <li key={step.title} className="flex gap-6 border-b border-white/10 py-6 last:border-b-0">
+          <li key={step.title} className="flex gap-6 border-b border-ink/10 py-6 last:border-b-0">
             <span className="label-data mt-1 shrink-0 tabular-nums">0{i + 1}</span>
             <div>
-              <h2 className="text-base font-semibold text-paper">{step.title}</h2>
-              <p className="mt-2 text-[15px] leading-7 text-smoke [&_strong]:font-semibold [&_strong]:text-paper">
+              <h2 className="text-base font-semibold text-ink">{step.title}</h2>
+              <p className="mt-2 text-[15px] leading-7 text-smoke [&_strong]:font-semibold [&_strong]:text-ink">
                 {step.body}
               </p>
             </div>

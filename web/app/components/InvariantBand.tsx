@@ -93,7 +93,7 @@ export function InvariantBand() {
     <section
       id="protocol"
       data-chapter="split"
-      className="relative overflow-hidden bg-transparent text-paper"
+      className="relative overflow-hidden bg-transparent text-ink"
     >
       {/* Held from the floor, not evenly: the equation is enormous white type
           and reads over anything, so the top of the frame is left open and the
@@ -127,19 +127,19 @@ export function InvariantBand() {
           The value identity; token quantities adjust with the SY exchange rate
         </p>
 
-        <div className="mt-16 grid border-t border-white/15 sm:mt-20 sm:grid-cols-3">
+        <div className="mt-16 grid border-t border-ink/15 sm:mt-20 sm:grid-cols-3">
           {LEGS.map((leg, i) => (
             <div
               key={leg.tag}
               onPointerEnter={() => setActive(leg.tag)}
               onPointerLeave={() => setActive(null)}
-              className={`border-t border-white/15 py-8 transition-opacity duration-300 sm:border-t-0 sm:px-10 ${
-                i < LEGS.length - 1 ? "sm:border-r sm:border-white/15" : ""
+              className={`border-t border-ink/15 py-8 transition-opacity duration-300 sm:border-t-0 sm:px-10 ${
+                i < LEGS.length - 1 ? "sm:border-r sm:border-ink/15" : ""
               } ${i === 0 ? "sm:pl-0" : ""} ${active && active !== leg.tag ? "opacity-40" : "opacity-100"}`}
             >
               <div className="flex items-center justify-between">
                 <LegGlyph tag={leg.tag} />
-                <span className="rounded-pill border border-white/25 px-3 py-1 font-mono text-[13px] tracking-[0.12em]">
+                <span className="rounded-pill border border-ink/25 px-3 py-1 font-mono text-[13px] tracking-[0.12em]">
                   {leg.tag}
                 </span>
               </div>

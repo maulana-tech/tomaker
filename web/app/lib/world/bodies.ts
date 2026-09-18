@@ -27,8 +27,8 @@ export type Bodies = {
   dispose(): void;
 };
 
-const PAPER = 0xffffff;
-const AMBER = 0xffac2e;
+const INK = 0x0b0b0b;
+const SIGNAL = 0x1cd8b0;
 
 /** How far above the ring plane the bodies ride, so they never z-fight the
  *  graduation band they are being read against. */
@@ -61,7 +61,7 @@ export function buildBodies(low: boolean): Bodies {
   // Unlit, because it is a source rather than a surface, but still fogged so it
   // recedes with everything else.
   const ptGeo = new THREE.SphereGeometry(BODY_RADIUS, segments, segments);
-  const ptMat = new THREE.MeshBasicMaterial({ color: PAPER });
+  const ptMat = new THREE.MeshBasicMaterial({ color: INK });
   geometries.push(ptGeo);
   materials.push(ptMat);
   const pt = new THREE.Mesh(ptGeo, ptMat);
@@ -76,7 +76,7 @@ export function buildBodies(low: boolean): Bodies {
   // ---- the yield -----------------------------------------------------------
 
   const ytGeo = new THREE.SphereGeometry(BODY_RADIUS, segments, segments);
-  const ytMat = new THREE.MeshBasicMaterial({ color: AMBER, transparent: true });
+  const ytMat = new THREE.MeshBasicMaterial({ color: SIGNAL, transparent: true });
   geometries.push(ytGeo);
   materials.push(ytMat);
   const yt = new THREE.Mesh(ytGeo, ytMat);
@@ -85,14 +85,14 @@ export function buildBodies(low: boolean): Bodies {
   const ytGlow = makeGlow("rgba(255,172,46,0.95)", "rgba(255,120,30,0.28)");
   group.add(ytGlow);
 
-  const ytLight = new THREE.PointLight(AMBER, 0, 8, 2);
+  const ytLight = new THREE.PointLight(SIGNAL, 0, 8, 2);
   group.add(ytLight);
 
-  // The socket the amber was in. It does not leave the machine at maturity —
+  // The socket the signal was in. It does not leave the machine at maturity —
   // the yield is spent, which is a different thing from never having been.
   const spentGeo = new THREE.TorusGeometry(BODY_RADIUS * 1.25, 0.035, 6, low ? 20 : 40);
   const spentMat = new THREE.MeshBasicMaterial({
-    color: PAPER,
+    color: INK,
     transparent: true,
     opacity: 0,
     depthWrite: false,
@@ -110,7 +110,7 @@ export function buildBodies(low: boolean): Bodies {
   const spreadGeo = new THREE.BufferGeometry();
   spreadGeo.setAttribute("position", new THREE.BufferAttribute(spreadPoints, 3));
   const spreadMat = new THREE.LineBasicMaterial({
-    color: PAPER,
+    color: INK,
     transparent: true,
     opacity: 0,
     depthWrite: false,

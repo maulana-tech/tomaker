@@ -8,7 +8,7 @@ import { useToMaker } from "@/lib/useToMaker";
 import { requestFaucetFunds } from "@/lib/faucet";
 
 const BUTTON_CLASS =
-  "rounded-pill border border-white/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-paper transition hover:bg-paper hover:text-ink disabled:cursor-not-allowed disabled:opacity-50";
+  "rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-50";
 
 type FaucetState = "idle" | "working" | "done" | "error";
 

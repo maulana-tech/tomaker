@@ -15,8 +15,8 @@ export function NetworkPill() {
   );
 
   return (
-    <span className="hidden items-center gap-2 rounded-pill border border-white/20 px-3 py-1.5 text-[13px] uppercase tracking-[0.12em] text-smoke sm:inline-flex">
-      <span className="glow-signal-dot h-1.5 w-1.5 animate-pulse rounded-pill bg-amber" />
+    <span className="hidden items-center gap-2 rounded-pill border border-ink/20 px-3 py-1.5 text-[13px] uppercase tracking-[0.12em] text-smoke sm:inline-flex">
+      <span className="glow-signal-dot h-1.5 w-1.5 animate-pulse rounded-pill bg-signal" />
       {label}
     </span>
   );

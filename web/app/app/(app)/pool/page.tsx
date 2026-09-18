@@ -182,14 +182,14 @@ export default function PoolPage() {
           <div className="card space-y-6 p-8">
             <div className="flex items-start justify-between gap-6">
               <div>
-                <h2 className="text-lg font-semibold text-paper">Add liquidity</h2>
+                <h2 className="text-lg font-semibold text-ink">Add liquidity</h2>
                 <p className="mt-1 text-xs text-ash">
                   Deposit proportional PT and SY. Any excess side remains in your wallet.
                 </p>
               </div>
               <Link
                 href="/mint"
-                className="rounded-pill border border-white/15 px-3 py-1.5 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-paper hover:text-paper"
+                className="rounded-pill border border-ink/15 px-3 py-1.5 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-ink hover:text-ink"
               >
                 Get PT + SY
               </Link>
@@ -213,7 +213,7 @@ export default function PoolPage() {
             />
 
             {matured ? (
-              <p className="panel-subtle px-4 py-3 text-[13px] text-amber">
+              <p className="panel-subtle px-4 py-3 text-[13px] text-signal">
                 Add liquidity is closed after maturity. Removing LP remains open.
               </p>
             ) : !poolSeeded ? (
@@ -256,7 +256,7 @@ export default function PoolPage() {
 
           <div className="card space-y-6 p-8">
             <div>
-              <h2 className="text-lg font-semibold text-paper">Remove liquidity</h2>
+              <h2 className="text-lg font-semibold text-ink">Remove liquidity</h2>
               <p className="mt-1 text-xs text-ash">
                 Burn LP shares and receive the current pro-rata PT and SY reserves.
               </p>
@@ -391,9 +391,9 @@ function SlippageControl({
   onChange: (bps: bigint) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-white/10 py-2">
+    <div className="flex items-center justify-between gap-4 border-t border-ink/10 py-2">
       <span className="text-ash">Slippage tolerance</span>
-      <div className="flex gap-px border border-white/10">
+      <div className="flex gap-px border border-ink/10">
         {SLIPPAGE_OPTIONS.map((opt) => (
           <button
             key={opt.label}
@@ -402,8 +402,8 @@ function SlippageControl({
             aria-pressed={slippageBps === opt.bps}
             className={`px-3 py-1.5 text-[13px] tabular-nums transition ${
               slippageBps === opt.bps
-                ? "bg-amber/10 text-amber"
-                : "text-smoke hover:text-paper"
+                ? "bg-signal/10 text-signal"
+                : "text-smoke hover:text-ink"
             }`}
           >
             {opt.label}
@@ -424,9 +424,9 @@ function PreviewRow({
   signal?: boolean;
 }) {
   return (
-    <div className="flex justify-between gap-4 border-t border-white/10 py-2 first:border-t-0 first:pt-0">
+    <div className="flex justify-between gap-4 border-t border-ink/10 py-2 first:border-t-0 first:pt-0">
       <dt className="text-ash">{label}</dt>
-      <dd className={`tabular-nums ${signal ? "text-amber" : "text-paper"}`}>{value}</dd>
+      <dd className={`tabular-nums ${signal ? "text-signal" : "text-ink"}`}>{value}</dd>
     </div>
   );
 }
@@ -443,9 +443,9 @@ function Stat({
   loading?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-white/10 py-3 first:border-t-0 first:pt-0">
+    <div className="flex items-center justify-between gap-4 border-t border-ink/10 py-3 first:border-t-0 first:pt-0">
       <dt className="label-data">{label}</dt>
-      <dd className={`text-sm tabular-nums ${signal ? "text-amber" : "text-paper"}`}>
+      <dd className={`text-sm tabular-nums ${signal ? "text-signal" : "text-ink"}`}>
         <LiveValue value={value} loading={loading} className="w-14" />
       </dd>
     </div>

@@ -77,7 +77,7 @@ export function PinnedSteps({ steps }: { steps: PinnedStep[] }) {
                     i > 0 ? "absolute inset-0" : ""
                   } ${active ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-4"}`}
                 >
-                  <span className="block text-9xl font-light leading-none text-white/15 lg:text-[13rem]">
+                  <span className="block text-9xl font-light leading-none text-ink/15 lg:text-[13rem]">
                     {step.n}
                   </span>
                   <h2 className="mt-6 text-5xl font-light tracking-tight lg:-mt-10 lg:text-7xl">
@@ -97,7 +97,7 @@ export function PinnedSteps({ steps }: { steps: PinnedStep[] }) {
                 <span
                   key={step.n}
                   className={`h-px transition-all duration-500 ${
-                    phase === i + 1 ? "w-14 bg-paper" : "w-6 bg-white/25"
+                    phase === i + 1 ? "w-14 bg-ink" : "w-6 bg-ink/25"
                   }`}
                 />
               ))}

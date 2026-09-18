@@ -34,7 +34,7 @@ const STEPS = [
         ready for the splitting mechanism.
       </>
     ),
-    band: "ink" as const,
+    band: "paper" as const,
   },
   {
     n: "02",
@@ -46,7 +46,7 @@ const STEPS = [
         the yield is isolated as <Term>YT</Term>.
       </>
     ),
-    band: "carbon" as const,
+    band: "chalk" as const,
   },
   {
     n: "03",
@@ -58,7 +58,7 @@ const STEPS = [
         AMM priced by an internal TWAP.
       </>
     ),
-    band: "ink" as const,
+    band: "paper" as const,
   },
 ];
 
@@ -130,7 +130,7 @@ export default function LandingPage() {
             >
               <Link
                 href="/mint"
-                className="rounded-pill bg-paper px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-smoke"
+                className="rounded-pill bg-ink px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-smoke"
               >
                 Open App
               </Link>
@@ -164,7 +164,7 @@ export default function LandingPage() {
         {STEPS.map((step) => (
           <div
             key={step.n}
-            className={step.band === "carbon" ? "bg-carbon" : "bg-ink"}
+            className={step.band === "chalk" ? "bg-chalk" : "bg-paper"}
           >
             <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 py-20 sm:px-16 lg:grid-cols-2">
               <div>
@@ -200,17 +200,17 @@ export default function LandingPage() {
             </h2>
             <MarketStatusLabel className="label-data" />
           </div>
-          <div className="mt-12 grid grid-cols-2 border border-white/10 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 border border-ink/10 lg:grid-cols-4">
             {FACTS.map((fact, i) => (
               <Spotlight
                 key={fact.label}
-                className={`p-8 ${i < FACTS.length - 1 ? "border-b border-white/10 lg:border-b-0 lg:border-r" : ""} ${
+                className={`p-8 ${i < FACTS.length - 1 ? "border-b border-ink/10 lg:border-b-0 lg:border-r" : ""} ${
                   i < 2 ? "border-b lg:border-b-0" : ""
                 }`}
               >
                 <p
                   className={`text-5xl font-light tabular-nums tracking-tight sm:text-6xl ${
-                    fact.signal ? "text-amber" : "text-paper"
+                    fact.signal ? "text-signal" : "text-ink"
                   }`}
                 >
                   {fact.value === null ? (

@@ -5,22 +5,22 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --font-inter: "Avenir Next", "Helvetica Neue", "Arial Nova";
 }
 
-/* The functional app canvas is the dark carbon/ink darkroom. The marketing
-   route group overrides per section where it needs a paper-white block. */
+/* The app canvas is paper. The marketing route group overrides per section
+   where it needs a chalk block for contrast. */
 body {
-  @apply bg-ink text-paper antialiased;
+  @apply bg-paper text-ink antialiased;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.12);
 }
 
-/* Darkroom scrollbar: a hairline paper thumb floating on an invisible track,
-   inset from the edge, brightening under the pointer.
+/* A hairline ink thumb floating on an invisible track, inset from the edge,
+   darkening under the pointer.
 
    The standard scrollbar-width/color properties MUST stay Firefox-only: as of
    Chrome 121 setting either makes Chromium ignore every ::-webkit-scrollbar
@@ -28,7 +28,7 @@ body {
 @supports (-moz-appearance: none) {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
   }
 }
 *::-webkit-scrollbar {
@@ -41,13 +41,13 @@ body {
 *::-webkit-scrollbar-thumb {
   /* The transparent border + background-clip insets a 4px-wide thumb inside
      the 12px gutter, so it reads as a floating filament, not a bar. */
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.28);
   background-clip: padding-box;
   border: 4px solid transparent;
   border-radius: 9999px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   border: 3px solid transparent;
 }
@@ -63,49 +63,49 @@ body {
     @apply text-[13px] uppercase tracking-[0.12em] text-ash;
   }
 
-  /* Sharp carbon panel with a hairline border. Depth via tonal contrast. */
+  /* Sharp chalk panel with a hairline border. Depth via tonal contrast. */
   .card {
-    @apply rounded-none border border-white/10 bg-carbon;
+    @apply rounded-none border border-ink/10 bg-chalk;
   }
 
   /* Inset, secondary panel: a hairline frame over the base, no fill jump. */
   .panel-subtle {
-    @apply rounded-none border border-white/10 bg-white/[0.02];
+    @apply rounded-none border border-ink/10 bg-ink/[0.02];
   }
 
-  /* Text input: sharp, transparent over carbon, hairline that brightens to
-     paper on focus. No amber on borders (single-accent rule). */
+  /* Text input: sharp, transparent over chalk, hairline that darkens to ink
+     on focus. No signal on borders (single-accent rule). */
   .field {
-    @apply mt-2 w-full rounded-none border border-white/15 bg-transparent px-3 py-2.5
-      text-lg tabular-nums text-paper outline-none transition
-      placeholder:text-ash focus:border-paper;
+    @apply mt-2 w-full rounded-none border border-ink/15 bg-transparent px-3 py-2.5
+      text-lg tabular-nums text-ink outline-none transition
+      placeholder:text-ash focus:border-ink;
   }
 
-  /* Primary action: solid monochrome pill, paper fill on ink text. Never amber
-     (amber marks signals, not actions). Full width inside forms. */
+  /* Primary action: solid monochrome pill, ink fill under paper text. Never
+     signal (signal marks signals, not actions). Full width inside forms. */
   .btn-solid {
     @apply inline-flex w-full items-center justify-center gap-2 rounded-pill
-      bg-paper px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em]
-      text-ink transition hover:bg-smoke disabled:cursor-not-allowed
-      disabled:bg-white/20 disabled:text-ash;
+      bg-ink px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em]
+      text-paper transition hover:bg-smoke disabled:cursor-not-allowed
+      disabled:bg-ink/20 disabled:text-ash;
   }
 }
 
-/* ---- Motion layer (Path A: monochrome darkroom, animated) ------------------
+/* ---- Motion layer (monochrome paper, animated) ----------------------------
    All motion below is decoration on top of a complete static render: the
    server ships the finished state, JS arms the animated one, and
    prefers-reduced-motion keeps the static state. No color is introduced. */
 
 /* Liquid-metal sheen panned across the hero headline. The gradient is
-   paper-to-smoke only, so the headline stays monochrome. */
+   ink-to-pewter only, so the headline stays monochrome. */
 .hero-shimmer {
   background-image: linear-gradient(
     105deg,
-    #ffffff 0%,
-    #ffffff 40%,
+    #0b0b0b 0%,
+    #0b0b0b 40%,
     #8f8f8f 50%,
-    #ffffff 60%,
-    #ffffff 100%
+    #0b0b0b 60%,
+    #0b0b0b 100%
   );
   background-size: 250% 100%;
   -webkit-background-clip: text;
@@ -249,7 +249,7 @@ body {
 }
 
 /* Live values (LiveValue component): changed characters roll over, the value
-   flashes amber (a live signal, the accent's one job), and loading states
+   flashes signal (a live signal, the accent's one job), and loading states
    shimmer as a skeleton line. */
 .lv-cell {
   position: relative;
@@ -282,7 +282,7 @@ body {
 }
 @keyframes lv-flash {
   from {
-    color: #ffac2e;
+    color: #1CD8B0;
   }
 }
 
@@ -295,9 +295,9 @@ body {
   vertical-align: middle;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.06) 25%,
-    rgba(255, 255, 255, 0.16) 50%,
-    rgba(255, 255, 255, 0.06) 75%
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.16) 50%,
+    rgba(0, 0, 0, 0.06) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-sheen 1.4s linear infinite;
@@ -315,7 +315,7 @@ body {
 /* The pinned band no longer carries an SVG scene; the world behind it is
    the diagram. The .ps-* morph rules that drove it are gone with it. */
 
-/* The one sanctioned glow: a 1px amber bloom on live-signal elements only
+/* The one sanctioned glow: a 1px signal bloom on live-signal elements only
    (pulse dots, the active tab, Live labels). Glow as signal, never as
    decoration; everything else keeps the no-shadow rule. */
 .glow-signal {
@@ -337,7 +337,7 @@ body {
 .atmosphere-nebula-white {
   left: -28rem;
   top: 18%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.055), transparent 68%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.055), transparent 68%);
   animation: atmosphere-drift-white 48s ease-in-out infinite;
 }
 .atmosphere-nebula-blue {
@@ -376,7 +376,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.25),
+    rgba(0, 0, 0, 0.25),
     transparent
   );
 }
@@ -398,7 +398,7 @@ body {
     inset: 0;
     background: radial-gradient(
       200px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(255, 255, 255, 0.05),
+      rgba(0, 0, 0, 0.05),
       transparent
     );
     content: "";
@@ -459,7 +459,7 @@ body {
   }
   .audience-card:hover {
     transform: translateY(-6px);
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: rgba(0, 0, 0, 0.04);
   }
 }
 
@@ -510,8 +510,8 @@ body {
 }
 
 /* ---- Docs prose ------------------------------------------------------------
-   Long-form reading voice for /docs. Same darkroom system: paper on ink,
-   hairline dividers, sharp panels, amber reserved for live signals (never
+   Long-form reading voice for /docs. Same paper system: ink on paper,
+   hairline dividers, sharp panels, signal reserved for live signals (never
    used decoratively here). Semantic HTML in, typography out, so docs pages
    stay plain markup instead of restating classes on every element. */
 @layer components {
@@ -522,19 +522,19 @@ body {
     @apply mt-5;
   }
   .docs-prose h2 {
-    @apply mt-12 border-t border-white/10 pt-8 text-xl font-semibold tracking-tight text-paper;
+    @apply mt-12 border-t border-ink/10 pt-8 text-xl font-semibold tracking-tight text-ink;
   }
   .docs-prose h2:first-child {
     @apply mt-0 border-t-0 pt-0;
   }
   .docs-prose h3 {
-    @apply mt-8 text-base font-semibold text-paper;
+    @apply mt-8 text-base font-semibold text-ink;
   }
   .docs-prose strong {
-    @apply font-semibold text-paper;
+    @apply font-semibold text-ink;
   }
   .docs-prose a {
-    @apply text-paper underline decoration-white/30 underline-offset-4 transition hover:decoration-paper;
+    @apply text-ink underline decoration-ink/30 underline-offset-4 transition hover:decoration-ink;
   }
   .docs-prose ul,
   .docs-prose ol {
@@ -547,10 +547,10 @@ body {
     @apply list-decimal marker:text-graphite;
   }
   .docs-prose code {
-    @apply rounded-none border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[13px] text-paper;
+    @apply rounded-none border border-ink/10 bg-ink/[0.04] px-1.5 py-0.5 font-mono text-[13px] text-ink;
   }
   .docs-prose pre {
-    @apply overflow-x-auto border border-white/10 bg-carbon p-4 font-mono text-[13px] leading-6 text-smoke;
+    @apply overflow-x-auto border border-ink/10 bg-chalk p-4 font-mono text-[13px] leading-6 text-smoke;
   }
   .docs-prose pre code {
     @apply border-0 bg-transparent p-0 text-inherit;
@@ -559,13 +559,13 @@ body {
     @apply w-full border-collapse text-[14px];
   }
   .docs-prose th {
-    @apply border-b border-white/15 py-2 pr-4 text-left align-top font-medium text-paper;
+    @apply border-b border-ink/15 py-2 pr-4 text-left align-top font-medium text-ink;
   }
   .docs-prose td {
-    @apply border-b border-white/10 py-2 pr-4 align-top;
+    @apply border-b border-ink/10 py-2 pr-4 align-top;
   }
   .docs-prose hr {
-    @apply border-white/10;
+    @apply border-ink/10;
   }
   /* Wide tables (contract addresses) scroll in place, never the page. */
   .docs-table-scroll {

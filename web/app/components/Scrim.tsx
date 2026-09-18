@@ -17,12 +17,12 @@ type Side = "left" | "bottom" | "full";
 const GRADIENTS: Record<Side, string> = {
   // Desktop copy sits in the left half; the gradient is angled so the falloff
   // follows the diagonal the rings tend to travel on.
-  left: "linear-gradient(100deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.82) 26%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.12) 72%, rgba(0,0,0,0) 88%)",
+  left: "linear-gradient(100deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.82) 26%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.12) 72%, rgba(255,255,255,0) 88%)",
   // For bands whose copy runs the full width, so the frame has to be held from
   // the floor instead of from one side.
   bottom:
-    "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 34%, rgba(0,0,0,0.3) 64%, rgba(0,0,0,0) 100%)",
-  full: "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.82) 50%, rgba(0,0,0,0.7) 100%)",
+    "linear-gradient(to top, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.72) 34%, rgba(255,255,255,0.3) 64%, rgba(255,255,255,0) 100%)",
+  full: "linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.82) 50%, rgba(255,255,255,0.7) 100%)",
 };
 
 export function Scrim({ side = "left", className = "" }: { side?: Side; className?: string }) {

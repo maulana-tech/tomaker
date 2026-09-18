@@ -48,11 +48,11 @@ export function MaturityRail() {
       aria-label="Chapters"
       className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
     >
-      <div className="relative h-[220px] w-px bg-white/15">
+      <div className="relative h-[220px] w-px bg-ink/15">
         {/* Time elapsed against the run. Pure CSS off the conductor's variable —
             no subscription, no per-frame work in React. */}
         <div
-          className="absolute left-0 top-0 w-px bg-paper/70"
+          className="absolute left-0 top-0 w-px bg-ink/70"
           style={{ height: "calc(var(--tau, 0) * 100%)" }}
         />
 
@@ -71,12 +71,12 @@ export function MaturityRail() {
                   label parked over the page permanently would be one more
                   thing competing with the content. Solid ink behind it because
                   it can be summoned over a white diagram. */}
-              <span className="label-data whitespace-nowrap bg-ink px-2 py-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+              <span className="label-data whitespace-nowrap bg-paper px-2 py-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                 {chapter.label}
               </span>
               <span
-                className={`block h-px transition-all duration-500 group-hover:bg-paper group-focus-visible:bg-paper ${
-                  current ? "w-5 bg-paper" : "w-2 bg-white/30"
+                className={`block h-px transition-all duration-500 group-hover:bg-ink group-focus-visible:bg-ink ${
+                  current ? "w-5 bg-ink" : "w-2 bg-ink/30"
                 }`}
               />
             </button>

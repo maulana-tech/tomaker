@@ -15,8 +15,8 @@ function FactSequence({ hidden = false }: { hidden?: boolean }) {
     <div className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {FACTS.map((fact) => (
         <span key={fact.text} className="flex shrink-0 items-center">
-          <span className={fact.statement ? "text-paper" : "text-ash"}>{fact.text}</span>
-          <span className="px-8 text-white/25" aria-hidden>
+          <span className={fact.statement ? "text-ink" : "text-ash"}>{fact.text}</span>
+          <span className="px-8 text-ink/25" aria-hidden>
             ·
           </span>
         </span>

@@ -22,20 +22,25 @@ parallax. Geometry, lighting and motion constraints follow below.
 
 ### Palette
 
-Use the site palette. Amber identifies the yield token.
+Use the site palette. The signal accent identifies the yield token.
+
+The stage is paper, not a void. The instrument reads by being darker than the
+page, so the light/dark roles are the inverse of a darkroom scene: there is no
+rim light doing the separating, and metalness stays low or the bright
+environment blows the rings out to near-white.
 
 | role | value | use |
 | --- | --- | --- |
-| world dark | `#000000` | deep space, negative space |
-| deep field | `#05070D` | fog colour, far structure |
-| structural mid | `#2A2E33` | brushed steel rings, armature |
-| housing | `#181818` | matte graphite castings |
-| readable light | `#FFFFFF` | the principal body, engraved graduations, DOM type |
-| story accent | `#FFAC2E` | the yield leg, and nothing else, ever |
+| world paper | `#FFFFFF` | the page the instrument sits on |
+| near field | `#EEF1F5` | fog colour, far structure |
+| structural mid | `#3A4048` | brushed steel rings, armature |
+| housing | `#1D1F23` | matte graphite castings |
+| readable dark | `#0B0B0B` | the principal body, engraved graduations, DOM type |
+| story accent | `#1CD8B0` | the yield leg, and nothing else, ever |
 
-The colour arc is the whole story: amber is present from the split, and goes out
+The colour arc is the whole story: signal is present from the split, and goes out
 at maturity. It must never appear on a ring, a light, or a UI element in this
-scene. If the frame has no live yield in it, the frame has no amber in it.
+scene. If the frame has no live yield in it, the frame has no signal in it.
 
 ### Lens and composition
 
@@ -77,7 +82,7 @@ See `chapters.ts` for the machine-readable ledger. In prose:
 | `split` | It resolves into principal and yield | central gimbal | camera pushes inside the outer ring |
 | `mechanism` | The two legs ride at different rates | armature spine | camera travels along the armature; near-plane structure crosses the frame |
 | `market` | The spread between them is the market | counter-rotating ring pair | camera pulls back and orbits to the far side |
-| `maturity` | Yield spent, principal at par | the par detent | camera settles, amber goes out, rings still |
+| `maturity` | Yield spent, principal at par | the par detent | camera settles, signal goes out, rings still |
 
 ## 4. Camera ledger
 
@@ -131,7 +136,7 @@ nothing else.
 | engraved graduation | steel base | white etched ticks, emissive 0.15, unlit at distance |
 | matte graphite | `#181818`, rough 0.78, metal 0.2 | subtle noise, no specular character |
 | principal body | unlit white | emissive 1.0, the only pure white in the scene |
-| yield body | unlit amber | emissive scaled by remaining life, out at maturity |
+| yield body | unlit signal | emissive scaled by remaining life, out at maturity |
 
 ## 6. Lighting and atmosphere
 
@@ -189,6 +194,6 @@ downloads it and the marketing route's initial JS is unchanged.
 1. Check chapter thresholds and camera positions against this specification.
 2. Instrument builds and holds a single static composition.
 3. Camera travels all five chapters, forward and reverse, no seams.
-4. Bodies, split, and amber decay driven by tau and correct at both ends.
+4. Bodies, split, and signal decay driven by tau and correct at both ends.
 5. Fallback, reduced motion, context loss, teardown.
 6. Performance gates met on desktop and a throttled mobile profile.

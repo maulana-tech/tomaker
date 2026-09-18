@@ -124,7 +124,7 @@ export function AudienceCards() {
           {AUDIENCES.map((audience, index) => (
             <Spotlight
               key={audience.title}
-              className="audience-card relative min-h-[24rem] overflow-hidden bg-white/[0.02] p-8 lg:p-10"
+              className="audience-card relative min-h-[24rem] overflow-hidden bg-ink/[0.02] p-8 lg:p-10"
             >
               <svg
                 aria-hidden
@@ -154,7 +154,7 @@ export function AudienceCards() {
               {/* Watermark index: the step-numeral language, faded to texture. */}
               <span
                 aria-hidden
-                className="pointer-events-none absolute -right-2 -top-6 text-[9rem] font-light leading-none text-white/[0.05]"
+                className="pointer-events-none absolute -right-2 -top-6 text-[9rem] font-light leading-none text-ink/[0.05]"
               >
                 {audience.index}
               </span>
@@ -170,7 +170,7 @@ export function AudienceCards() {
                 <p className="mt-5 max-w-sm leading-relaxed text-smoke">{audience.body}</p>
                 <RollingLink
                   href={audience.href}
-                  className="mt-auto pt-10 font-mono text-[13px] uppercase tracking-[0.15em] text-paper"
+                  className="mt-auto pt-10 font-mono text-[13px] uppercase tracking-[0.15em] text-ink"
                 >
                   {`${audience.cta} →`}
                 </RollingLink>

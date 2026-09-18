@@ -20,7 +20,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   const cfg = appConfig();
 
   return (
-    <div className="flex min-h-screen flex-col text-paper">
+    <div className="flex min-h-screen flex-col text-ink">
       <SmoothScroll />
       <Conductor />
       <MarketingNav />
@@ -43,20 +43,20 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
             <div className="flex flex-wrap items-center gap-6">
               <RollingLink
                 href="https://github.com/guha-rahul/tomaker"
-                className="label-data transition hover:text-paper"
+                className="label-data transition hover:text-ink"
               >
                 GitHub
               </RollingLink>
               <RollingLink
                 href="/docs"
-                className="label-data transition hover:text-paper"
+                className="label-data transition hover:text-ink"
               >
                 Docs
               </RollingLink>
               <span className="label-data">{cfg.yieldSource.name} · {networkLabel(cfg.network)}</span>
             </div>
           </div>
-          <p className="border-t border-white/10 pt-6 text-[13px] text-ash">
+          <p className="border-t border-ink/10 pt-6 text-[13px] text-ash">
             © 2026 toMaker Protocol. All rights reserved.
           </p>
         </div>

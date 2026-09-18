@@ -55,7 +55,7 @@ export default function OrderBookPage() {
       <div className="space-y-6">
         <Header maturity={market?.maturity ?? null} />
         <section className="panel px-6 py-10 text-center">
-          <h2 className="text-lg font-medium text-paper">Resting orders are not deployed here</h2>
+          <h2 className="text-lg font-medium text-ink">Resting orders are not deployed here</h2>
           <p className="mx-auto mt-3 max-w-xl text-[14px] leading-7 text-smoke">
             This is a legacy market with only the AMM. Configure a V2 deployment&apos;s
             NEXT_PUBLIC_ORDERBOOK_ADDRESS to enable escrowed limit orders.
@@ -240,7 +240,7 @@ function BookHeader({
   onRefresh: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
+    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 px-5 py-4">
       <div className="flex flex-wrap gap-6">
         <Metric label="Mid" value={midWad === null ? "—" : formatPriceWad(midWad)} />
         <Metric label="Spread" value={spreadBps === null ? "—" : bpsToPercent(spreadBps)} />
@@ -257,7 +257,7 @@ function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <p className="label-data">{label}</p>
-      <p className="mt-1 font-mono text-[13px] text-paper">{value}</p>
+      <p className="mt-1 font-mono text-[13px] text-ink">{value}</p>
     </div>
   );
 }
@@ -293,8 +293,8 @@ function BookRows({
               type="button"
               aria-pressed={selectedId === order.id}
               onClick={() => onSelect(order)}
-              className={`grid w-full grid-cols-[80px_1fr_1fr_1fr] gap-3 border-t border-white/5 px-5 py-3 text-left transition ${
-                selectedId === order.id ? "bg-white/[0.07]" : "hover:bg-white/[0.03]"
+              className={`grid w-full grid-cols-[80px_1fr_1fr_1fr] gap-3 border-t border-ink/5 px-5 py-3 text-left transition ${
+                selectedId === order.id ? "bg-ink/[0.07]" : "hover:bg-ink/[0.03]"
               }`}
             >
               <span className={side === "Ask" ? "text-red-300" : "text-emerald-300"}>
@@ -303,7 +303,7 @@ function BookRows({
               <span className="font-mono text-[13px] text-smoke">
                 {formatTokenAmount(order.remainingBase, decimals, 4)}
               </span>
-              <span className="text-right font-mono text-[13px] text-paper">
+              <span className="text-right font-mono text-[13px] text-ink">
                 {formatPriceWad(order.priceWad)}
               </span>
               <span className="text-right font-mono text-[12px] text-ash">
@@ -319,9 +319,9 @@ function BookRows({
 
 function InsideMarket({ midWad, spreadBps }: { midWad: bigint | null; spreadBps: bigint | null }) {
   return (
-    <div className="flex items-center justify-between border-y border-white/10 bg-white/[0.025] px-5 py-3">
+    <div className="flex items-center justify-between border-y border-ink/10 bg-ink/[0.025] px-5 py-3">
       <span className="label-data">Inside market</span>
-      <span className="font-mono text-[14px] text-amber">
+      <span className="font-mono text-[14px] text-signal">
         {midWad === null ? "—" : formatPriceWad(midWad)}
       </span>
       <span className="font-mono text-[12px] text-ash">
@@ -407,14 +407,14 @@ function PlaceOrderPanel({
   return (
     <section className="panel p-5">
       <h2 className="label-data">Place resting order</h2>
-      <div className="mt-4 grid grid-cols-2 border border-white/10">
+      <div className="mt-4 grid grid-cols-2 border border-ink/10">
         {(["Ask", "Bid"] as const).map((value) => (
           <button
             type="button"
             key={value}
             aria-pressed={side === value}
             onClick={() => setSide(value)}
-            className={`px-3 py-2 text-[13px] ${side === value ? "bg-white/10 text-paper" : "text-smoke"}`}
+            className={`px-3 py-2 text-[13px] ${side === value ? "bg-ink/10 text-ink" : "text-smoke"}`}
           >
             {value === "Ask" ? "Sell PT" : "Buy PT"}
           </button>
@@ -548,19 +548,19 @@ function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-4">
       <dt className="text-[12px] text-ash">{label}</dt>
-      <dd className="text-right font-mono text-[12px] text-paper">{value}</dd>
+      <dd className="text-right font-mono text-[12px] text-ink">{value}</dd>
     </div>
   );
 }
 
 function LadderSkeleton() {
   return (
-    <div className="divide-y divide-white/5">
+    <div className="divide-y divide-ink/5">
       {Array.from({ length: 10 }).map((_, index) => (
         <div key={index} className="flex items-center justify-between px-5 py-3">
-          <span className="h-3 w-24 animate-pulse bg-white/10" />
-          <span className="h-3 w-20 animate-pulse bg-white/10" />
-          <span className="h-3 w-16 animate-pulse bg-white/10" />
+          <span className="h-3 w-24 animate-pulse bg-ink/10" />
+          <span className="h-3 w-20 animate-pulse bg-ink/10" />
+          <span className="h-3 w-16 animate-pulse bg-ink/10" />
         </div>
       ))}
     </div>

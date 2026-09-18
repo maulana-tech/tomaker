@@ -11,9 +11,9 @@ export function DeploymentBanner() {
   if (deployed) return null;
 
   return (
-    <div className="border-b border-white/10 bg-carbon">
+    <div className="border-b border-ink/10 bg-chalk">
       <p className="mx-auto max-w-[1280px] px-6 py-2.5 text-xs text-smoke">
-        No market is available on this network. Select Hedera testnet or contact the deployment operator.
+        No market is available on this network. Select BOT Chain testnet or contact the deployment operator.
       </p>
     </div>
   );

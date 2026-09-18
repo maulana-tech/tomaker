@@ -145,9 +145,9 @@ export function environmentPanorama(): HTMLCanvasElement {
   const { canvas, ctx } = surface(W, H);
 
   const sky = ctx.createLinearGradient(0, 0, 0, H);
-  sky.addColorStop(0, "#2f3c4c");
-  sky.addColorStop(0.42, "#131a23");
-  sky.addColorStop(1, "#04060a");
+  sky.addColorStop(0, "#dfe6ef");
+  sky.addColorStop(0.42, "#eef1f5");
+  sky.addColorStop(1, "#fbfcfd");
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, W, H);
 
