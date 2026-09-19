@@ -13,7 +13,8 @@ playwright-report/
 test-results/
 
 # Local deploy outputs. Committed deployment manifests live in deployments/*.toml.
-app/.env.local
+app/.env.local.example
+!app/.env.local
 workers/access-requests/.dev.vars
 deployments/*.state.env
 deployments/*.tmp
