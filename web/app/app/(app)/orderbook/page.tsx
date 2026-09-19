@@ -242,22 +242,32 @@ function BookHeader({
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 px-5 py-4">
       <div className="flex flex-wrap gap-6">
-        <Metric label="Mid" value={midWad === null ? "—" : formatPriceWad(midWad)} />
-        <Metric label="Spread" value={spreadBps === null ? "—" : bpsToPercent(spreadBps)} />
-        <Metric label="Taker fee" value={feeBps === null ? "—" : bpsToPercent(feeBps)} />
+        <div>
+          <p className="label-data">Mid price</p>
+          <p className="mt-1 font-mono text-[14px] text-ink">
+            {midWad === null ? "—" : formatPriceWad(midWad)}
+          </p>
+        </div>
+        <div>
+          <p className="label-data">Spread</p>
+          <p className="mt-1 font-mono text-[14px] text-ink">
+            {spreadBps === null ? "—" : bpsToPercent(spreadBps)}
+          </p>
+        </div>
+        <div>
+          <p className="label-data">Taker fee</p>
+          <p className="mt-1 font-mono text-[14px] text-ink">
+            {feeBps === null ? "—" : bpsToPercent(feeBps)}
+          </p>
+        </div>
       </div>
-      <button type="button" className="btn-ghost text-xs" onClick={onRefresh}>
+      <button 
+        type="button" 
+        className="rounded-lg border border-ink/20 px-3 py-1.5 text-[12px] text-ink transition hover:bg-ink hover:text-paper" 
+        onClick={onRefresh}
+      >
         Refresh
       </button>
-    </div>
-  );
-}
-
-function Metric({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <p className="label-data">{label}</p>
-      <p className="mt-1 font-mono text-[13px] text-ink">{value}</p>
     </div>
   );
 }
@@ -276,14 +286,19 @@ function BookRows({
   onSelect: (order: RestingOrder) => void;
 }) {
   if (orders.length === 0) {
-    return <p className="px-5 py-8 text-center text-[13px] text-ash">No resting {side.toLowerCase()}s.</p>;
+    return (
+      <div className="px-5 py-8 text-center">
+        <p className="text-[13px] text-ash">No resting {side.toLowerCase()}s.</p>
+        <p className="mt-1 text-[11px] text-smoke">Be the first to place a {side.toLowerCase()} order</p>
+      </div>
+    );
   }
   return (
     <div>
-      <div className="grid grid-cols-[80px_1fr_1fr_1fr] gap-3 px-5 py-2 text-[11px] uppercase tracking-widest text-ash">
-        <span>{side}</span>
+      <div className="grid grid-cols-[60px_1fr_1fr_1fr] gap-3 px-5 py-2 text-[11px] uppercase tracking-widest text-ash">
+        <span>ID</span>
         <span>PT remaining</span>
-        <span className="text-right">SY / PT</span>
+        <span className="text-right">Price (SY/PT)</span>
         <span className="text-right">Maker</span>
       </div>
       <ol className={side === "Ask" ? "flex flex-col-reverse" : ""}>
@@ -293,11 +308,13 @@ function BookRows({
               type="button"
               aria-pressed={selectedId === order.id}
               onClick={() => onSelect(order)}
-              className={`grid w-full grid-cols-[80px_1fr_1fr_1fr] gap-3 border-t border-ink/5 px-5 py-3 text-left transition ${
-                selectedId === order.id ? "bg-ink/[0.07]" : "hover:bg-ink/[0.03]"
+              className={`grid w-full grid-cols-[60px_1fr_1fr_1fr] gap-3 border-t border-ink/5 px-5 py-3 text-left transition ${
+                selectedId === order.id 
+                  ? "bg-ink/[0.07] border-l-2 border-l-signal" 
+                  : "hover:bg-ink/[0.03]"
               }`}
             >
-              <span className={side === "Ask" ? "text-red-300" : "text-emerald-300"}>
+              <span className={`font-mono text-[13px] ${side === "Ask" ? "text-red-400" : "text-emerald-400"}`}>
                 #{order.id.toString()}
               </span>
               <span className="font-mono text-[13px] text-smoke">
@@ -321,12 +338,14 @@ function InsideMarket({ midWad, spreadBps }: { midWad: bigint | null; spreadBps:
   return (
     <div className="flex items-center justify-between border-y border-ink/10 bg-ink/[0.025] px-5 py-3">
       <span className="label-data">Inside market</span>
-      <span className="font-mono text-[14px] text-signal-ink">
-        {midWad === null ? "—" : formatPriceWad(midWad)}
-      </span>
-      <span className="font-mono text-[12px] text-ash">
-        {spreadBps === null ? "One-sided" : `${bpsToPercent(spreadBps)} spread`}
-      </span>
+      <div className="flex items-center gap-4">
+        <span className="font-mono text-[14px] text-signal-ink">
+          {midWad === null ? "—" : formatPriceWad(midWad)}
+        </span>
+        <span className="rounded-full bg-ink/[0.05] px-2 py-0.5 font-mono text-[12px] text-ash">
+          {spreadBps === null ? "One-sided" : `${bpsToPercent(spreadBps)} spread`}
+        </span>
+      </div>
     </div>
   );
 }
@@ -405,55 +424,104 @@ function PlaceOrderPanel({
     phase.kind !== "working";
 
   return (
-    <section className="panel p-5">
+    <section className="card space-y-4 p-6">
       <h2 className="label-data">Place resting order</h2>
-      <div className="mt-4 grid grid-cols-2 border border-ink/10">
+      
+      {/* Side selector */}
+      <div className="grid grid-cols-2 gap-1 rounded-lg border border-ink/10 p-1">
         {(["Ask", "Bid"] as const).map((value) => (
           <button
             type="button"
             key={value}
             aria-pressed={side === value}
             onClick={() => setSide(value)}
-            className={`px-3 py-2 text-[13px] ${side === value ? "bg-ink/10 text-ink" : "text-smoke"}`}
+            className={`rounded-md px-3 py-2 text-[13px] font-medium transition ${
+              side === value 
+                ? value === "Ask" 
+                  ? "bg-red-50 text-red-600" 
+                  : "bg-emerald-50 text-emerald-600"
+                : "text-smoke hover:bg-ink/[0.03]"
+            }`}
           >
             {value === "Ask" ? "Sell PT" : "Buy PT"}
           </button>
         ))}
       </div>
-      <label className="mt-4 block text-[12px] text-ash">
-        PT amount
-        <input className="input mt-2 w-full" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="0.00" />
-      </label>
-      <label className="mt-4 block text-[12px] text-ash">
-        Limit price · SY per PT
-        <input className="input mt-2 w-full" inputMode="decimal" value={price} onChange={(event) => setPrice(event.target.value)} placeholder="0.95000" />
-      </label>
-      <label className="mt-4 block text-[12px] text-ash">
-        Expiry
-        <select className="input mt-2 w-full" value={expirySeconds} onChange={(event) => setExpirySeconds(Number(event.target.value))}>
-          {EXPIRIES.map((option) => <option key={option.seconds} value={option.seconds}>{option.label}</option>)}
-        </select>
-      </label>
-      <dl className="mt-4 space-y-2 text-[12px]">
-        <DetailRow label={side === "Ask" ? "Expected maker proceeds" : "SY escrow"} value={`${formatTokenAmount(quote, decimals, 4)} SY`} />
-        <DetailRow label="Priority predecessor" value={priceWad ? `#${predecessorFor(orders, side, priceWad)?.toString() ?? "head"}` : "—"} />
-      </dl>
-      {validation ? <p className="mt-3 text-[12px] leading-5 text-red-400">{validation}</p> : null}
-      <div className="mt-5">
-        <SubmitButton
-          phase={phase}
-          address={address}
-          idleLabel={side === "Ask" ? "Place PT ask" : "Place PT bid"}
-          connectLabel="Connect wallet to place"
-          disabled={!canSubmit}
-          onClick={() => {
-            if (!address || baseAmount === null || priceWad === null || maturity === null) return;
-            const now = BigInt(Math.floor(Date.now() / 1000));
-            const expiry = now + BigInt(expirySeconds) < maturity ? now + BigInt(expirySeconds) : maturity;
-            onSubmit({ maker: address, side, baseAmount, priceWad, expiry, predecessor: predecessorFor(orders, side, priceWad) });
-          }}
+
+      {/* Amount input */}
+      <div className="space-y-1">
+        <label className="flex items-center justify-between text-[12px]">
+          <span className="text-ash">PT amount</span>
+          {max !== undefined && (
+            <span className="text-smoke">
+              Max: {formatTokenAmount(max, decimals, 4)}
+            </span>
+          )}
+        </label>
+        <input 
+          className="field w-full" 
+          inputMode="decimal" 
+          value={amount} 
+          onChange={(event) => setAmount(event.target.value)} 
+          placeholder="0.00" 
         />
       </div>
+
+      {/* Price input */}
+      <div className="space-y-1">
+        <label className="text-[12px] text-ash">Limit price · SY per PT</label>
+        <input 
+          className="field w-full" 
+          inputMode="decimal" 
+          value={price} 
+          onChange={(event) => setPrice(event.target.value)} 
+          placeholder="0.95000" 
+        />
+      </div>
+
+      {/* Expiry */}
+      <div className="space-y-1">
+        <label className="text-[12px] text-ash">Expiry</label>
+        <select 
+          className="field w-full" 
+          value={expirySeconds} 
+          onChange={(event) => setExpirySeconds(Number(event.target.value))}
+        >
+          {EXPIRIES.map((option) => (
+            <option key={option.seconds} value={option.seconds}>{option.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Summary */}
+      <div className="space-y-2 rounded-lg bg-ink/[0.02] p-3 text-[12px]">
+        <DetailRow 
+          label={side === "Ask" ? "Expected proceeds" : "SY required"} 
+          value={`${formatTokenAmount(quote, decimals, 4)} SY`} 
+        />
+        <DetailRow 
+          label="Predecessor" 
+          value={priceWad ? `#${predecessorFor(orders, side, priceWad)?.toString() ?? "head"}` : "—"} 
+        />
+      </div>
+
+      {validation && (
+        <p className="rounded-lg bg-red-50 p-3 text-[12px] text-red-600">{validation}</p>
+      )}
+
+      <SubmitButton
+        phase={phase}
+        address={address}
+        idleLabel={side === "Ask" ? "Place PT ask" : "Place PT bid"}
+        connectLabel="Connect wallet to place"
+        disabled={!canSubmit}
+        onClick={() => {
+          if (!address || baseAmount === null || priceWad === null || maturity === null) return;
+          const now = BigInt(Math.floor(Date.now() / 1000));
+          const expiry = now + BigInt(expirySeconds) < maturity ? now + BigInt(expirySeconds) : maturity;
+          onSubmit({ maker: address, side, baseAmount, priceWad, expiry, predecessor: predecessorFor(orders, side, priceWad) });
+        }}
+      />
     </section>
   );
 }

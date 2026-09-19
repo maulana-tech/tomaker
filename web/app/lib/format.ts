@@ -38,7 +38,16 @@ export function formatTokenAmount(baseUnits: bigint, decimals: number, maxFracti
   fracStr = fracStr.replace(/0+$/, "");
 
   const sign = negative ? "-" : "";
-  return fracStr.length > 0 ? `${sign}${whole}.${fracStr}` : `${sign}${whole}`;
+  const wholeStr = whole.toString();
+  
+  // For very large whole numbers, add thousands separators
+  const formattedWhole = wholeStr.length > 3
+    ? wholeStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : wholeStr;
+
+  return fracStr.length > 0
+    ? `${sign}${formattedWhole}.${fracStr}`
+    : `${sign}${formattedWhole}`;
 }
 
 /** Parses a human decimal string into base units. Throws on malformed input. */

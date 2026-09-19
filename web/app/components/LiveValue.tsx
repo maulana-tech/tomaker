@@ -37,15 +37,22 @@ export function LiveValue({
   }
 
   const { prev, value: cur, epoch } = shown;
+  
+  // For simple values without animation complexity, just render directly
+  // to avoid character alignment issues with formatted numbers
+  if (!prev || prev === cur) {
+    return <span className={className}>{cur}</span>;
+  }
+
   // Align to the previous value from the right, so a growing integer part
   // shifts rather than rewriting every digit.
-  const offset = prev !== null ? prev.length - cur.length : 0;
+  const offset = prev.length - cur.length;
 
   return (
-    <span key={epoch} className={`${prev !== null ? "lv-flash" : ""} ${className}`}>
+    <span key={epoch} className={`lv-flash ${className}`}>
       {Array.from(cur).map((ch, i) => {
         const old = prev?.[i + offset];
-        const changed = prev !== null && old !== ch;
+        const changed = old !== ch;
         return (
           <span key={i} className="lv-cell">
             {changed && old !== undefined ? (
