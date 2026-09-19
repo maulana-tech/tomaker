@@ -4,7 +4,7 @@ import { bondDiscountBps, type BondInfo, type MarketState, type StrategyInfo } f
 import type { YieldSourceConfig } from "@/lib/config";
 import { bpsToPercent, formatTokenAmount, formatCompact, shortAddress } from "@/lib/format";
 
-function fmtBig(baseUnits: bigint, decimals: number): string {
+function fmt(baseUnits: bigint, decimals: number): string {
   const scale = 10n ** BigInt(decimals);
   const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
   return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
