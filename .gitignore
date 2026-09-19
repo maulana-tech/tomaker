@@ -9,3 +9,4 @@
 
 # Wrangler local caches and deployment staging
 .wrangler/
+.vercel

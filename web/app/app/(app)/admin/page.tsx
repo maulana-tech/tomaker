@@ -203,7 +203,7 @@ function FeeCard({
         />
         {error && <p className="text-[12px] text-red-600">{error}</p>}
         {!authorized && address && (
-          <p className="text-[12px] text-ash">Connected wallet is not this contract's admin.</p>
+          <p className="text-[12px] text-ash">Connected wallet is not this contract&apos;s admin.</p>
         )}
         {parsed !== null && parsed === current && (
           <p className="text-[12px] text-ash">Fee already set to {bpsToPercent(parsed)}.</p>
