@@ -179,33 +179,45 @@ function FeeCard({
     phase.kind === "working";
 
   return (
-    <section className="panel p-5">
-      <h2 className="label-data">{title}</h2>
-      <p className="mt-3 font-mono text-xl text-ink">{bpsToPercent(current)}</p>
-      <p className="mt-2 text-[11px] text-ash">Admin {shortAddress(admin)}</p>
-      <label className="mt-5 block text-[12px] text-smoke">
-        New fee · basis points
+    <section className="panel space-y-4 p-6">
+      <div>
+        <h2 className="label-data">{title}</h2>
+        <p className="mt-3 font-mono text-2xl font-semibold text-ink">{bpsToPercent(current)}</p>
+        <p className="mt-2 text-[12px] text-ash">Admin: {shortAddress(admin)}</p>
+      </div>
+      
+      <div className="space-y-2 border-t border-ink/10 pt-4">
+        <label htmlFor={`fee-${title}`} className="flex items-center justify-between">
+          <span className="text-[13px] font-medium uppercase tracking-[0.08em] text-smoke">New fee</span>
+          <span className="text-[11px] text-ash">basis points (bps)</span>
+        </label>
         <input
-          className="input mt-2 w-full"
+          id={`fee-${title}`}
+          type="text"
           inputMode="numeric"
           value={value}
           onChange={(event) => setValue(event.target.value)}
+          placeholder="0"
+          className={`field w-full font-mono ${error ? "border-red-400/50" : ""}`}
+          disabled={!authorized}
         />
-      </label>
-      {error ? <p className="mt-2 text-[12px] text-red-400">{error}</p> : null}
-      {!authorized && address ? (
-        <p className="mt-3 text-[12px] leading-5 text-ash">Connected wallet is not this contract&apos;s admin.</p>
-      ) : null}
-      <div className="mt-5">
-        <SubmitButton
-          phase={phase}
-          address={address}
-          idleLabel="Update fee"
-          connectLabel="Connect admin wallet"
-          disabled={disabled}
-          onClick={() => parsed !== null && onSubmit(parsed)}
-        />
+        {error && <p className="text-[12px] text-red-400">{error}</p>}
+        {!authorized && address && (
+          <p className="text-[12px] leading-5 text-ash">This wallet is not the admin for this contract.</p>
+        )}
+        {parsed !== null && parsed === current && (
+          <p className="text-[12px] text-ash">Fee is already set to {bpsToPercent(parsed)}.</p>
+        )}
       </div>
+
+      <SubmitButton
+        phase={phase}
+        address={address}
+        idleLabel={`Update to ${parsed !== null ? bpsToPercent(parsed) : "…"}`}
+        connectLabel="Connect admin wallet"
+        disabled={disabled}
+        onClick={() => parsed !== null && onSubmit(parsed)}
+      />
     </section>
   );
 }
