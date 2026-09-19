@@ -48,17 +48,21 @@ addresses in the app and the addresses here cannot drift apart.
 
 | Contract | Address |
 |---|---|
-| Bond (ERC-3643 security) | _not deployed yet_ |
-| Identity registry | _not deployed yet_ |
-| Compliance module | _not deployed yet_ |
-| Cash token (tUSD, test only) | _not deployed yet_ |
-| SY vault | _not deployed yet_ |
-| Bond strategy | _not deployed yet_ |
-| PT | _not deployed yet_ |
-| YT | _not deployed yet_ |
-| Tokenizer | _not deployed yet_ |
-| AMM | _not deployed yet_ |
-| Order book | _not deployed yet_ |
+| Bond (ERC-3643 security) | [`0x970C3114C5Dcf853692bc8D3e0598d1AC9D12185`](https://scan.bohr.life/address/0x970C3114C5Dcf853692bc8D3e0598d1AC9D12185) |
+| Identity registry | [`0xD04A92C83AFe71f4f69F9FAD0A33229BFBdE33E6`](https://scan.bohr.life/address/0xD04A92C83AFe71f4f69F9FAD0A33229BFBdE33E6) |
+| Compliance module | [`0x44b99f76f12e0Ece22f6bD76DcB305Afcf25876D`](https://scan.bohr.life/address/0x44b99f76f12e0Ece22f6bD76DcB305Afcf25876D) |
+| Cash token (tUSD, test only) | [`0x6d4d017dE8d0A36dce7856Ee989624C6A18cD9Ea`](https://scan.bohr.life/address/0x6d4d017dE8d0A36dce7856Ee989624C6A18cD9Ea) |
+| SY vault | [`0x40c3323992dD140Fc3770ceE5A6B23165aD36Fc1`](https://scan.bohr.life/address/0x40c3323992dD140Fc3770ceE5A6B23165aD36Fc1) |
+| Bond strategy | [`0x588DeC15D915659E8BF36c01e662479916301d3A`](https://scan.bohr.life/address/0x588DeC15D915659E8BF36c01e662479916301d3A) |
+| PT | [`0x8Db79e6Ca738D7F212Db208B4f9889Caf931a68A`](https://scan.bohr.life/address/0x8Db79e6Ca738D7F212Db208B4f9889Caf931a68A) |
+| YT | [`0x3152B6f625F25B6a2Aa0Adb57017eB74acA65ecB`](https://scan.bohr.life/address/0x3152B6f625F25B6a2Aa0Adb57017eB74acA65ecB) |
+| Tokenizer | [`0xA0c9791e4FE34734D06fDD2ded0C0e0cd5b7F0f6`](https://scan.bohr.life/address/0xA0c9791e4FE34734D06fDD2ded0C0e0cd5b7F0f6) |
+| AMM | [`0xE67A87b2eCBbE03B90cac2cA3C494a3e1be5f615`](https://scan.bohr.life/address/0xE67A87b2eCBbE03B90cac2cA3C494a3e1be5f615) |
+| Order book | [`0x1d19a197B9860bD831F84d30E51584d62796f362`](https://scan.bohr.life/address/0x1d19a197B9860bD831F84d30E51584d62796f362) |
+
+**Deployer**: [`0x3a8d93D5F52a26689b075A49E67F4f8924BeC84B`](https://scan.bohr.life/address/0x3a8d93D5F52a26689b075A49E67F4f8924BeC84B)  
+**Maturity**: `1797571070` (Unix timestamp)  
+**Market ID**: `botchain-bond-q4`
 
 ### BOT Chain Mainnet — chain 677
 
@@ -144,9 +148,6 @@ pnpm --filter @tomaker/app test
 ## Attribution
 
 toMaker is derived from
-[`guha-rahul/sidereal-hedera`](https://github.com/guha-rahul/sidereal-hedera),
-Apache-2.0, which implemented this yield-splitting design on Hedera around
-Hedera's Asset Tokenization Studio.
 
 This build ports it to BOT Chain. That meant removing the ATS integration
 entirely — BOT Chain has no ATS factory — and issuing the bond from the

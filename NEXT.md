@@ -10,24 +10,6 @@ Dokumen ini hanya berisi yang belum selesai. Yang sudah selesai ada di
 
 ## 0. Dua keputusan yang belum diambil
 
-Ambil keduanya hari ini. Keduanya mempengaruhi sisa pekerjaan.
-
-### a. Orisinalitas
-
-Basis kode ini turunan dari `guha-rahul/sidereal-hedera` (Apache-2.0, legal).
-Perubahannya besar — ganti chain, hapus ATS, 90 berkas dibuang, tema dan font
-baru — tapi arsitektur SY/PT/YT bukan karya sendiri. Juri menilai 20 poin
-orisinalitas dan mensyaratkan kamu bisa menjelaskannya saat demo.
-
-Dua jalan:
-
-1. **Sebut terus terang di README** bahwa ini fork yang diport ke BOT Chain,
-   lengkap dengan apa yang diubah. Jujur, dan biasanya dihargai.
-2. **Bangun dari nol.** Masih cukup waktu untuk Time Capsule atau Asset
-   Registry yang 100% milikmu. Contract-nya ~30 baris.
-
-Jangan tunda keputusan ini lewat hari ke-6.
-
 ### b. Hosting
 
 **GitHub Pages tidak bisa dipakai untuk aplikasi ini.** Ada tiga rute server
@@ -43,15 +25,11 @@ mengharuskan GitHub Pages.
 ## 1. Hari ini — empat hal dengan waktu tunggu
 
 Semuanya bergantung pada pihak lain atau pada waktu kalender, jadi tidak bisa
-dikejar di akhir.
-
-- [ ] **Akun X + post pertama.** Syaratnya 5 post dalam 30 hari sebelum submit.
-      Ini satu-satunya item yang tidak bisa dikompres. 1 post/hari sampai submit.
+dikejar di akhir..
 - [ ] **Kirim alamat wallet ke organizer** untuk alokasi BOT mainnet. Tidak ada
       faucet mainnet. Draft pesannya ada di bagian 7a.
 - [ ] **Klaim tBOT** di <https://faucet.botchain.ai/basic>. Batas **10 tBOT per
       alamat per 24 jam**, jadi kalau kurang kamu perlu klaim dua hari berturut.
-- [ ] **Beli domain** ($1–1.5). Simpan struk, direimburse setelah submit.
 
 ---
 

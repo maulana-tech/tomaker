@@ -38,7 +38,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com/guha-rahul/tomaker"
+              href="https://github.com/maulana-techtomaker"
               className="label-data transition hover:text-ink"
             >
               GitHub
@@ -66,7 +66,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               Home
             </Link>
             <a
-              href="https://github.com/guha-rahul/tomaker"
+              href="https://github.com/maulana-techtomaker"
               className="label-data transition hover:text-ink"
             >
               GitHub

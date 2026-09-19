@@ -155,7 +155,7 @@ export default function SecurityPage() {
         <p>
           Report security findings <strong>privately</strong> through GitHub&rsquo;s security
           advisory flow in the{" "}
-          <a href="https://github.com/guha-rahul/tomaker/security">
+          <a href="https://github.com/maulana-techtomaker/security">
             project repository
           </a>
           , not as a public issue.

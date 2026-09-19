@@ -53,7 +53,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   Docs
                 </a>
                 <a
-                  href="https://github.com/guha-rahul/tomaker"
+                  href="https://github.com/maulana-techtomaker"
                   className="label-data transition hover:text-ink"
                 >
                   GitHub
