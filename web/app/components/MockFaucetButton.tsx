@@ -47,13 +47,14 @@ export function MockFaucetButton({
       setError(null);
 
       const cashAmount = 1000n * 10n ** BigInt(cfg.underlyingDecimals);
-      const mintData = encodeFunctionData({ abi: MINT_ABI, functionName: "mint", args: [address, cashAmount] });
+      const walletAddress = address as Address;
+      const mintData = encodeFunctionData({ abi: MINT_ABI, functionName: "mint", args: [walletAddress, cashAmount] });
       await send(cfg.contracts.underlying as Address, mintData);
 
-      const registryData = encodeFunctionData({ abi: SET_VERIFIED_ABI, functionName: "setVerified", args: [address, true] });
+      const registryData = encodeFunctionData({ abi: SET_VERIFIED_ABI, functionName: "setVerified", args: [walletAddress, true] });
       await send(cfg.contracts.registry as Address, registryData);
 
-      const complianceData = encodeFunctionData({ abi: SET_ALLOWED_ABI, functionName: "setAllowed", args: [address, true] });
+      const complianceData = encodeFunctionData({ abi: SET_ALLOWED_ABI, functionName: "setAllowed", args: [walletAddress, true] });
       await send(cfg.contracts.compliance as Address, complianceData);
 
       setPhase("done");
