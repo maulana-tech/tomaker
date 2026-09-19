@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd web/app && pnpm run build",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "installCommand": "cd web && pnpm install --frozen-lockfile",
+  "buildCommand": "cd web && pnpm --filter @tomaker/sdk build && pnpm --filter @tomaker/app build",
   "framework": "nextjs"
 }
