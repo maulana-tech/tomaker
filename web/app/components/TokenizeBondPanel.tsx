@@ -5,7 +5,13 @@
 import Link from "next/link";
 import { bondDiscountBps, type BondInfo, type StrategyInfo } from "@tomaker/sdk";
 import type { YieldSourceConfig } from "@/lib/config";
-import { bpsToPercent, formatMaturityDate, formatTokenAmount } from "@/lib/format";
+import { bpsToPercent, formatMaturityDate, formatTokenAmount, formatCompact } from "@/lib/format";
+
+function fmt(baseUnits: bigint, decimals: number): string {
+  const scale = 10n ** BigInt(decimals);
+  const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
+  return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
+}
 
 /**
  * Guided context for tokenizing the bond-backed yield source. The bond sits
@@ -36,7 +42,7 @@ export function TokenizeBondPanel({
         <div>
           <p className="label-data">Tokenize into PT + YT</p>
           <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
-            {bond ? formatTokenAmount(bond.valuePerUnit, decimals, 4) : "—"}
+            {bond ? fmt(bond.valuePerUnit, decimals) : "—"}
             <span className="ml-2 text-xl text-graphite">bond value / unit</span>
           </p>
         </div>
@@ -67,13 +73,13 @@ export function TokenizeBondPanel({
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Bond supply</dt>
           <dd className="tabular-nums text-ink">
-            {bond ? formatTokenAmount(bond.totalSupply, decimals) : "n/a"}
+            {bond ? fmt(bond.totalSupply, decimals) : "n/a"}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Strategy assets</dt>
           <dd className="tabular-nums text-ink">
-            {strategy ? formatTokenAmount(strategy.totalAssets, decimals, 4) : "n/a"}
+            {strategy ? fmt(strategy.totalAssets, decimals) : "n/a"}
           </dd>
         </div>
       </dl>
