@@ -3,8 +3,15 @@
 "use client";
 
 import type { Position } from "@tomaker/sdk";
-import { formatTokenAmount } from "../lib/format";
+import { formatTokenAmount, formatCompact } from "../lib/format";
 import { LiveValue } from "./LiveValue";
+
+function fmt(baseUnits: bigint, decimals: number): string {
+  const scale = 10n ** BigInt(decimals);
+  const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
+  // Switch to compact for 4+ digit whole numbers
+  return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
+}
 
 function Cell({ label, value, signal }: { label: string; value: string; signal?: boolean }) {
   return (
@@ -50,12 +57,12 @@ export function PositionCard({
   const asset = assetDecimals ?? decimals;
   return (
     <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
-      <Cell label="SY balance" value={formatTokenAmount(position.syBalance, decimals)} />
-      <Cell label="PT balance" value={formatTokenAmount(position.ptBalance, asset)} />
-      <Cell label="YT balance" value={formatTokenAmount(position.ytBalance, asset)} />
+      <Cell label="SY balance" value={fmt(position.syBalance, decimals)} />
+      <Cell label="PT balance" value={fmt(position.ptBalance, asset)} />
+      <Cell label="YT balance" value={fmt(position.ytBalance, asset)} />
       <Cell
         label="Claimable yield (SY)"
-        value={formatTokenAmount(position.claimableYieldNet, decimals)}
+        value={fmt(position.claimableYieldNet, decimals)}
         signal
       />
     </dl>

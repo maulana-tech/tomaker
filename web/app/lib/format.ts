@@ -50,6 +50,34 @@ export function formatTokenAmount(baseUnits: bigint, decimals: number, maxFracti
     : `${sign}${formattedWhole}`;
 }
 
+/**
+ * Compact large-number display with K/M/B suffixes.
+ * e.g. (1_500_000n, 6) -> "1.50M"
+ */
+export function formatCompact(baseUnits: bigint, decimals: number): string {
+  if (baseUnits === 0n) return "0";
+  const negative = baseUnits < 0n;
+  const abs = negative ? -baseUnits : baseUnits;
+
+  // Convert base units to float representation
+  const asNumber = Number((abs * 10000n) / (10n ** BigInt(decimals))) / 10000;
+  
+  if (asNumber >= 1e12) {
+    return `${negative ? "-" : ""}${(asNumber / 1e12).toFixed(2)}T`;
+  }
+  if (asNumber >= 1e9) {
+    return `${negative ? "-" : ""}${(asNumber / 1e9).toFixed(2)}B`;
+  }
+  if (asNumber >= 1e6) {
+    return `${negative ? "-" : ""}${(asNumber / 1e6).toFixed(2)}M`;
+  }
+  if (asNumber >= 1e3) {
+    return `${negative ? "-" : ""}${(asNumber / 1e3).toFixed(2)}K`;
+  }
+  
+  return formatTokenAmount(baseUnits, decimals, 4);
+}
+
 /** Parses a human decimal string into base units. Throws on malformed input. */
 export function parseTokenAmount(value: string, decimals: number): bigint {
   const trimmed = value.trim();
