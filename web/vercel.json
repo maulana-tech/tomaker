@@ -1,3 +1,6 @@
 {
-  "outputDirectory": "app/.next"
+  "framework": "nextjs",
+  "buildCommand": "pnpm --filter @tomaker/sdk build && pnpm --filter @tomaker/app build",
+  "outputDirectory": "app/.next",
+  "installCommand": "pnpm install --frozen-lockfile"
 }
