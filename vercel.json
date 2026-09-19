@@ -1,5 +1,0 @@
-{
-  "buildCommand": "pnpm --filter @tomaker/sdk build && pnpm --filter @tomaker/app build",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "framework": "nextjs"
-}
