@@ -1,0 +1,16 @@
+{
+  "name": "@tomaker/web",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.27.0",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "pnpm --filter @tomaker/sdk build && pnpm --filter @tomaker/app build",
+    "dev": "pnpm --filter @tomaker/app dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
