@@ -63,7 +63,7 @@ export default function AdminPage() {
 
   if (!cfg.contracts.orderbook?.trim()) {
     return (
-      <section className="panel mx-auto max-w-2xl p-6">
+      <section className="card mx-auto max-w-2xl p-6">
         <h1 className="text-2xl font-semibold text-ink">Protocol administration</h1>
         <p className="mt-4 text-[14px] leading-7 text-smoke">
           This legacy deployment does not advertise mutable-fee contracts. No admin transactions
@@ -74,9 +74,9 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6 p-6">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight">Protocol administration</h1>
+        <h1 className="text-3xl font-semibold tracking-tight text-ink">Protocol administration</h1>
         <p className="mt-2 text-[14px] leading-7 text-smoke">
           Fee changes are authorized independently by each contract. The connected wallet must
           exactly match the admin stored on-chain; the frontend cannot bypass that check.
@@ -84,14 +84,14 @@ export default function AdminPage() {
       </header>
 
       {readError ? (
-        <p className="panel p-5 text-[13px] text-red-400">
+        <p className="card border-red-400/30 bg-red-400/5 p-5 text-[13px] text-red-600">
           {readError instanceof Error ? readError.message : "Unable to read fee configuration."}
         </p>
       ) : null}
-      {!fees && !readError ? <p className="panel p-5 text-[13px] text-smoke">Reading contract admins…</p> : null}
+      {!fees && !readError ? <p className="card p-5 text-[13px] text-ash">Reading contract admins…</p> : null}
 
       {fees ? (
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           <FeeCard
             title="AMM swap fee"
             current={fees.swapFeeBps}
@@ -179,17 +179,17 @@ function FeeCard({
     phase.kind === "working";
 
   return (
-    <section className="panel space-y-4 p-6">
+    <section className="card space-y-4 p-6">
       <div>
         <h2 className="label-data">{title}</h2>
         <p className="mt-3 font-mono text-2xl font-semibold text-ink">{bpsToPercent(current)}</p>
-        <p className="mt-2 text-[12px] text-ash">Admin: {shortAddress(admin)}</p>
+        <p className="mt-2 text-[12px] text-smoke">Admin: {shortAddress(admin)}</p>
       </div>
       
-      <div className="space-y-2 border-t border-ink/10 pt-4">
+      <div className="panel-subtle space-y-2 p-3">
         <label htmlFor={`fee-${title}`} className="flex items-center justify-between">
-          <span className="text-[13px] font-medium uppercase tracking-[0.08em] text-smoke">New fee</span>
-          <span className="text-[11px] text-ash">basis points (bps)</span>
+          <span className="label-data">New fee</span>
+          <span className="text-[11px] text-ash">basis points</span>
         </label>
         <input
           id={`fee-${title}`}
@@ -198,22 +198,22 @@ function FeeCard({
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder="0"
-          className={`field w-full font-mono ${error ? "border-red-400/50" : ""}`}
+          className="field"
           disabled={!authorized}
         />
-        {error && <p className="text-[12px] text-red-400">{error}</p>}
+        {error && <p className="text-[12px] text-red-600">{error}</p>}
         {!authorized && address && (
-          <p className="text-[12px] leading-5 text-ash">This wallet is not the admin for this contract.</p>
+          <p className="text-[12px] text-ash">Connected wallet is not this contract's admin.</p>
         )}
         {parsed !== null && parsed === current && (
-          <p className="text-[12px] text-ash">Fee is already set to {bpsToPercent(parsed)}.</p>
+          <p className="text-[12px] text-ash">Fee already set to {bpsToPercent(parsed)}.</p>
         )}
       </div>
 
       <SubmitButton
         phase={phase}
         address={address}
-        idleLabel={`Update to ${parsed !== null ? bpsToPercent(parsed) : "…"}`}
+        idleLabel={parsed !== null ? `Update to ${bpsToPercent(parsed)}` : "Update fee"}
         connectLabel="Connect admin wallet"
         disabled={disabled}
         onClick={() => parsed !== null && onSubmit(parsed)}
