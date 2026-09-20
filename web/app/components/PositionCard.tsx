@@ -3,15 +3,8 @@
 "use client";
 
 import type { Position } from "@tomaker/sdk";
-import { formatTokenAmount, formatCompact } from "../lib/format";
+import { fmt } from "../lib/format";
 import { LiveValue } from "./LiveValue";
-
-function fmt(baseUnits: bigint, decimals: number): string {
-  const scale = 10n ** BigInt(decimals);
-  const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
-  // Switch to compact for 4+ digit whole numbers
-  return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
-}
 
 function Cell({ label, value, signal }: { label: string; value: string; signal?: boolean }) {
   return (

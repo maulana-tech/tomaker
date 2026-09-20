@@ -8,7 +8,7 @@ import {
   amountError,
   bpsToPercent,
   formatMaturityDate,
-  formatTokenAmount,
+  fmt,
   maturityStatus,
   parseTokenAmount,
 } from "@/lib/format";
@@ -206,7 +206,7 @@ export default function TradePage() {
           <dl className="space-y-px">
             <Stat
               label="Reserves (SY)"
-              value={market ? formatTokenAmount(market.totalSy, cfg.decimals) : "n/a"}
+              value={market ? fmt(market.totalSy, cfg.decimals) : "n/a"}
               loading={marketLoading}
             />
             <Stat
@@ -304,7 +304,7 @@ export default function TradePage() {
               <span className="label-data">Expected out ({direction.assetOut})</span>
               <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
                 <LiveValue
-                  value={quote ? formatTokenAmount(quote.amountOut, cfg.decimals) : "0.0"}
+                  value={quote ? fmt(quote.amountOut, cfg.decimals) : "0.0"}
                   loading={quoting}
                 />
               </p>
@@ -339,7 +339,7 @@ export default function TradePage() {
               <div className="flex justify-between">
                 <dt className="text-ash">Expected out ({direction.assetOut})</dt>
                 <dd className="tabular-nums text-ink">
-                  <LiveValue value={formatTokenAmount(quote.amountOut, cfg.decimals)} />
+                  <LiveValue value={fmt(quote.amountOut, cfg.decimals)} />
                 </dd>
               </div>
               <div className="flex justify-between">
@@ -360,7 +360,7 @@ export default function TradePage() {
                 </dt>
                 <dd className="tabular-nums text-ink">
                   <LiveValue
-                    value={formatTokenAmount(applySlippage(quote.amountOut, slippageBps), cfg.decimals)}
+                    value={fmt(applySlippage(quote.amountOut, slippageBps), cfg.decimals)}
                   />
                 </dd>
               </div>

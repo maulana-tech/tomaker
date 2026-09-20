@@ -2,13 +2,7 @@
 
 import { bondDiscountBps, type BondInfo, type MarketState, type StrategyInfo } from "@tomaker/sdk";
 import type { YieldSourceConfig } from "@/lib/config";
-import { bpsToPercent, formatTokenAmount, formatCompact, shortAddress } from "@/lib/format";
-
-function fmt(baseUnits: bigint, decimals: number): string {
-  const scale = 10n ** BigInt(decimals);
-  const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
-  return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
-}
+import { bpsToPercent, fmt, fmt, fmtPctOfFace, shortAddress } from "@/lib/format";
 import { LiveValue } from "@/components/LiveValue";
 
 function sourceStatus(source: YieldSourceConfig): { label: string; body: string; tone: "live" | "idle" } {
@@ -71,7 +65,7 @@ export function YieldSourceCard({
         <div className="flex justify-between gap-4">
           <dt className="label-data">SY rate</dt>
           <dd className="tabular-nums text-ink">
-            {market ? `1 SY = ${formatTokenAmount(market.exchangeRate, 18, 6)} underlying` : "n/a"}
+            {market ? `1 SY = ${fmt(market.exchangeRate, 18, 6)} underlying` : "n/a"}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
@@ -95,7 +89,7 @@ export function YieldSourceCard({
             <div className="flex justify-between gap-4">
               <dt className="label-data">Bond value / unit</dt>
               <dd className="tabular-nums text-ink">
-                 {bond ? fmt(bond.valuePerUnit, assetDecimals) : "n/a"}
+                 {bond ? fmtPctOfFace(bond.valuePerUnit, bond.faceValuePerUnit) : "n/a"}
                </dd>
              </div>
              <div className="flex justify-between gap-4">

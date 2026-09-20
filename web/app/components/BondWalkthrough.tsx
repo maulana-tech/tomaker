@@ -11,7 +11,7 @@ import { WalletButton } from "@/components/WalletButton";
 import { FaucetButton } from "@/components/FaucetButton";
 import { usePosition } from "@/lib/usePosition";
 import { useLpPosition } from "@/lib/useLpPosition";
-import { bpsToPercent, formatTokenAmount } from "@/lib/format";
+import { bpsToPercent, fmt } from "@/lib/format";
 
 const REFRESH_MS = 15_000;
 const LINK_CLASS =
@@ -104,7 +104,7 @@ export function BondWalkthrough() {
         : "Fund the connected wallet with the configured cash denomination before depositing. toMaker only reads that exact asset for this market.",
       live:
         cashBalance !== null
-          ? `Wallet cash: ${formatTokenAmount(cashBalance, cfg.underlyingDecimals)}`
+          ? `Wallet cash: ${fmt(cashBalance, cfg.underlyingDecimals)}`
           : `Expected: ${cfg.yieldSource.underlyingAddress || "configured cash asset"}`,
       action: isTestnet ? (
         <FaucetButton onDone={refresh} />
@@ -120,9 +120,9 @@ export function BondWalkthrough() {
       detail:
         "Mint approves and deposits cash, then approves SY and splits it into equal PT and YT face amounts. Each required transaction is confirmed separately.",
       live: tokenized
-        ? `Tokenized: ${formatTokenAmount(position!.ptBalance, cfg.shareDecimals)} PT + ${formatTokenAmount(position!.ytBalance, cfg.shareDecimals)} YT`
+        ? `Tokenized: ${fmt(position!.ptBalance, cfg.shareDecimals)} PT + ${fmt(position!.ytBalance, cfg.shareDecimals)} YT`
         : deposited
-          ? `In SY: ${formatTokenAmount(position!.syBalance, cfg.shareDecimals)} (not split yet)`
+          ? `In SY: ${fmt(position!.syBalance, cfg.shareDecimals)} (not split yet)`
           : "No SY, PT, or YT held yet",
       action: (
         <Link href="/mint" className={LINK_CLASS}>

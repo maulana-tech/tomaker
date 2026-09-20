@@ -17,8 +17,9 @@ import { requestFaucetFunds } from "@/lib/faucet";
 import {
   amountError,
   bpsToPercent,
+  fmt,
+  fmtPctOfFace,
   formatMaturityDate,
-  formatTokenAmount,
   maturityStatus,
   parseTokenAmount,
   shortAddress,
@@ -173,11 +174,11 @@ export default function JourneyPage() {
   const shareDecimals = cfg.shareDecimals;
   const bondDecimals = bond?.decimals ?? assetDecimals;
   const fmtCash = (v: bigint | null | undefined) =>
-    v === null || v === undefined ? "—" : formatTokenAmount(v, assetDecimals);
+    v === null || v === undefined ? "—" : fmt(v, assetDecimals);
   const fmtSy = (v: bigint | null | undefined) =>
-    v === null || v === undefined ? "—" : formatTokenAmount(v, shareDecimals);
+    v === null || v === undefined ? "—" : fmt(v, shareDecimals);
   const fmtUnits = (v: bigint | null | undefined) =>
-    v === null || v === undefined ? "—" : formatTokenAmount(v, bondDecimals);
+    v === null || v === undefined ? "—" : fmt(v, bondDecimals);
 
   // Record each confirmed transaction (with its real hash) in a session log.
   useEffect(() => {
@@ -440,7 +441,7 @@ export default function JourneyPage() {
               <Stat label="Realized cash held" value={<>{fmtCash(backing?.countedCash)} <span className="text-graphite">cash</span></>} />
               <Stat label="Strategy total assets" value={<>{fmtCash(backing?.totalAssets)} <span className="text-graphite">cash</span></>} />
               <Stat label="Bond redemption liquidity" value={<>{fmtCash(backing?.availableLiquidity)} <span className="text-graphite">cash</span></>} />
-              <Stat label="SY exchange rate" value={market ? `1 SY = ${formatTokenAmount(market.exchangeRate, shareDecimals, 6)} cash` : "—"} />
+              <Stat label="SY exchange rate" value={market ? `1 SY = ${fmt(market.exchangeRate, shareDecimals, 6)} cash` : "—"} />
             </dl>
             <p className="text-xs text-ash">
               Units and cash are shown separately on purpose: bond units are the reserve quantity,
@@ -712,7 +713,7 @@ export default function JourneyPage() {
           <div className="card space-y-3 p-6">
             <p className="label-data">Live values</p>
             <dl>
-              <Stat label="SY rate" value={market ? formatTokenAmount(market.exchangeRate, shareDecimals, 6) : "—"} />
+              <Stat label="SY rate" value={market ? fmt(market.exchangeRate, shareDecimals, 6) : "—"} />
               <Stat label="Bond value / unit" value={bond ? fmtCash(bond.valuePerUnit) : "—"} />
               <Stat label="Days to maturity" value={market ? Math.max(0, Math.floor(market.secondsToMaturity / 86_400)).toString() : "—"} />
             </dl>

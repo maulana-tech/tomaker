@@ -9,7 +9,7 @@ import {
   amountError,
   bpsToPercent,
   formatMaturityDate,
-  formatTokenAmount,
+  fmt,
   maturityStatus,
   parseTokenAmount,
 } from "@/lib/format";
@@ -227,19 +227,19 @@ export default function PoolPage() {
             <dl className="panel-subtle space-y-2 p-5 text-sm">
               <PreviewRow
                 label="LP minted"
-                value={formatTokenAmount(addPreview.lpOut, cfg.decimals)}
+                value={fmt(addPreview.lpOut, cfg.decimals)}
                 signal
               />
-              <PreviewRow label="PT used" value={formatTokenAmount(addPreview.ptUsed, cfg.decimals)} />
-              <PreviewRow label="SY used" value={formatTokenAmount(addPreview.syUsed, cfg.decimals)} />
-              <PreviewRow label="PT left in wallet" value={formatTokenAmount(addPreview.ptUnused, cfg.decimals)} />
-              <PreviewRow label="SY left in wallet" value={formatTokenAmount(addPreview.syUnused, cfg.decimals)} />
+              <PreviewRow label="PT used" value={fmt(addPreview.ptUsed, cfg.decimals)} />
+              <PreviewRow label="SY used" value={fmt(addPreview.syUsed, cfg.decimals)} />
+              <PreviewRow label="PT left in wallet" value={fmt(addPreview.ptUnused, cfg.decimals)} />
+              <PreviewRow label="SY left in wallet" value={fmt(addPreview.syUnused, cfg.decimals)} />
               <PreviewRow label="Limiting side" value={addPreview.limitingSide} />
               <PreviewRow label="New share" value={bpsToPercent(addPreview.shareBpsAfter)} signal />
               <SlippageControl slippageBps={slippageBps} onChange={setSlippageBps} />
               <PreviewRow
                 label={`Min LP out (${slippageLabel(slippageBps)} slippage)`}
-                value={formatTokenAmount(addMinLpOut, cfg.decimals)}
+                value={fmt(addMinLpOut, cfg.decimals)}
               />
             </dl>
           ) : null}
@@ -276,23 +276,23 @@ export default function PoolPage() {
             <dl className="panel-subtle space-y-2 p-5 text-sm">
               <PreviewRow
                 label="PT received"
-                value={formatTokenAmount(removePreview.ptOut, cfg.decimals)}
+                value={fmt(removePreview.ptOut, cfg.decimals)}
                 signal
               />
               <PreviewRow
                 label="SY received"
-                value={formatTokenAmount(removePreview.syOut, cfg.decimals)}
+                value={fmt(removePreview.syOut, cfg.decimals)}
                 signal
               />
               <PreviewRow label="Pool share burned" value={bpsToPercent(removePreview.shareBps)} />
               <SlippageControl slippageBps={slippageBps} onChange={setSlippageBps} />
               <PreviewRow
                 label={`Min PT out (${slippageLabel(slippageBps)} slippage)`}
-                value={formatTokenAmount(removeMinPtOut, cfg.decimals)}
+                value={fmt(removeMinPtOut, cfg.decimals)}
               />
               <PreviewRow
                 label={`Min SY out (${slippageLabel(slippageBps)} slippage)`}
-                value={formatTokenAmount(removeMinSyOut, cfg.decimals)}
+                value={fmt(removeMinSyOut, cfg.decimals)}
               />
             </dl>
           ) : null}
@@ -321,17 +321,17 @@ export default function PoolPage() {
           <dl className="card space-y-px p-6">
             <Stat
               label="PT reserves"
-              value={market ? formatTokenAmount(market.totalPt, cfg.decimals) : "n/a"}
+              value={market ? fmt(market.totalPt, cfg.decimals) : "n/a"}
               loading={marketLoading}
             />
             <Stat
               label="SY reserves"
-              value={market ? formatTokenAmount(market.totalSy, cfg.decimals) : "n/a"}
+              value={market ? fmt(market.totalSy, cfg.decimals) : "n/a"}
               loading={marketLoading}
             />
             <Stat
               label="Total LP"
-              value={market ? formatTokenAmount(market.totalLp, cfg.decimals) : "n/a"}
+              value={market ? fmt(market.totalLp, cfg.decimals) : "n/a"}
               loading={marketLoading}
             />
             <Stat label="Fee" value={market ? bpsToPercent(market.feeBps) : "n/a"} loading={marketLoading} />
@@ -358,16 +358,16 @@ export default function PoolPage() {
           <dl className="card space-y-px p-6">
             <Stat
               label="LP balance"
-              value={lpPosition ? formatTokenAmount(lpPosition.lpBalance, cfg.decimals) : "0"}
+              value={lpPosition ? fmt(lpPosition.lpBalance, cfg.decimals) : "0"}
             />
             <Stat label="Pool share" value={lpPosition ? bpsToPercent(lpPosition.shareBps) : "0.00%"} signal />
             <Stat
               label="PT value"
-              value={lpPosition ? formatTokenAmount(lpPosition.ptValue, cfg.decimals) : "0"}
+              value={lpPosition ? fmt(lpPosition.ptValue, cfg.decimals) : "0"}
             />
             <Stat
               label="SY value"
-              value={lpPosition ? formatTokenAmount(lpPosition.syValue, cfg.decimals) : "0"}
+              value={lpPosition ? fmt(lpPosition.syValue, cfg.decimals) : "0"}
             />
           </dl>
         </aside>

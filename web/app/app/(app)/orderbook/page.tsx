@@ -7,7 +7,7 @@ import type { OrderSide, PlaceOrderArgs, RestingOrder, TransactionRequest } from
 import {
   amountError,
   bpsToPercent,
-  formatTokenAmount,
+  fmt,
   parseTokenAmount,
   shortAddress,
 } from "@/lib/format";
@@ -92,7 +92,7 @@ export default function OrderBookPage() {
                 selectedId={selectedId}
                 onSelect={(order) => {
                   setSelectedId(order.id);
-                  setFillAmount(formatTokenAmount(order.remainingBase, cfg.decimals));
+                  setFillAmount(fmt(order.remainingBase, cfg.decimals));
                 }}
               />
               <InsideMarket midWad={midWad} spreadBps={spreadBps} />
@@ -103,7 +103,7 @@ export default function OrderBookPage() {
                 selectedId={selectedId}
                 onSelect={(order) => {
                   setSelectedId(order.id);
-                  setFillAmount(formatTokenAmount(order.remainingBase, cfg.decimals));
+                  setFillAmount(fmt(order.remainingBase, cfg.decimals));
                 }}
               />
             </>
@@ -318,7 +318,7 @@ function BookRows({
                 #{order.id.toString()}
               </span>
               <span className="font-mono text-[13px] text-smoke">
-                {formatTokenAmount(order.remainingBase, decimals, 4)}
+                {fmt(order.remainingBase, decimals, 4)}
               </span>
               <span className="text-right font-mono text-[13px] text-ink">
                 {formatPriceWad(order.priceWad)}
@@ -454,7 +454,7 @@ function PlaceOrderPanel({
           <span className="text-ash">PT amount</span>
           {max !== undefined && (
             <span className="text-smoke">
-              Max: {formatTokenAmount(max, decimals, 4)}
+              Max: {fmt(max, decimals, 4)}
             </span>
           )}
         </label>
@@ -497,7 +497,7 @@ function PlaceOrderPanel({
       <div className="space-y-2 rounded-lg bg-ink/[0.02] p-3 text-[12px]">
         <DetailRow 
           label={side === "Ask" ? "Expected proceeds" : "SY required"} 
-          value={`${formatTokenAmount(quote, decimals, 4)} SY`} 
+          value={`${fmt(quote, decimals, 4)} SY`} 
         />
         <DetailRow 
           label="Predecessor" 
@@ -580,8 +580,8 @@ function OrderDetail({
       <dl className="mt-4 space-y-2">
         <DetailRow label="Maker" value={shortAddress(order.maker)} />
         <DetailRow label="Price" value={`${formatPriceWad(order.priceWad)} SY`} />
-        <DetailRow label="Remaining" value={`${formatTokenAmount(order.remainingBase, decimals, 4)} PT`} />
-        <DetailRow label="Escrow" value={`${formatTokenAmount(order.escrowRemaining, decimals, 4)} ${order.side === "Ask" ? "PT" : "SY"}`} />
+        <DetailRow label="Remaining" value={`${fmt(order.remainingBase, decimals, 4)} PT`} />
+        <DetailRow label="Escrow" value={`${fmt(order.escrowRemaining, decimals, 4)} ${order.side === "Ask" ? "PT" : "SY"}`} />
         <DetailRow label="Expires" value={new Date(Number(order.expiry) * 1000).toLocaleString()} />
       </dl>
       <label className="mt-4 block text-[12px] text-ash">
@@ -589,8 +589,8 @@ function OrderDetail({
         <input className="input mt-2 w-full" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
       </label>
       <dl className="mt-4 space-y-2">
-        <DetailRow label={order.side === "Ask" ? "You pay" : "You receive gross"} value={`${formatTokenAmount(quote, decimals, 4)} SY`} />
-        <DetailRow label="Taker fee" value={`${formatTokenAmount(fee, decimals, 4)} SY`} />
+        <DetailRow label={order.side === "Ask" ? "You pay" : "You receive gross"} value={`${fmt(quote, decimals, 4)} SY`} />
+        <DetailRow label="Taker fee" value={`${fmt(fee, decimals, 4)} SY`} />
       </dl>
       {validation ? <p className="mt-3 text-[12px] leading-5 text-red-400">{validation}</p> : null}
       <div className="mt-5 space-y-3">

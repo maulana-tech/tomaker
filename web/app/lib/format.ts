@@ -51,31 +51,39 @@ export function formatTokenAmount(baseUnits: bigint, decimals: number, maxFracti
 }
 
 /**
- * Compact large-number display with K/M/B suffixes.
- * e.g. (1_500_000n, 6) -> "1.50M"
+ * Auto-compact formatter for ALL token displays.
+ * < 1,000 → full decimal (e.g. "123.45")
+ * ≥ 1,000 → compact with K/M/B/T (e.g. "1.23K", "5.67M")
  */
-export function formatCompact(baseUnits: bigint, decimals: number): string {
+export function fmt(baseUnits: bigint, decimals: number, maxFraction = 2): string {
   if (baseUnits === 0n) return "0";
   const negative = baseUnits < 0n;
   const abs = negative ? -baseUnits : baseUnits;
-
-  // Convert base units to float representation
   const asNumber = Number((abs * 10000n) / (10n ** BigInt(decimals))) / 10000;
-  
-  if (asNumber >= 1e12) {
-    return `${negative ? "-" : ""}${(asNumber / 1e12).toFixed(2)}T`;
-  }
-  if (asNumber >= 1e9) {
-    return `${negative ? "-" : ""}${(asNumber / 1e9).toFixed(2)}B`;
-  }
-  if (asNumber >= 1e6) {
-    return `${negative ? "-" : ""}${(asNumber / 1e6).toFixed(2)}M`;
-  }
-  if (asNumber >= 1e3) {
-    return `${negative ? "-" : ""}${(asNumber / 1e3).toFixed(2)}K`;
-  }
-  
-  return formatTokenAmount(baseUnits, decimals, 4);
+  const sign = negative ? "-" : "";
+
+  if (asNumber >= 1e12) return `${sign}${(asNumber / 1e12).toFixed(2)}T`;
+  if (asNumber >= 1e9) return `${sign}${(asNumber / 1e9).toFixed(2)}B`;
+  if (asNumber >= 1e6) return `${sign}${(asNumber / 1e6).toFixed(2)}M`;
+  if (asNumber >= 1e3) return `${sign}${(asNumber / 1e3).toFixed(2)}K`;
+
+  const scale = 10n ** BigInt(decimals);
+  const whole = abs / scale;
+  const frac = abs % scale;
+  let fracStr = frac.toString().padStart(decimals, "0").slice(0, maxFraction).replace(/0+$/, "");
+  const wholeStr = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return fracStr ? `${sign}${wholeStr}.${fracStr}` : `${sign}${wholeStr}`;
+}
+
+/**
+ * Bond value as percentage of face value.
+ * e.g. valueUnit=950_087_892_232, face=1_000_000_000_000 → "95.01%"
+ */
+export function fmtPctOfFace(valueUnit: bigint, faceValuePerUnit: bigint): string {
+  if (faceValuePerUnit <= 0n) return "n/a";
+  const bps = (valueUnit * 10_000n) / faceValuePerUnit;
+  const pct = Number(bps) / 100;
+  return `${pct.toFixed(2)}% of par`;
 }
 
 /** Parses a human decimal string into base units. Throws on malformed input. */

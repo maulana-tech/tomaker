@@ -8,7 +8,7 @@ import { bondDiscountBps } from "@tomaker/sdk";
 import { LiveValue } from "@/components/LiveValue";
 import { ConfiguredMarketPill } from "@/components/MarketStatus";
 import { appConfig, deploymentStage, networkLabel } from "@/lib/config";
-import { bpsToPercent, formatMaturityDate, formatTokenAmount, maturityStatus } from "@/lib/format";
+import { bpsToPercent, fmt, fmtPctOfFace, formatMaturityDate, maturityStatus } from "@/lib/format";
 import { useBondInfo } from "@/lib/useBondInfo";
 import { useMarketStatus } from "@/lib/useMarket";
 import { fixedRateDisplay } from "@/lib/yieldChoice";
@@ -75,7 +75,7 @@ export default function StrategyPage() {
       ? bond.faceValuePerUnit
       : 10n ** BigInt(cfg.underlyingDecimals);
   const bondDiscount = bond ? bpsToPercent(bondDiscountBps(bond.valuePerUnit, bondPar)) : "";
-  const bondValue = bond ? formatTokenAmount(bond.valuePerUnit, cfg.underlyingDecimals, 4) : "";
+  const bondValue = bond ? fmtPctOfFace(bond.valuePerUnit, bondPar) : "";
   const sourceName = cfg.yieldSource.name || "Configured yield source";
   const selected = STRATEGIES.find((strategy) => strategy.id === selectedId) ?? STRATEGIES[0];
   const selectedIsLive = selected.id === "bond-usdc";
@@ -241,7 +241,7 @@ export default function StrategyPage() {
                   label="Bond value / unit"
                   value={bondValue}
                   loading={bond === null}
-                  detail="Accrued value per bond unit"
+                  detail="Accrued value vs face value"
                 />
                 <StrategyMetric
                   label="Series maturity"

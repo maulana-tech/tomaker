@@ -5,13 +5,7 @@
 import Link from "next/link";
 import { bondDiscountBps, type BondInfo, type StrategyInfo } from "@tomaker/sdk";
 import type { YieldSourceConfig } from "@/lib/config";
-import { bpsToPercent, formatMaturityDate, formatTokenAmount, formatCompact } from "@/lib/format";
-
-function fmt(baseUnits: bigint, decimals: number): string {
-  const scale = 10n ** BigInt(decimals);
-  const whole = baseUnits < 0n ? -baseUnits / scale : baseUnits / scale;
-  return whole >= 10_000n ? formatCompact(baseUnits, decimals) : formatTokenAmount(baseUnits, decimals, 4);
-}
+import { bpsToPercent, formatMaturityDate, fmt, fmtPctOfFace } from "@/lib/format";
 
 /**
  * Guided context for tokenizing the bond-backed yield source. The bond sits
@@ -42,8 +36,8 @@ export function TokenizeBondPanel({
         <div>
           <p className="label-data">Tokenize into PT + YT</p>
           <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
-            {bond ? fmt(bond.valuePerUnit, decimals) : "—"}
-            <span className="ml-2 text-xl text-graphite">bond value / unit</span>
+            {bond ? fmtPctOfFace(bond.valuePerUnit, bond.faceValuePerUnit) : "—"}
+            <span className="ml-2 text-xl text-graphite">of face value</span>
           </p>
         </div>
         <span className="rounded-pill border border-signal/30 bg-signal/10 px-2 py-0.5 text-[13px] uppercase tracking-[0.1em] text-signal-ink">

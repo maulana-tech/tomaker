@@ -8,7 +8,7 @@ import {
   amountError,
   daysToMaturity,
   formatMaturityDate,
-  formatTokenAmount,
+  fmt,
   maturityStatus,
   parseTokenAmount,
 } from "@/lib/format";
@@ -148,7 +148,7 @@ export default function PortfolioPage() {
               connectLabel="Connect wallet to claim"
               idleLabel={
                 position && position.claimableYieldNet > 0n
-                  ? `Claim ${formatTokenAmount(position.claimableYieldNet, cfg.shareDecimals)} SY`
+                  ? `Claim ${fmt(position.claimableYieldNet, cfg.shareDecimals)} SY`
                   : "No yield to claim"
               }
             />
@@ -205,7 +205,7 @@ export default function PortfolioPage() {
 
             {underlyingPreview !== null ? (
               <p className="panel-subtle p-4 text-sm tabular-nums text-ink">
-                You will receive ~{formatTokenAmount(underlyingPreview, cfg.decimals)} underlying
+                You will receive ~{fmt(underlyingPreview, cfg.decimals)} underlying
               </p>
             ) : null}
 
@@ -255,7 +255,7 @@ export default function PortfolioPage() {
               <span className="label-data">Exchange rate</span>
               <span className="text-sm tabular-nums text-ink">
                 {market !== null
-                  ? `1 SY = ${formatTokenAmount(market.exchangeRate, 18, 4)} underlying`
+                  ? `1 SY = ${fmt(market.exchangeRate, 18, 4)} underlying`
                   : "n/a"}
               </span>
             </div>

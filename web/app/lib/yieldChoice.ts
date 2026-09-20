@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { bondDiscountBps, type BondInfo, type MarketState } from "@tomaker/sdk";
-import { bpsToPercent, formatTokenAmount } from "./format";
+import { bpsToPercent, fmt } from "./format";
 
 export type YieldChoiceTone = "live" | "idle" | "warning";
 
@@ -38,7 +38,7 @@ export function fixedRateDisplay(
   }
   return {
     value: bpsToPercent(market.impliedApyBps),
-    detail: `TWAP implied by ${formatTokenAmount(market.totalSy, decimals, 2)} SY in pool.`,
+    detail: `TWAP implied by ${fmt(market.totalSy, decimals, 2)} SY in pool.`,
     tone: "live",
   };
 }

@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { bondDiscountBps, type BondInfo, type StrategyInfo } from "@tomaker/sdk";
 import type { YieldSourceConfig } from "@/lib/config";
-import { bpsToPercent, formatTokenAmount } from "@/lib/format";
+import { bpsToPercent, fmt } from "@/lib/format";
 
 /**
  * Shows the tokenized bond and strategy adapter that back SY for this market.
@@ -47,7 +47,7 @@ export function BondPositionCard({
           <p className="mt-1 text-sm leading-relaxed text-smoke">
             SY is backed by{" "}
             <span className="tabular-nums text-ink">
-              {formatTokenAmount(bond.totalSupply, decimals)} {bond.denomination ? "bond units" : "units"}
+              {fmt(bond.totalSupply, decimals)} {bond.denomination ? "bond units" : "units"}
             </span>{" "}
             of {source.name}, currently at a{" "}
             <span className="tabular-nums text-signal-ink">{discount}</span> discount to par.
@@ -69,7 +69,7 @@ export function BondPositionCard({
         <div>
           <p className="label-data">Yield source backing SY</p>
           <p className="mt-2 text-3xl font-normal tabular-nums text-ink">
-            {formatTokenAmount(bond.valuePerUnit, decimals, 4)}
+            {fmt(bond.valuePerUnit, decimals, 4)}
             <span className="ml-2 text-xl text-graphite">value / unit</span>
           </p>
         </div>
@@ -87,19 +87,19 @@ export function BondPositionCard({
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Bond supply</dt>
           <dd className="tabular-nums text-ink">
-            {formatTokenAmount(bond.totalSupply, decimals)}
+            {fmt(bond.totalSupply, decimals)}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Face value / unit</dt>
           <dd className="tabular-nums text-ink">
-            {formatTokenAmount(bond.faceValuePerUnit, decimals, 4)}
+            {fmt(bond.faceValuePerUnit, decimals, 4)}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
           <dt className="text-ash">Strategy assets</dt>
           <dd className="tabular-nums text-ink">
-            {strategy ? formatTokenAmount(strategy.totalAssets, decimals, 4) : "n/a"}
+            {strategy ? fmt(strategy.totalAssets, decimals, 4) : "n/a"}
           </dd>
         </div>
       </dl>
