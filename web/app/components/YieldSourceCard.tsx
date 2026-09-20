@@ -2,7 +2,7 @@
 
 import { bondDiscountBps, type BondInfo, type MarketState, type StrategyInfo } from "@tomaker/sdk";
 import type { YieldSourceConfig } from "@/lib/config";
-import { bpsToPercent, fmt, fmt, fmtPctOfFace, shortAddress } from "@/lib/format";
+import { bpsToPercent, fmt, fmtPctOfFace, shortAddress } from "@/lib/format";
 import { LiveValue } from "@/components/LiveValue";
 
 function sourceStatus(source: YieldSourceConfig): { label: string; body: string; tone: "live" | "idle" } {
