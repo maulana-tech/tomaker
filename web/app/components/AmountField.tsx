@@ -2,7 +2,7 @@
 
 "use client";
 
-import { fmt } from "../lib/format";
+import { fmt as formatTokenAmount } from "../lib/format";
 
 /**
  * Labelled decimal amount input with an optional Max shortcut and an inline

@@ -8,7 +8,7 @@ import { bondDiscountBps } from "@tomaker/sdk";
 import { LiveValue } from "@/components/LiveValue";
 import { ConfiguredMarketPill } from "@/components/MarketStatus";
 import { appConfig, deploymentStage, networkLabel } from "@/lib/config";
-import { bpsToPercent, fmt, fmtPctOfFace, formatMaturityDate, maturityStatus } from "@/lib/format";
+import { bpsToPercent, fmtPctOfFace, formatMaturityDate, maturityStatus } from "@/lib/format";
 import { useBondInfo } from "@/lib/useBondInfo";
 import { useMarketStatus } from "@/lib/useMarket";
 import { fixedRateDisplay } from "@/lib/yieldChoice";

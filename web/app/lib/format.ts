@@ -70,7 +70,7 @@ export function fmt(baseUnits: bigint, decimals: number, maxFraction = 2): strin
   const scale = 10n ** BigInt(decimals);
   const whole = abs / scale;
   const frac = abs % scale;
-  let fracStr = frac.toString().padStart(decimals, "0").slice(0, maxFraction).replace(/0+$/, "");
+  const fracStr = frac.toString().padStart(decimals, "0").slice(0, maxFraction).replace(/0+$/, "");
   const wholeStr = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return fracStr ? `${sign}${wholeStr}.${fracStr}` : `${sign}${wholeStr}`;
 }

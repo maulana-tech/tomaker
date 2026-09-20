@@ -18,7 +18,6 @@ import {
   amountError,
   bpsToPercent,
   fmt,
-  fmtPctOfFace,
   formatMaturityDate,
   maturityStatus,
   parseTokenAmount,
