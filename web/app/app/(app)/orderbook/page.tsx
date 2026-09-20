@@ -54,7 +54,7 @@ export default function OrderBookPage() {
     return (
       <div className="space-y-6">
         <Header maturity={market?.maturity ?? null} />
-        <section className="panel px-6 py-10 text-center">
+        <section className="card px-6 py-10 text-center">
           <h2 className="text-lg font-medium text-ink">Resting orders are not deployed here</h2>
           <p className="mx-auto mt-3 max-w-xl text-[14px] leading-7 text-smoke">
             This is a legacy market with only the AMM. Configure a V2 deployment&apos;s
@@ -70,7 +70,7 @@ export default function OrderBookPage() {
       <Header maturity={market?.maturity ?? null} />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-        <section className="panel overflow-hidden">
+        <section className="card overflow-hidden">
           <BookHeader
             midWad={midWad}
             spreadBps={spreadBps}
@@ -552,7 +552,7 @@ function OrderDetail({
   onCancel: (order: RestingOrder) => void;
 }) {
   if (!order) {
-    return <section className="panel p-5 text-[13px] leading-6 text-smoke">Select a resting order to fill it or inspect its escrow.</section>;
+    return <section className="card p-5 text-[13px] leading-6 text-smoke">Select a resting order to fill it or inspect its escrow.</section>;
   }
   let baseAmount: bigint | null = null;
   try {
@@ -572,7 +572,7 @@ function OrderDetail({
   const makerOwns = address === order.maker;
 
   return (
-    <section className="panel p-5">
+    <section className="card p-5">
       <div className="flex items-center justify-between">
         <h2 className="label-data">Order #{order.id.toString()}</h2>
         <span className={order.side === "Ask" ? "text-[12px] text-red-300" : "text-[12px] text-emerald-300"}>{order.side}</span>
