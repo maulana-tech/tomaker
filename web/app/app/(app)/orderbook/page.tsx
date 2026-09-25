@@ -3,6 +3,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { formatUnits } from "viem";
 import type { OrderSide, PlaceOrderArgs, RestingOrder, TransactionRequest } from "@tomaker/sdk";
 import {
   amountError,
@@ -52,7 +53,7 @@ export default function OrderBookPage() {
 
   if (!book.available) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-12">
         <Header maturity={market?.maturity ?? null} />
         <section className="card px-6 py-10 text-center">
           <h2 className="text-lg font-medium text-ink">Resting orders are not deployed here</h2>
@@ -66,10 +67,10 @@ export default function OrderBookPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       <Header maturity={market?.maturity ?? null} />
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
         <section className="card overflow-hidden">
           <BookHeader
             midWad={midWad}
@@ -80,7 +81,7 @@ export default function OrderBookPage() {
           {book.loading ? (
             <LadderSkeleton />
           ) : book.error ? (
-            <p className="px-5 py-10 text-center text-[14px] text-red-400">
+            <p className="px-6 py-10 text-center text-[14px] text-red-700">
               {book.error instanceof Error ? book.error.message : "Unable to read resting orders."}
             </p>
           ) : (
@@ -92,7 +93,7 @@ export default function OrderBookPage() {
                 selectedId={selectedId}
                 onSelect={(order) => {
                   setSelectedId(order.id);
-                  setFillAmount(fmt(order.remainingBase, cfg.decimals));
+                  setFillAmount(formatUnits(order.remainingBase, cfg.decimals));
                 }}
               />
               <InsideMarket midWad={midWad} spreadBps={spreadBps} />
@@ -103,7 +104,7 @@ export default function OrderBookPage() {
                 selectedId={selectedId}
                 onSelect={(order) => {
                   setSelectedId(order.id);
-                  setFillAmount(fmt(order.remainingBase, cfg.decimals));
+                  setFillAmount(formatUnits(order.remainingBase, cfg.decimals));
                 }}
               />
             </>
@@ -215,14 +216,12 @@ export default function OrderBookPage() {
 
 function Header({ maturity }: { maturity: number | null }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Order book</h1>
-        <p className="mt-2 max-w-2xl text-[15px] leading-7 text-smoke">
-          Escrowed PT/SY limit orders with on-chain price-time priority, partial fills,
-          cancellation and expiry. Prices are SY shares per PT.
-        </p>
-      </div>
+    <header className="space-y-3">
+      <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Order book</h1>
+      <p className="max-w-xl text-smoke">
+        Escrowed PT/SY limit orders with on-chain price-time priority, partial fills,
+        cancellation and expiry. Prices are SY shares per PT.
+      </p>
       <MaturityBadge maturity={maturity} />
     </header>
   );
@@ -240,30 +239,30 @@ function BookHeader({
   onRefresh: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 px-5 py-4">
-      <div className="flex flex-wrap gap-6">
+    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 px-6 py-5">
+      <div className="flex flex-wrap gap-8">
         <div>
           <p className="label-data">Mid price</p>
-          <p className="mt-1 font-mono text-[14px] text-ink">
+          <p className="mt-1 font-mono text-lg tabular-nums text-ink">
             {midWad === null ? "—" : formatPriceWad(midWad)}
           </p>
         </div>
         <div>
           <p className="label-data">Spread</p>
-          <p className="mt-1 font-mono text-[14px] text-ink">
+          <p className="mt-1 font-mono text-lg tabular-nums text-ink">
             {spreadBps === null ? "—" : bpsToPercent(spreadBps)}
           </p>
         </div>
         <div>
           <p className="label-data">Taker fee</p>
-          <p className="mt-1 font-mono text-[14px] text-ink">
+          <p className="mt-1 font-mono text-lg tabular-nums text-ink">
             {feeBps === null ? "—" : bpsToPercent(feeBps)}
           </p>
         </div>
       </div>
-      <button 
-        type="button" 
-        className="rounded-lg border border-ink/20 px-3 py-1.5 text-[12px] text-ink transition hover:bg-ink hover:text-paper" 
+      <button
+        type="button"
+        className="rounded-pill border border-ink/15 px-3 py-1.5 text-[13px] uppercase tracking-[0.1em] text-smoke transition hover:border-ink hover:text-ink"
         onClick={onRefresh}
       >
         Refresh
@@ -287,15 +286,15 @@ function BookRows({
 }) {
   if (orders.length === 0) {
     return (
-      <div className="px-5 py-8 text-center">
-        <p className="text-[13px] text-ash">No resting {side.toLowerCase()}s.</p>
-        <p className="mt-1 text-[11px] text-smoke">Be the first to place a {side.toLowerCase()} order</p>
+      <div className="px-6 py-8 text-center">
+        <p className="text-[13px] text-smoke">No resting {side.toLowerCase()}s.</p>
+        <p className="mt-1 text-[12px] text-ash">Be the first to place a {side.toLowerCase()} order.</p>
       </div>
     );
   }
   return (
     <div>
-      <div className="grid grid-cols-[60px_1fr_1fr_1fr] gap-3 px-5 py-2 text-[11px] uppercase tracking-widest text-ash">
+      <div className="grid grid-cols-[60px_1fr_1fr_1fr] gap-3 border-t border-ink/10 px-6 py-2 text-[11px] uppercase tracking-[0.12em] text-ash">
         <span>ID</span>
         <span>PT remaining</span>
         <span className="text-right">Price (SY/PT)</span>
@@ -308,19 +307,19 @@ function BookRows({
               type="button"
               aria-pressed={selectedId === order.id}
               onClick={() => onSelect(order)}
-              className={`grid w-full grid-cols-[60px_1fr_1fr_1fr] gap-3 border-t border-ink/5 px-5 py-3 text-left transition ${
-                selectedId === order.id 
-                  ? "bg-ink/[0.07] border-l-2 border-l-signal" 
-                  : "hover:bg-ink/[0.03]"
+              className={`grid w-full grid-cols-[60px_1fr_1fr_1fr] gap-3 border-l-2 border-t border-t-ink/5 px-6 py-3 text-left transition ${
+                selectedId === order.id
+                  ? "border-l-signal bg-ink/[0.05]"
+                  : "border-l-transparent hover:bg-ink/[0.03]"
               }`}
             >
-              <span className={`font-mono text-[13px] ${side === "Ask" ? "text-red-400" : "text-emerald-400"}`}>
+              <span className={`font-mono text-[13px] ${side === "Ask" ? "text-red-700" : "text-emerald-700"}`}>
                 #{order.id.toString()}
               </span>
-              <span className="font-mono text-[13px] text-smoke">
+              <span className="font-mono text-[13px] tabular-nums text-smoke">
                 {fmt(order.remainingBase, decimals, 4)}
               </span>
-              <span className="text-right font-mono text-[13px] text-ink">
+              <span className="text-right font-mono text-[13px] tabular-nums text-ink">
                 {formatPriceWad(order.priceWad)}
               </span>
               <span className="text-right font-mono text-[12px] text-ash">
@@ -336,13 +335,13 @@ function BookRows({
 
 function InsideMarket({ midWad, spreadBps }: { midWad: bigint | null; spreadBps: bigint | null }) {
   return (
-    <div className="flex items-center justify-between border-y border-ink/10 bg-ink/[0.025] px-5 py-3">
+    <div className="flex items-center justify-between border-y border-ink/10 bg-ink/[0.03] px-6 py-3">
       <span className="label-data">Inside market</span>
       <div className="flex items-center gap-4">
         <span className="font-mono text-[14px] text-signal-ink">
           {midWad === null ? "—" : formatPriceWad(midWad)}
         </span>
-        <span className="rounded-full bg-ink/[0.05] px-2 py-0.5 font-mono text-[12px] text-ash">
+        <span className="rounded-pill border border-ink/10 px-2.5 py-0.5 font-mono text-[12px] text-ash">
           {spreadBps === null ? "One-sided" : `${bpsToPercent(spreadBps)} spread`}
         </span>
       </div>
@@ -424,23 +423,22 @@ function PlaceOrderPanel({
     phase.kind !== "working";
 
   return (
-    <section className="card space-y-4 p-6">
-      <h2 className="label-data">Place resting order</h2>
-      
-      {/* Side selector */}
-      <div className="grid grid-cols-2 gap-1 rounded-lg border border-ink/10 p-1">
+    <section className="card space-y-5 p-8">
+      <h2 className="text-lg font-semibold text-ink">Place resting order</h2>
+
+      <div className="grid grid-cols-2 gap-1 rounded-pill border border-ink/10 p-1">
         {(["Ask", "Bid"] as const).map((value) => (
           <button
             type="button"
             key={value}
             aria-pressed={side === value}
             onClick={() => setSide(value)}
-            className={`rounded-md px-3 py-2 text-[13px] font-medium transition ${
-              side === value 
-                ? value === "Ask" 
-                  ? "bg-red-50 text-red-600" 
-                  : "bg-emerald-50 text-emerald-600"
-                : "text-smoke hover:bg-ink/[0.03]"
+            className={`rounded-pill px-3 py-2 text-[13px] uppercase tracking-[0.08em] transition ${
+              side === value
+                ? value === "Ask"
+                  ? "bg-red-700 text-paper"
+                  : "bg-emerald-700 text-paper"
+                : "text-smoke hover:text-ink"
             }`}
           >
             {value === "Ask" ? "Sell PT" : "Buy PT"}
@@ -448,65 +446,65 @@ function PlaceOrderPanel({
         ))}
       </div>
 
-      {/* Amount input */}
-      <div className="space-y-1">
-        <label className="flex items-center justify-between text-[12px]">
-          <span className="text-ash">PT amount</span>
+      <label className="block">
+        <span className="flex items-center justify-between">
+          <span className="label-data">PT amount</span>
           {max !== undefined && (
-            <span className="text-smoke">
-              Max: {fmt(max, decimals, 4)}
-            </span>
+            <button
+              type="button"
+              className="font-mono text-[12px] text-smoke transition hover:text-ink"
+              onClick={() => setAmount(formatUnits(max, decimals))}
+            >
+              Max {fmt(max, decimals, 4)}
+            </button>
           )}
-        </label>
-        <input 
-          className="field w-full" 
-          inputMode="decimal" 
-          value={amount} 
-          onChange={(event) => setAmount(event.target.value)} 
-          placeholder="0.00" 
+        </span>
+        <input
+          className="field"
+          inputMode="decimal"
+          value={amount}
+          onChange={(event) => setAmount(event.target.value)}
+          placeholder="0.00"
         />
-      </div>
+      </label>
 
-      {/* Price input */}
-      <div className="space-y-1">
-        <label className="text-[12px] text-ash">Limit price · SY per PT</label>
-        <input 
-          className="field w-full" 
-          inputMode="decimal" 
-          value={price} 
-          onChange={(event) => setPrice(event.target.value)} 
-          placeholder="0.95000" 
+      <label className="block">
+        <span className="label-data">Limit price · SY per PT</span>
+        <input
+          className="field"
+          inputMode="decimal"
+          value={price}
+          onChange={(event) => setPrice(event.target.value)}
+          placeholder="0.95000"
         />
-      </div>
+      </label>
 
-      {/* Expiry */}
-      <div className="space-y-1">
-        <label className="text-[12px] text-ash">Expiry</label>
-        <select 
-          className="field w-full" 
-          value={expirySeconds} 
+      <label className="block">
+        <span className="label-data">Expiry</span>
+        <select
+          className="field text-base"
+          value={expirySeconds}
           onChange={(event) => setExpirySeconds(Number(event.target.value))}
         >
           {EXPIRIES.map((option) => (
             <option key={option.seconds} value={option.seconds}>{option.label}</option>
           ))}
         </select>
-      </div>
+      </label>
 
-      {/* Summary */}
-      <div className="space-y-2 rounded-lg bg-ink/[0.02] p-3 text-[12px]">
-        <DetailRow 
-          label={side === "Ask" ? "Expected proceeds" : "SY required"} 
-          value={`${fmt(quote, decimals, 4)} SY`} 
+      <dl className="panel-subtle space-y-2 p-4">
+        <DetailRow
+          label={side === "Ask" ? "Expected proceeds" : "SY required"}
+          value={`${fmt(quote, decimals, 4)} SY`}
         />
-        <DetailRow 
-          label="Predecessor" 
-          value={priceWad ? `#${predecessorFor(orders, side, priceWad)?.toString() ?? "head"}` : "—"} 
+        <DetailRow
+          label="Predecessor"
+          value={priceWad ? `#${predecessorFor(orders, side, priceWad)?.toString() ?? "head"}` : "—"}
         />
-      </div>
+      </dl>
 
       {validation && (
-        <p className="rounded-lg bg-red-50 p-3 text-[12px] text-red-600">{validation}</p>
+        <p className="border border-red-700/20 bg-red-700/5 px-4 py-3 text-[13px] text-red-700">{validation}</p>
       )}
 
       <SubmitButton
@@ -552,7 +550,7 @@ function OrderDetail({
   onCancel: (order: RestingOrder) => void;
 }) {
   if (!order) {
-    return <section className="card p-5 text-[13px] leading-6 text-smoke">Select a resting order to fill it or inspect its escrow.</section>;
+    return <section className="card border-dashed p-8 text-center text-[13px] leading-6 text-ash">Select a resting order in the book to fill it or inspect its escrow.</section>;
   }
   let baseAmount: bigint | null = null;
   try {
@@ -572,10 +570,16 @@ function OrderDetail({
   const makerOwns = address === order.maker;
 
   return (
-    <section className="card p-5">
+    <section className="card p-8">
       <div className="flex items-center justify-between">
-        <h2 className="label-data">Order #{order.id.toString()}</h2>
-        <span className={order.side === "Ask" ? "text-[12px] text-red-300" : "text-[12px] text-emerald-300"}>{order.side}</span>
+        <h2 className="text-lg font-semibold text-ink">Order #{order.id.toString()}</h2>
+        <span
+          className={`rounded-pill border px-2.5 py-0.5 text-[12px] uppercase tracking-[0.1em] ${
+            order.side === "Ask" ? "border-red-700/30 text-red-700" : "border-emerald-700/30 text-emerald-700"
+          }`}
+        >
+          {order.side}
+        </span>
       </div>
       <dl className="mt-4 space-y-2">
         <DetailRow label="Maker" value={shortAddress(order.maker)} />
@@ -584,15 +588,15 @@ function OrderDetail({
         <DetailRow label="Escrow" value={`${fmt(order.escrowRemaining, decimals, 4)} ${order.side === "Ask" ? "PT" : "SY"}`} />
         <DetailRow label="Expires" value={new Date(Number(order.expiry) * 1000).toLocaleString()} />
       </dl>
-      <label className="mt-4 block text-[12px] text-ash">
-        PT to fill
-        <input className="input mt-2 w-full" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
+      <label className="mt-6 block">
+        <span className="label-data">PT to fill</span>
+        <input className="field" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
       </label>
-      <dl className="mt-4 space-y-2">
+      <dl className="panel-subtle mt-4 space-y-2 p-4">
         <DetailRow label={order.side === "Ask" ? "You pay" : "You receive gross"} value={`${fmt(quote, decimals, 4)} SY`} />
         <DetailRow label="Taker fee" value={`${fmt(fee, decimals, 4)} SY`} />
       </dl>
-      {validation ? <p className="mt-3 text-[12px] leading-5 text-red-400">{validation}</p> : null}
+      {validation ? <p className="mt-3 text-[13px] leading-5 text-red-700">{validation}</p> : null}
       <div className="mt-5 space-y-3">
         <SubmitButton
           phase={phase}
@@ -615,8 +619,8 @@ function OrderDetail({
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-4">
-      <dt className="text-[12px] text-ash">{label}</dt>
-      <dd className="text-right font-mono text-[12px] text-ink">{value}</dd>
+      <dt className="text-[13px] text-ash">{label}</dt>
+      <dd className="text-right font-mono text-[13px] tabular-nums text-ink">{value}</dd>
     </div>
   );
 }
@@ -625,7 +629,7 @@ function LadderSkeleton() {
   return (
     <div className="divide-y divide-ink/5">
       {Array.from({ length: 10 }).map((_, index) => (
-        <div key={index} className="flex items-center justify-between px-5 py-3">
+        <div key={index} className="flex items-center justify-between px-6 py-3">
           <span className="h-3 w-24 animate-pulse bg-ink/10" />
           <span className="h-3 w-20 animate-pulse bg-ink/10" />
           <span className="h-3 w-16 animate-pulse bg-ink/10" />

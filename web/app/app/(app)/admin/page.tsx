@@ -63,9 +63,9 @@ export default function AdminPage() {
 
   if (!cfg.contracts.orderbook?.trim()) {
     return (
-      <section className="card mx-auto max-w-2xl p-6">
-        <h1 className="text-2xl font-semibold text-ink">Protocol administration</h1>
-        <p className="mt-4 text-[14px] leading-7 text-smoke">
+      <section className="card mx-auto max-w-2xl p-8">
+        <h1 className="text-lg font-semibold text-ink">Protocol administration</h1>
+        <p className="mt-3 text-[14px] leading-7 text-smoke">
           This legacy deployment does not advertise mutable-fee contracts. No admin transactions
           are offered, preventing the UI from calling setters that are absent from deployed Wasm.
         </p>
@@ -74,21 +74,29 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-6">
-      <header>
-        <h1 className="text-3xl font-semibold tracking-tight text-ink">Protocol administration</h1>
-        <p className="mt-2 text-[14px] leading-7 text-smoke">
+    <div className="space-y-12">
+      <header className="space-y-3">
+        <h1 className="text-6xl font-normal tracking-tight sm:text-7xl">Admin</h1>
+        <p className="max-w-xl text-smoke">
           Fee changes are authorized independently by each contract. The connected wallet must
           exactly match the admin stored on-chain; the frontend cannot bypass that check.
         </p>
       </header>
 
       {readError ? (
-        <p className="card border-red-400/30 bg-red-400/5 p-5 text-[13px] text-red-600">
+        <p className="border border-red-700/20 bg-red-700/5 px-5 py-4 text-[13px] text-red-700">
           {readError instanceof Error ? readError.message : "Unable to read fee configuration."}
         </p>
       ) : null}
-      {!fees && !readError ? <p className="card p-5 text-[13px] text-ash">Reading contract admins…</p> : null}
+      {!fees && !readError ? <div className="grid gap-6 md:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="card space-y-4 p-8">
+              <span aria-hidden className="block h-3 w-24 animate-pulse bg-ink/10" />
+              <span aria-hidden className="block h-8 w-20 animate-pulse bg-ink/10" />
+              <span aria-hidden className="block h-10 w-full animate-pulse bg-ink/10" />
+            </div>
+          ))}
+        </div> : null}
 
       {fees ? (
         <div className="grid gap-6 md:grid-cols-3">
@@ -179,17 +187,33 @@ function FeeCard({
     phase.kind === "working";
 
   return (
-    <section className="card space-y-4 p-6">
+    <section className="card flex flex-col gap-6 p-8">
       <div>
-        <h2 className="label-data">{title}</h2>
-        <p className="mt-3 font-mono text-2xl font-semibold text-ink">{bpsToPercent(current)}</p>
-        <p className="mt-2 text-[12px] text-smoke">Admin: {shortAddress(admin)}</p>
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="label-data">{title}</h2>
+          <span
+            className={`shrink-0 rounded-pill border px-2.5 py-0.5 text-[11px] uppercase tracking-[0.1em] ${
+              authorized ? "border-signal/40 text-signal-ink" : "border-ink/15 text-ash"
+            }`}
+          >
+            {authorized ? "You are admin" : "Read only"}
+          </span>
+        </div>
+        <p className="mt-4 font-mono text-4xl tabular-nums text-ink">{bpsToPercent(current)}</p>
+        <p className="mt-1 text-[12px] text-ash">
+          {current.toString()} bps · max {maximum.toString()} bps
+        </p>
       </div>
-      
-      <div className="panel-subtle space-y-2 p-3">
+
+      <dl className="flex items-baseline justify-between gap-4 border-t border-ink/10 pt-4">
+        <dt className="text-[13px] text-ash">Admin</dt>
+        <dd className="font-mono text-[13px] text-ink" title={admin}>{shortAddress(admin)}</dd>
+      </dl>
+
+      <div>
         <label htmlFor={`fee-${title}`} className="flex items-center justify-between">
           <span className="label-data">New fee</span>
-          <span className="text-[11px] text-ash">basis points</span>
+          <span className="text-[12px] text-ash">basis points</span>
         </label>
         <input
           id={`fee-${title}`}
@@ -198,26 +222,28 @@ function FeeCard({
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder="0"
-          className="field"
+          className="field disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!authorized}
         />
-        {error && <p className="text-[12px] text-red-600">{error}</p>}
+        {error && <p className="mt-2 text-[12px] text-red-700">{error}</p>}
         {!authorized && address && (
-          <p className="text-[12px] text-ash">Connected wallet is not this contract&apos;s admin.</p>
+          <p className="mt-2 text-[12px] text-ash">Connected wallet is not this contract&apos;s admin.</p>
         )}
         {parsed !== null && parsed === current && (
-          <p className="text-[12px] text-ash">Fee already set to {bpsToPercent(parsed)}.</p>
+          <p className="mt-2 text-[12px] text-ash">Fee already set to {bpsToPercent(parsed)}.</p>
         )}
       </div>
 
-      <SubmitButton
-        phase={phase}
-        address={address}
-        idleLabel={parsed !== null ? `Update to ${bpsToPercent(parsed)}` : "Update fee"}
-        connectLabel="Connect admin wallet"
-        disabled={disabled}
-        onClick={() => parsed !== null && onSubmit(parsed)}
-      />
+      <div className="mt-auto">
+        <SubmitButton
+          phase={phase}
+          address={address}
+          idleLabel={parsed !== null ? `Update to ${bpsToPercent(parsed)}` : "Update fee"}
+          connectLabel="Connect admin wallet"
+          disabled={disabled}
+          onClick={() => parsed !== null && onSubmit(parsed)}
+        />
+      </div>
     </section>
   );
 }

@@ -7,8 +7,7 @@ import { useWallet } from "@/lib/wallet";
 import { useToMaker } from "@/lib/useToMaker";
 import { requestFaucetFunds } from "@/lib/faucet";
 
-const BUTTON_CLASS =
-  "rounded-pill border border-ink/30 px-4 py-2 text-[13px] uppercase tracking-[0.12em] text-ink transition hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-50";
+const BUTTON_CLASS = "btn-ghost w-full py-2.5 text-[13px]";
 
 type FaucetState = "idle" | "working" | "done" | "error";
 
@@ -36,11 +35,11 @@ export function FaucetButton({
   const label = !address
     ? "Connect wallet to get test cash"
     : busy
-      ? "Funding wallet..."
+      ? "Funding wallet…"
       : state === "error"
         ? "Retry test cash"
         : state === "done"
-          ? "Demo wallet funded"
+          ? "Wallet funded ✓"
           : `Get ${cfg.faucetAmount} test cash`;
 
   return (
@@ -69,9 +68,20 @@ export function FaucetButton({
         }}
         data-tour="faucet"
       >
+        {busy ? (
+          <span
+            aria-hidden
+            className="h-3.5 w-3.5 animate-spin rounded-pill border border-ink/20 border-t-ink"
+          />
+        ) : null}
         {label}
       </button>
-      {error ? <p className="mt-2 text-xs text-red-300">{error}</p> : null}
+      {error ? <p className="mt-2 text-xs leading-relaxed text-red-700">{error}</p> : null}
+      {state === "done" ? (
+        <p className="mt-2 text-xs text-signal-ink">
+          {cfg.faucetAmount} test cash sent, KYC granted. Balance refreshes shortly.
+        </p>
+      ) : null}
     </div>
   );
 }

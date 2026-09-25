@@ -183,6 +183,14 @@ body {
       text-paper transition hover:bg-smoke disabled:cursor-not-allowed
       disabled:bg-ink/20 disabled:text-ash;
   }
+
+  /* Secondary action: the same pill as .btn-solid, outlined instead of filled. */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill border
+      border-ink/20 px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em]
+      text-ink transition hover:border-ink hover:bg-ink hover:text-paper
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
 }
 
 /* ---- Motion layer (monochrome paper, animated) ----------------------------
