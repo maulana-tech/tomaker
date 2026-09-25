@@ -23,7 +23,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "viem": "^2.21.0"
+    "viem": "^2.56.8"
   },
   "devDependencies": {
     "typescript": "^5.5.0",
