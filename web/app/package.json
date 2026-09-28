@@ -18,7 +18,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@privy-io/node": "^0.34.0",
+    "@privy-io/node": "^0.35.0",
     "@privy-io/react-auth": "^3.42.0",
     "@tomaker/sdk": "workspace:*",
     "@vercel/analytics": "^2.0.1",
