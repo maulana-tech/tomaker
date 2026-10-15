@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@privy-io/node": "^0.34.0",
-    "@privy-io/react-auth": "^3.42.0",
+    "@privy-io/react-auth": "^3.45.0",
     "@tomaker/sdk": "workspace:*",
     "@vercel/analytics": "^2.0.1",
     "lenis": "^1.3.25",
